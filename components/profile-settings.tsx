@@ -1,0 +1,89 @@
+"use client";
+
+import { useState } from "react";
+import { MapPin, Repeat, Check } from "lucide-react";
+import { Card, Select, Button } from "@/components/ui";
+import { MUNICIPALITIES, USER_TYPES } from "@/lib/taxonomy";
+import { updateMunicipalityAction, switchUserTypeAction } from "@/lib/actions/auth";
+
+type Role = "CITIZEN" | "MERCHANT" | "ADMIN";
+
+export function ProfileSettings({
+  role,
+  municipality,
+}: {
+  role: Role;
+  municipality: string;
+}) {
+  const [muni, setMuni] = useState(municipality);
+  const isMerchant = role === "MERCHANT";
+  const target = isMerchant ? "CITIZEN" : "MERCHANT";
+
+  return (
+    <section className="p-4 space-y-3">
+      <h2 className="font-bold">Ajustes de la cuenta</h2>
+
+      {/* Cambiar municipio */}
+      <Card className="p-4 space-y-3">
+        <div className="flex items-center gap-2">
+          <span className="h-9 w-9 rounded-2xl bg-bg grid place-items-center">
+            <MapPin size={18} className="text-ink" />
+          </span>
+          <div>
+            <p className="font-semibold text-ink">Municipio</p>
+            <p className="text-xs text-ink-soft">Cambia el municipio de tu cuenta.</p>
+          </div>
+        </div>
+        <form action={updateMunicipalityAction} className="flex gap-2">
+          <Select
+            name="municipality"
+            value={muni}
+            onChange={(e) => setMuni(e.target.value)}
+            className="flex-1"
+          >
+            {MUNICIPALITIES.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </Select>
+          <Button size="md" disabled={muni === municipality}>
+            <Check size={16} /> Guardar
+          </Button>
+        </form>
+      </Card>
+
+      {/* Cambiar tipo principal (no aplica a admin) */}
+      {role !== "ADMIN" && (
+        <Card className="p-4 space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="h-9 w-9 rounded-2xl bg-bg grid place-items-center">
+              <Repeat size={18} className="text-ink" />
+            </span>
+            <div className="min-w-0">
+              <p className="font-semibold text-ink">Tipo de usuario</p>
+              <p className="text-xs text-ink-soft">
+                Actualmente:{" "}
+                <b className="text-ink">
+                  {USER_TYPES[isMerchant ? "MERCHANT" : "CITIZEN"].emoji}{" "}
+                  {USER_TYPES[isMerchant ? "MERCHANT" : "CITIZEN"].label}
+                </b>
+              </p>
+            </div>
+          </div>
+          <p className="text-xs text-ink-soft">
+            {isMerchant
+              ? "Como negocio puedes publicar en todos los módulos. Si cambias a “Quiero descubrir” solo podrás explorar y comentar."
+              : "Cambia a “Tengo un negocio” para poder publicar negocios, inmuebles, servicios y vacantes."}
+          </p>
+          <form action={switchUserTypeAction}>
+            <input type="hidden" name="role" value={target} />
+            <Button variant="outline" size="md" className="w-full">
+              {USER_TYPES[target].emoji} Cambiar a “{USER_TYPES[target].label}”
+            </Button>
+          </form>
+        </Card>
+      )}
+    </section>
+  );
+}
