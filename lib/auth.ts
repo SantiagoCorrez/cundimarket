@@ -27,13 +27,33 @@ export async function verifyPassword(password: string, hash: string) {
   return bcrypt.compare(password, hash);
 }
 
-/** Firma un JWT y lo guarda en cookie httpOnly. Llamar desde Server Action / Route Handler. */
-export async function createSession(user: SessionUser) {
-  const token = await new SignJWT({ ...user })
+/** Firma un JWT de sesión (30 días). Usado tanto para la cookie web como para el token bearer móvil. */
+export async function signAuthToken(user: SessionUser) {
+  return new SignJWT({ ...user })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("30d")
     .sign(secret);
+}
+
+export async function verifyAuthToken(token: string): Promise<SessionUser | null> {
+  try {
+    const { payload } = await jwtVerify(token, secret);
+    return {
+      id: payload.id as string,
+      name: payload.name as string,
+      email: payload.email as string,
+      role: payload.role as Role,
+      municipality: payload.municipality as string,
+    };
+  } catch {
+    return null;
+  }
+}
+
+/** Firma un JWT y lo guarda en cookie httpOnly. Llamar desde Server Action / Route Handler. */
+export async function createSession(user: SessionUser) {
+  const token = await signAuthToken(user);
 
   const store = await cookies();
   store.set(COOKIE, token, {
@@ -74,4 +94,13 @@ export async function getCurrentUser() {
   const session = await getSession();
   if (!session) return null;
   return prisma.user.findUnique({ where: { id: session.id } });
+}
+
+/** Sesión para la API móvil: token bearer (app nativa) o cookie (fallback). */
+export async function getSessionFromRequest(req: Request): Promise<SessionUser | null> {
+  const header = req.headers.get("authorization");
+  if (header?.startsWith("Bearer ")) {
+    return verifyAuthToken(header.slice(7));
+  }
+  return getSession();
 }

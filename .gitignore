@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+mobile/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -46,3 +47,15 @@ next-env.d.ts
 /lib/generated
 *.db
 *.db-journal
+
+# expo / mobile app
+mobile/.expo
+mobile/dist
+mobile/ios
+mobile/android
+mobile/*.orig.*
+mobile/web-build
+mobile/expo-env.d.ts
+mobile/.env*.local
+# mobile/.env solo trae EXPO_PUBLIC_API_BASE_URL (no es secreto, se compila en el bundle)
+!mobile/.env

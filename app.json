@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "02c9e418-d316-4c45-997b-8aad21cf31cd"
+      }
+    },
+    "android": {
+      "package": "com.cundimarketapp.cundimarket"
+    }
+  }
+}

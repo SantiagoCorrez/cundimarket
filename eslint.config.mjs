@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Prisma client generado: no se edita ni se lintea.
     "lib/generated/**",
+    // App móvil Expo: proyecto independiente con su propio lint (`npm run lint` dentro de mobile/).
+    "mobile/**",
   ]),
 ]);
 
