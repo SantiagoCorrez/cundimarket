@@ -8,22 +8,28 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ApiError, api } from '@/api/client';
 import type { Business } from '@/api/types';
 import { Card, ScreenHeader, SectionTitle, Stars, VerifiedBadge } from '@/components/ui';
+import { ReportButton } from '@/components/report-button';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
+import { useContactGuard } from '@/hooks/use-contact-guard';
 import { formatCOP, telUrl, timeAgo, whatsappUrl } from '@/utils/format';
+import { openDirections } from '@/utils/maps';
 
 export default function BusinessScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
   const { user } = useAuth();
+  const guardContact = useContactGuard();
   const [business, setBusiness] = useState<Business | null>(null);
   const [favorited, setFavorited] = useState(false);
+  const [openNow, setOpenNow] = useState<boolean | null>(null);
   const [rateOpen, setRateOpen] = useState(false);
 
   const load = useCallback(() => {
-    api.get<{ business: Business; favorited: boolean }>(`/api/mobile/business/${id}`).then((r) => {
+    api.get<{ business: Business; favorited: boolean; openNow: boolean | null }>(`/api/mobile/business/${id}`).then((r) => {
       setBusiness(r.business);
       setFavorited(r.favorited);
+      setOpenNow(r.openNow ?? null);
     });
   }, [id]);
 
@@ -87,14 +93,25 @@ export default function BusinessScreen() {
         </View>
 
         <View style={styles.infoBlock}>
-          <InfoRow icon="location" text={`${business.address}${business.neighborhood ? `, ${business.neighborhood}` : ''}, ${business.municipality}`} />
-          {business.schedule && <InfoRow icon="time" text={business.schedule} />}
+          <InfoRow
+            icon="location"
+            text={`${business.address}${business.neighborhood ? `, ${business.neighborhood}` : ''}, ${business.municipality}`}
+            hint="Cómo llegar"
+            onPress={() => openDirections(business)}
+          />
+          {business.schedule && (
+            <InfoRow
+              icon="time"
+              text={business.schedule}
+              badge={openNow == null ? undefined : openNow ? { label: 'Abierto ahora', color: Palette.success } : { label: 'Cerrado', color: Palette.inkFaint }}
+            />
+          )}
           <InfoRow icon="call" text={business.phone} />
         </View>
 
         {business.photos.length > 0 && (
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.gallery}>
-            {business.photos.map((ph) => (
+            {business.photos.slice(0, 2).map((ph) => (
               <Image key={ph.id} source={ph.url} style={styles.galleryImage} contentFit="cover" />
             ))}
           </ScrollView>
@@ -167,15 +184,16 @@ export default function BusinessScreen() {
             )}
           </View>
         </View>
+        <ReportButton targetType="BUSINESS" targetId={business.id} />
       </ScrollView>
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + 12 }]}>
-        <Pressable style={styles.callButton} onPress={() => Linking.openURL(telUrl(business.phone))}>
+        <Pressable style={styles.callButton} onPress={() => guardContact(() => Linking.openURL(telUrl(business.phone)))}>
           <Ionicons name="call" size={18} color="#fff" />
           <Text style={styles.callButtonText}>Llamar</Text>
         </Pressable>
         {business.whatsapp && (
-          <Pressable style={styles.waButton} onPress={() => Linking.openURL(whatsappUrl(business.whatsapp!, waMessage))}>
+          <Pressable style={styles.waButton} onPress={() => guardContact(() => Linking.openURL(whatsappUrl(business.whatsapp!, waMessage)))}>
             <Ionicons name="logo-whatsapp" size={18} color={Palette.brandInk} />
             <Text style={styles.waButtonText}>WhatsApp</Text>
           </Pressable>
@@ -199,12 +217,40 @@ export default function BusinessScreen() {
   );
 }
 
-function InfoRow({ icon, text }: { icon: keyof typeof Ionicons.glyphMap; text: string }) {
-  return (
+function InfoRow({
+  icon,
+  text,
+  onPress,
+  hint,
+  badge,
+}: {
+  icon: keyof typeof Ionicons.glyphMap;
+  text: string;
+  onPress?: () => void;
+  hint?: string;
+  badge?: { label: string; color: string };
+}) {
+  const content = (
     <View style={styles.infoRow}>
-      <Ionicons name={icon} size={16} color={Palette.text} />
-      <Text style={styles.infoText}>{text}</Text>
+      <Ionicons name={icon} size={16} color={onPress ? Palette.brandStrong : Palette.text} />
+      <Text style={[styles.infoText, onPress && styles.infoLink]}>
+        {text}
+        {badge && <Text style={{ color: badge.color, fontWeight: '700' }}>{`  ● ${badge.label}`}</Text>}
+      </Text>
+      {onPress && (
+        <View style={styles.infoHint}>
+          <Ionicons name="navigate" size={13} color={Palette.brandStrong} />
+          <Text style={styles.infoHintText}>{hint}</Text>
+        </View>
+      )}
     </View>
+  );
+  return onPress ? (
+    <Pressable onPress={onPress} accessibilityRole="link" accessibilityLabel={hint}>
+      {content}
+    </Pressable>
+  ) : (
+    content
   );
 }
 
@@ -251,6 +297,9 @@ const styles = StyleSheet.create({
   infoBlock: { paddingHorizontal: 16, gap: 6 },
   infoRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   infoText: { fontSize: 13.5, color: Palette.textSecondary, flex: 1 },
+  infoLink: { color: Palette.brandStrong, fontWeight: '600', textDecorationLine: 'underline' },
+  infoHint: { flexDirection: 'row', alignItems: 'center', gap: 3 },
+  infoHintText: { fontSize: 11.5, fontWeight: '700', color: Palette.brandStrong },
   gallery: { paddingHorizontal: 16, gap: 8, marginTop: 16 },
   galleryImage: { height: 150, width: 210, borderRadius: Radius.card, backgroundColor: Palette.backgroundElement },
   section: { marginTop: 20, gap: 10 },

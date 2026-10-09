@@ -20,6 +20,11 @@ export function timeAgo(date: Date | string) {
   return d.toLocaleDateString('es-CO', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
+export function formatDistance(km: number) {
+  if (km >= 1) return `a ${km.toFixed(1)} km`;
+  return `a ${Math.max(10, Math.round((km * 1000) / 10) * 10)} m`;
+}
+
 export function telUrl(phone: string) {
   return `tel:${phone.replace(/[^\d+]/g, '')}`;
 }

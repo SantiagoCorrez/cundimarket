@@ -46,9 +46,13 @@ export default function TerminosPage() {
         <div>
           <h2 className="text-base font-bold text-ink mb-1">4. Tus derechos</h2>
           <p>
-            Puedes conocer, actualizar, rectificar o solicitar la eliminación de tus datos
-            en cualquier momento desde tu perfil o escribiendo a los canales de atención
-            de CundiMarket.
+            Puedes conocer, actualizar o rectificar tus datos en cualquier momento desde tu
+            perfil. También puedes <b>eliminar tu cuenta y tus datos</b> directamente desde la
+            app o la web en <b>Perfil → Eliminar mi cuenta</b> (
+            <Link href="/eliminar-cuenta" className="font-semibold text-ink underline">
+              cundimarket.online/eliminar-cuenta
+            </Link>
+            ), o escribiendo a los canales de atención de CundiMarket.
           </p>
         </div>
         <div>
@@ -57,6 +61,18 @@ export default function TerminosPage() {
             Solo los usuarios con perfil <b>🏪 Tengo un negocio</b> pueden publicar negocios,
             inmuebles, servicios o vacantes. Los usuarios <b>🛍️ Quiero descubrir</b> pueden
             explorar, guardar favoritos y calificar.
+          </p>
+        </div>
+        <div>
+          <h2 className="text-base font-bold text-ink mb-1">6. Naturaleza de la plataforma y responsabilidad</h2>
+          <p>
+            CundiMarket es un canal de conexión entre personas, comercios y prestadores de
+            servicios. La plataforma facilita la publicación y consulta de productos, servicios,
+            inmuebles, empleos y demás contenidos, pero no participa ni se hace responsable de
+            las negociaciones, pagos, acuerdos, calidad, cumplimiento o entrega de los productos
+            y servicios ofrecidos por terceros. Te recomendamos verificar la información antes
+            de realizar cualquier transacción, actuar con precaución y hacer un uso responsable
+            de la plataforma. Al continuar, declaras conocer y aceptar estas condiciones.
           </p>
         </div>
         <p className="text-xs text-ink-faint pt-2">

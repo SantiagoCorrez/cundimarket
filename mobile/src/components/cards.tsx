@@ -6,12 +6,12 @@ import { Card, Stars, VerifiedBadge } from '@/components/ui';
 import { Palette, Radius } from '@/constants/theme';
 import type { Business, Category, Job, News, Promotion, Property, ServiceProvider } from '@/api/types';
 import { NEWS_TYPES, OFFER_TYPES } from '@/constants/taxonomy';
-import { formatCOP, timeAgo } from '@/utils/format';
+import { formatCOP, formatDistance, timeAgo } from '@/utils/format';
 
 export function CategoryChip({ category }: { category: Category }) {
   return (
     <Pressable
-      onPress={() => router.push({ pathname: '/search', params: { category: category.slug } })}
+      onPress={() => router.push({ pathname: '/comercios', params: { category: category.slug } })}
       style={styles.categoryChip}>
       <Text style={styles.categoryChipIcon}>{category.icon}</Text>
       <Text style={styles.categoryChipLabel} numberOfLines={1}>
@@ -64,9 +64,20 @@ export function BusinessCard({ b }: { b: Business }) {
           </View>
           <Text style={styles.listSubtitle} numberOfLines={1}>
             {b.category.icon} {b.category.name}
+            {b.subcategory ? ` · ${b.subcategory.name}` : ''}
             {b.neighborhood ? ` · ${b.neighborhood}` : ''}
           </Text>
           <Stars value={b.ratingAvg} count={b.ratingCount} size={13} />
+          {(b.openNow != null || b.distanceKm != null) && (
+            <View style={styles.metaRow}>
+              {b.openNow != null && (
+                <Text style={[styles.metaText, { color: b.openNow ? Palette.success : Palette.inkFaint }]}>
+                  {b.openNow ? '● Abierto ahora' : '● Cerrado'}
+                </Text>
+              )}
+              {b.distanceKm != null && <Text style={styles.metaText}>{formatDistance(b.distanceKm)}</Text>}
+            </View>
+          )}
         </View>
         {(b._count?.promotions ?? 0) > 0 && (
           <View style={styles.promoDot}>
@@ -235,6 +246,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   rowGap: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  metaRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 3 },
+  metaText: { fontSize: 12, fontWeight: '600', color: Palette.textSecondary },
   listTitle: { fontSize: 15, fontWeight: '700', color: Palette.text },
   listSubtitle: { fontSize: 12.5, color: Palette.textSecondary, marginTop: 2, marginBottom: 3 },
   priceText: { fontSize: 14, fontWeight: '800', color: Palette.text },

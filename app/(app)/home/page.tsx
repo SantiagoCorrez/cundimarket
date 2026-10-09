@@ -10,10 +10,12 @@ import {
   NewsCard,
 } from "@/components/cards";
 import { ModuleGrid } from "@/components/module-grid";
+import { ensureFreshNews } from "@/lib/news-sync";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
+  ensureFreshNews();
   const session = await getSession();
 
   const [categories, featured, promos, news] = await Promise.all([

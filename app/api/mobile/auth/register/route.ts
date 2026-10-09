@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { signAuthToken, hashPassword, type Role } from "@/lib/auth";
 import { json, apiError } from "@/lib/api";
+import { MUNICIPALITIES, PILOT_MUNICIPALITY } from "@/lib/taxonomy";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
@@ -8,7 +9,8 @@ export async function POST(req: Request) {
   const email = String(body?.email || "").trim().toLowerCase();
   const password = String(body?.password || "");
   const phone = String(body?.phone || "").trim();
-  const municipality = String(body?.municipality || "Mosquera");
+  const requested = String(body?.municipality || PILOT_MUNICIPALITY);
+  const municipality = MUNICIPALITIES.includes(requested) ? requested : PILOT_MUNICIPALITY;
   const role: Role = body?.role === "MERCHANT" ? "MERCHANT" : "CITIZEN";
 
   if (!name || !email || password.length < 6) {

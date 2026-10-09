@@ -1,17 +1,6 @@
 import { prisma } from "@/lib/prisma";
+import { recomputeBusinessRating } from "@/lib/ratings";
 import { requireUser, isErrorResponse, json, apiError } from "@/lib/api";
-
-async function recomputeBusinessRating(businessId: string) {
-  const agg = await prisma.rating.aggregate({
-    where: { businessId },
-    _avg: { stars: true },
-    _count: true,
-  });
-  await prisma.business.update({
-    where: { id: businessId },
-    data: { ratingAvg: agg._avg.stars || 0, ratingCount: agg._count },
-  });
-}
 
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await requireUser(req);

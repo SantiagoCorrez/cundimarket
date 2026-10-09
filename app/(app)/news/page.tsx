@@ -2,10 +2,12 @@ import { prisma } from "@/lib/prisma";
 import { BackBar } from "@/components/nav";
 import { NewsCard } from "@/components/cards";
 import { EmptyState } from "@/components/ui";
+import { ensureFreshNews } from "@/lib/news-sync";
 
 export const dynamic = "force-dynamic";
 
 export default async function NewsPage() {
+  ensureFreshNews();
   const news = await prisma.news.findMany({ orderBy: { publishedAt: "desc" }, take: 50 });
 
   return (

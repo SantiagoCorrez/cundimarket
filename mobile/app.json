@@ -2,13 +2,12 @@
   "expo": {
     "name": "CundiMarket",
     "slug": "cundimarket",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "cundimarket",
     "userInterfaceStyle": "light",
     "ios": {
-      "icon": "./assets/expo.icon",
       "bundleIdentifier": "co.cundimarket.app",
       "supportsTablet": false,
       "infoPlist": {
@@ -17,11 +16,10 @@
     },
     "android": {
       "package": "co.cundimarket.app",
+      "versionCode": 2,
       "adaptiveIcon": {
-        "backgroundColor": "#0f1419",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "backgroundColor": "#055FAD",
+        "foregroundImage": "./assets/images/android-icon-foreground.png"
       },
       "predictiveBackGestureEnabled": false
     },
@@ -34,12 +32,18 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#0f1419",
+          "backgroundColor": "#055FAD",
           "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "imageWidth": 288
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "CundiMarket usa tu ubicación para mostrarte los comercios más cercanos."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

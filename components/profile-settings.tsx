@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { MapPin, Repeat, Check } from "lucide-react";
 import { Card, Select, Button } from "@/components/ui";
-import { MUNICIPALITIES, USER_TYPES } from "@/lib/taxonomy";
+import { ComingSoonSheet } from "@/components/coming-soon-sheet";
+import { MUNICIPALITIES, PILOT_MUNICIPALITY, USER_TYPES } from "@/lib/taxonomy";
 import { updateMunicipalityAction, switchUserTypeAction } from "@/lib/actions/auth";
 
 type Role = "CITIZEN" | "MERCHANT" | "ADMIN";
@@ -16,6 +17,7 @@ export function ProfileSettings({
   municipality: string;
 }) {
   const [muni, setMuni] = useState(municipality);
+  const [soonFor, setSoonFor] = useState<string | null>(null);
   const isMerchant = role === "MERCHANT";
   const target = isMerchant ? "CITIZEN" : "MERCHANT";
 
@@ -38,12 +40,17 @@ export function ProfileSettings({
           <Select
             name="municipality"
             value={muni}
-            onChange={(e) => setMuni(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value === PILOT_MUNICIPALITY) setMuni(value);
+              else setSoonFor(value);
+            }}
             className="flex-1"
           >
             {MUNICIPALITIES.map((m) => (
               <option key={m} value={m}>
                 {m}
+                {m === PILOT_MUNICIPALITY ? "" : " (próximamente)"}
               </option>
             ))}
           </Select>
@@ -52,6 +59,15 @@ export function ProfileSettings({
           </Button>
         </form>
       </Card>
+
+      <ComingSoonSheet municipality={soonFor} onChooseAnother={() => setSoonFor(null)}>
+        <form action={updateMunicipalityAction}>
+          <input type="hidden" name="municipality" value={soonFor ?? ""} />
+          <Button size="lg" className="w-full">
+            Avisarme cuando esté disponible
+          </Button>
+        </form>
+      </ComingSoonSheet>
 
       {/* Cambiar tipo principal (no aplica a admin) */}
       {role !== "ADMIN" && (

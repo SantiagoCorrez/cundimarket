@@ -6,6 +6,7 @@ import { BackBar } from "@/components/nav";
 import { Badge, VerifiedBadge, Card } from "@/components/ui";
 import { ReportButton } from "@/components/business-interactions";
 import { whatsappLink, telLink, formatCOP } from "@/lib/utils";
+import { directionsUrl } from "@/lib/maps";
 import { OFFER_TYPES } from "@/lib/taxonomy";
 
 export const dynamic = "force-dynamic";
@@ -16,6 +17,8 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
   const p = await prisma.property.findUnique({ where: { id }, include: { photos: true } });
   if (!p) notFound();
 
+  // Llamar o escribir por WhatsApp es solo para usuarios registrados.
+  const gate = `/register?reason=contact&next=${encodeURIComponent(`/espacios/${id}`)}`;
   const offer = OFFER_TYPES.find((o) => o.key === p.offerType);
   const specs = [
     p.rooms ? { icon: BedDouble, label: `${p.rooms} hab.` } : null,
@@ -45,10 +48,20 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
           {formatCOP(p.price)}
           {p.offerType === "RENT" && p.price ? <span className="text-base font-medium text-ink-soft"> /mes</span> : null}
         </h1>
-        <p className="text-sm text-ink-soft flex items-center gap-1 mt-1">
-          <MapPin size={14} /> {p.neighborhood ? `${p.neighborhood}, ` : ""}{p.municipality}
-          {p.address ? ` · ${p.address}` : ""}
-        </p>
+        <a
+          href={directionsUrl(p)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Cómo llegar en Google Maps"
+          className="text-sm text-brand-strong font-medium underline underline-offset-2 flex items-center gap-1 mt-1"
+        >
+          <MapPin size={14} className="shrink-0" />
+          <span className="flex-1">
+            {p.neighborhood ? `${p.neighborhood}, ` : ""}{p.municipality}
+            {p.address ? ` · ${p.address}` : ""}
+          </span>
+          <span className="shrink-0 text-xs font-bold no-underline">Cómo llegar</span>
+        </a>
 
         {specs.length > 0 && (
           <div className="grid grid-cols-4 gap-2 mt-4">
@@ -83,13 +96,13 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
       <div className="sticky bottom-0 bg-surface/95 backdrop-blur border-t border-line p-3">
         <p className="text-xs text-ink-soft mb-2 px-1">Contacto: {p.ownerName}</p>
         <div className="flex gap-2">
-          <a href={telLink(p.phone)} className="flex-1 h-12 rounded-2xl bg-ink text-white font-semibold flex items-center justify-center gap-2">
+          <a href={session ? telLink(p.phone) : gate} className="flex-1 h-12 rounded-2xl bg-ink text-white font-semibold flex items-center justify-center gap-2">
             <Phone size={18} /> Llamar
           </a>
           {p.whatsapp && (
             <a
-              href={whatsappLink(p.whatsapp, `Hola, me interesa el ${p.propertyType} publicado en CundiEspacios.`)}
-              target="_blank"
+              href={session ? whatsappLink(p.whatsapp, `Hola, me interesa el ${p.propertyType} publicado en CundiEspacios.`) : gate}
+              target={session ? "_blank" : undefined}
               className="flex-1 h-12 rounded-2xl bg-brand text-brand-ink font-semibold flex items-center justify-center gap-2"
             >
               <MessageCircle size={18} /> WhatsApp

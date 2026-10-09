@@ -59,6 +59,8 @@ export type Business = {
   facebook?: string | null;
   website?: string | null;
   logoUrl?: string | null;
+  lat?: number | null;
+  lng?: number | null;
   status: string;
   featured: boolean;
   ratingAvg: number;
@@ -71,6 +73,9 @@ export type Business = {
   promotions: Promotion[];
   ratings: Rating[];
   _count?: { promotions: number };
+  /** Calculados por la API de búsqueda: null cuando no se pudo determinar. */
+  openNow?: boolean | null;
+  distanceKm?: number | null;
 };
 
 export type News = {
@@ -81,6 +86,8 @@ export type News = {
   imageUrl?: string | null;
   municipality: string;
   publishedAt: string;
+  /** Página original de la noticia en el sitio de la alcaldía. */
+  sourceUrl?: string | null;
 };
 
 export type EmergencyContact = {

@@ -170,6 +170,8 @@ model News {
   authorId     String?
   author       User?    @relation(fields: [authorId], references: [id])
   publishedAt  DateTime @default(now())
+  /// URL pública de la noticia en el sitio de origen (alcaldía). Evita duplicados al sincronizar.
+  sourceUrl    String?  @unique
 }
 
 model EmergencyContact {

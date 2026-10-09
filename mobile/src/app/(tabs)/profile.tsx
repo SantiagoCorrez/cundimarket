@@ -8,14 +8,29 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { API_BASE_URL, api } from '@/api/client';
 import type { Business } from '@/api/types';
 import { BusinessCard } from '@/components/cards';
+import { DeleteAccountModal } from '@/components/delete-account-modal';
+import { MunicipalityPicker } from '@/components/municipality-picker';
 import { Button, Card, Logo } from '@/components/ui';
+import { PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
 
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
-  const { user, logout } = useAuth();
+  const { user, logout, updateMunicipality } = useAuth();
   const [favorites, setFavorites] = useState<Business[] | null>(null);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
+  async function saveMunicipality(municipality: string, notify: boolean) {
+    setPickerOpen(false);
+    try {
+      await updateMunicipality(municipality);
+      if (notify) Alert.alert('¡Listo!', `Te avisaremos cuando CundiMarket esté disponible en ${municipality}.`);
+    } catch {
+      Alert.alert('No se pudo guardar', 'Inténtalo de nuevo en unos segundos.');
+    }
+  }
 
   useEffect(() => {
     if (!user) return;
@@ -27,29 +42,34 @@ export default function ProfileScreen() {
 
   if (!user) {
     return (
-      <View style={[styles.loggedOut, { paddingTop: insets.top }]}>
-        <View style={styles.loggedOutIcon}>
-          <Ionicons name="person" size={36} color={Palette.inkFaint} />
+      <>
+        <View style={[styles.loggedOut, { paddingTop: insets.top }]}>
+          <View style={styles.loggedOutIcon}>
+            <Ionicons name="person" size={36} color={Palette.inkFaint} />
+          </View>
+          <Text style={styles.loggedOutTitle}>Tu cuenta</Text>
+          <Text style={styles.loggedOutSubtitle}>
+            Inicia sesión para guardar favoritos, calificar negocios y publicar.
+          </Text>
+          <View style={{ width: '100%', maxWidth: 320, marginTop: 24, gap: 10 }}>
+            <Button size="lg" onPress={() => router.push('/login')}>
+              Iniciar sesión
+            </Button>
+            <Button size="lg" variant="outline" onPress={() => router.push('/register')}>
+              Crear cuenta
+            </Button>
+          </View>
         </View>
-        <Text style={styles.loggedOutTitle}>Tu cuenta</Text>
-        <Text style={styles.loggedOutSubtitle}>
-          Inicia sesión para guardar favoritos, calificar negocios y publicar.
-        </Text>
-        <View style={{ width: '100%', maxWidth: 320, marginTop: 24, gap: 10 }}>
-          <Button size="lg" onPress={() => router.push('/login')}>
-            Iniciar sesión
-          </Button>
-          <Button size="lg" variant="outline" onPress={() => router.push('/register')}>
-            Crear cuenta
-          </Button>
-        </View>
-      </View>
+        {/* Sigue montado tras eliminar la cuenta para poder mostrar la confirmación final. */}
+        <DeleteAccountModal visible={deleteOpen} onClose={() => setDeleteOpen(false)} />
+      </>
     );
   }
 
   const roleLabel = user.role === 'ADMIN' ? 'Administrador' : user.role === 'MERCHANT' ? '🏪 Tengo un negocio' : '🛍️ Quiero descubrir';
 
   return (
+    <>
     <ScrollView style={{ flex: 1, backgroundColor: Palette.background }} contentContainerStyle={{ paddingBottom: insets.bottom + 32 }}>
       <View style={[styles.hero, { paddingTop: insets.top + 24 }]}>
         <Logo name={user.name} size={64} />
@@ -73,6 +93,11 @@ export default function ProfileScreen() {
         {user.role === 'ADMIN' && (
           <ProfileLink icon="shield-checkmark" label="Panel administrativo" onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/admin`)} />
         )}
+        <ProfileLink
+          icon="location"
+          label={user.municipality === PILOT_MUNICIPALITY ? `Municipio: ${user.municipality}` : `Municipio: ${user.municipality} (próximamente)`}
+          onPress={() => setPickerOpen(true)}
+        />
         <ProfileLink icon="briefcase" label="Mi perfil laboral" onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/empleo/perfil`)} />
       </View>
 
@@ -106,8 +131,23 @@ export default function ProfileScreen() {
           <Ionicons name="log-out-outline" size={18} color={Palette.danger} />
           <Text style={{ color: Palette.danger, fontWeight: '700', fontSize: 15 }}>Cerrar sesión</Text>
         </Button>
+        <Pressable style={styles.deleteLink} onPress={() => setDeleteOpen(true)} accessibilityRole="button">
+          <Ionicons name="trash-outline" size={16} color={Palette.danger} />
+          <Text style={styles.deleteLinkText}>Eliminar mi cuenta</Text>
+        </Pressable>
       </View>
+
+      <MunicipalityPicker
+        visible={pickerOpen}
+        current={user.municipality}
+        onClose={() => setPickerOpen(false)}
+        onSelect={(m) => saveMunicipality(m, false)}
+        onConfirmSoon={(m) => saveMunicipality(m, true)}
+        soonConfirmLabel="Avisarme cuando esté disponible"
+      />
     </ScrollView>
+    <DeleteAccountModal visible={deleteOpen} onClose={() => setDeleteOpen(false)} />
+    </>
   );
 }
 
@@ -135,6 +175,8 @@ const styles = StyleSheet.create({
   email: { color: 'rgba(255,255,255,0.6)', fontSize: 13, marginTop: 2 },
   role: { color: Palette.brand, fontSize: 12, fontWeight: '700', marginTop: 4 },
   links: { padding: 16, gap: 8 },
+  deleteLink: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 14, marginTop: 6 },
+  deleteLinkText: { color: Palette.danger, fontWeight: '600', fontSize: 14 },
   linkCard: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12 },
   linkIcon: { height: 40, width: 40, borderRadius: Radius.card - 8, backgroundColor: Palette.backgroundElement, alignItems: 'center', justifyContent: 'center' },
   linkLabel: { flex: 1, fontWeight: '600', color: Palette.text, fontSize: 14.5 },

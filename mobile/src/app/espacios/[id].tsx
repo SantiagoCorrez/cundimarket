@@ -9,12 +9,16 @@ import { api } from '@/api/client';
 import type { Property } from '@/api/types';
 import { Badge, Card, ScreenHeader, VerifiedBadge } from '@/components/ui';
 import { OFFER_TYPES } from '@/constants/taxonomy';
+import { ReportButton } from '@/components/report-button';
 import { Palette, Radius } from '@/constants/theme';
+import { useContactGuard } from '@/hooks/use-contact-guard';
 import { formatCOP, telUrl, whatsappUrl } from '@/utils/format';
+import { openDirections } from '@/utils/maps';
 
 export default function PropertyScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
+  const guardContact = useContactGuard();
   const [p, setP] = useState<Property | null>(null);
 
   useEffect(() => {
@@ -58,14 +62,16 @@ export default function PropertyScreen() {
             {formatCOP(p.price)}
             {p.offerType === 'RENT' && p.price ? <Text style={styles.priceUnit}> /mes</Text> : null}
           </Text>
-          <View style={styles.locationRow}>
-            <Ionicons name="location" size={14} color={Palette.textSecondary} />
+          <Pressable style={styles.locationRow} onPress={() => openDirections(p)} accessibilityRole="link" accessibilityLabel="Cómo llegar">
+            <Ionicons name="location" size={14} color={Palette.brandStrong} />
             <Text style={styles.locationText}>
               {p.neighborhood ? `${p.neighborhood}, ` : ''}
               {p.municipality}
               {p.address ? ` · ${p.address}` : ''}
             </Text>
-          </View>
+            <Ionicons name="navigate" size={13} color={Palette.brandStrong} />
+            <Text style={styles.locationHint}>Cómo llegar</Text>
+          </Pressable>
 
           {specs.length > 0 && (
             <View style={styles.specsGrid}>
@@ -92,19 +98,22 @@ export default function PropertyScreen() {
           ) : null}
           {p.stratum ? <Text style={styles.paragraph}>Estrato {p.stratum}</Text> : null}
         </View>
+        <ReportButton targetType="PROPERTY" targetId={p.id} />
       </ScrollView>
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + 12 }]}>
         <Text style={styles.ownerText}>Contacto: {p.ownerName}</Text>
         <View style={{ flexDirection: 'row', gap: 8 }}>
-          <Pressable style={styles.callButton} onPress={() => Linking.openURL(telUrl(p.phone))}>
+          <Pressable style={styles.callButton} onPress={() => guardContact(() => Linking.openURL(telUrl(p.phone)))}>
             <Ionicons name="call" size={18} color="#fff" />
             <Text style={styles.callButtonText}>Llamar</Text>
           </Pressable>
           {p.whatsapp && (
             <Pressable
               style={styles.waButton}
-              onPress={() => Linking.openURL(whatsappUrl(p.whatsapp!, `Hola, me interesa el ${p.propertyType} publicado en CundiEspacios.`))}>
+              onPress={() =>
+                guardContact(() => Linking.openURL(whatsappUrl(p.whatsapp!, `Hola, me interesa el ${p.propertyType} publicado en CundiEspacios.`)))
+              }>
               <Ionicons name="logo-whatsapp" size={18} color={Palette.brandInk} />
               <Text style={styles.waButtonText}>WhatsApp</Text>
             </Pressable>
@@ -123,7 +132,8 @@ const styles = StyleSheet.create({
   price: { fontSize: 24, fontWeight: '800', color: Palette.text, marginTop: 8 },
   priceUnit: { fontSize: 15, fontWeight: '600', color: Palette.textSecondary },
   locationRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 4 },
-  locationText: { fontSize: 13, color: Palette.textSecondary, flex: 1 },
+  locationText: { fontSize: 13, color: Palette.brandStrong, fontWeight: '600', textDecorationLine: 'underline', flex: 1 },
+  locationHint: { fontSize: 11.5, fontWeight: '700', color: Palette.brandStrong },
   specsGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 16 },
   specCard: { width: '23%', alignItems: 'center', gap: 4, paddingVertical: 12 },
   specLabel: { fontSize: 11, color: Palette.textSecondary, textAlign: 'center' },

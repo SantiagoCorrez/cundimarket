@@ -1,7 +1,9 @@
+import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { api } from '@/api/client';
@@ -50,6 +52,12 @@ export default function NewsDetailScreen() {
             {item.municipality} · {timeAgo(item.publishedAt)}
           </Text>
           <Text style={styles.content}>{item.body}</Text>
+          {item.sourceUrl && (
+            <Pressable style={styles.sourceLink} onPress={() => WebBrowser.openBrowserAsync(item.sourceUrl!)}>
+              <Ionicons name="open-outline" size={16} color={Palette.brandStrong} />
+              <Text style={styles.sourceText}>Ver la noticia completa en la Alcaldía de Mosquera</Text>
+            </Pressable>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -64,4 +72,6 @@ const styles = StyleSheet.create({
   title: { fontSize: 22, fontWeight: '800', color: Palette.text, marginTop: 10, lineHeight: 28 },
   meta: { fontSize: 12, color: Palette.inkFaint, marginTop: 4 },
   content: { fontSize: 15, color: Palette.textSecondary, lineHeight: 22, marginTop: 14 },
+  sourceLink: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 22 },
+  sourceText: { flex: 1, fontSize: 14, fontWeight: '700', color: Palette.brandStrong },
 });

@@ -18,6 +18,14 @@ export const MUNICIPALITIES = [
   'Fusagasugá',
 ];
 
+/** Único municipio habilitado en el piloto; el resto se muestra como "Próximamente". */
+export const PILOT_MUNICIPALITY = 'Mosquera';
+
+export const COMING_SOON = {
+  title: '📍 ¡Pronto llegaremos a tu municipio!',
+  body: 'CundiMarket aún no está habilitado en este municipio. Actualmente estamos recopilando y validando información para preparar su lanzamiento y ofrecerte una mejor experiencia. Puedes registrarte desde ahora y, cuando CundiMarket esté disponible en tu municipio, serás de los primeros en enterarte y empezar a disfrutar de todo lo que tenemos para ti.',
+};
+
 export const SERVICE_CATEGORIES = [
   { key: 'hogar', name: 'Servicios para el hogar', icon: '🔧' },
   { key: 'tecnico', name: 'Servicios técnicos', icon: '💻' },

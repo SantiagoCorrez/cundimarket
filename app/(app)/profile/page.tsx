@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, Store, Shield, Bell, Settings, ChevronRight, LogOut, User } from "lucide-react";
+import { Heart, Store, Shield, Bell, Settings, ChevronRight, LogOut, User, Trash2 } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 import { logoutAction } from "@/lib/actions/auth";
@@ -46,6 +46,7 @@ export default async function ProfilePage() {
     { href: "/empleo/perfil", icon: User, label: "Mi perfil laboral" },
     { href: "#", icon: Bell, label: "Notificaciones" },
     { href: "#", icon: Settings, label: "Configuración" },
+    { href: "/eliminar-cuenta", icon: Trash2, label: "Eliminar mi cuenta" },
   ].filter(Boolean) as { href: string; icon: typeof Store; label: string }[];
 
   return (

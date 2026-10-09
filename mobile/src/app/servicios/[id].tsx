@@ -8,12 +8,15 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { api } from '@/api/client';
 import type { ServiceProvider } from '@/api/types';
 import { Card, ScreenHeader, SectionTitle, Stars, VerifiedBadge } from '@/components/ui';
+import { ReportButton } from '@/components/report-button';
 import { Palette, Radius } from '@/constants/theme';
+import { useContactGuard } from '@/hooks/use-contact-guard';
 import { telUrl, timeAgo, whatsappUrl } from '@/utils/format';
 
 export default function ProviderScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
+  const guardContact = useContactGuard();
   const [s, setS] = useState<ServiceProvider | null>(null);
 
   useEffect(() => {
@@ -97,17 +100,18 @@ export default function ProviderScreen() {
             )}
           </View>
         </View>
+        <ReportButton targetType="SERVICE" targetId={s.id} />
       </ScrollView>
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + 12 }]}>
-        <Pressable style={styles.callButton} onPress={() => Linking.openURL(telUrl(s.phone))}>
+        <Pressable style={styles.callButton} onPress={() => guardContact(() => Linking.openURL(telUrl(s.phone)))}>
           <Ionicons name="call" size={18} color="#fff" />
           <Text style={styles.callButtonText}>Llamar</Text>
         </Pressable>
         {s.whatsapp && (
           <Pressable
             style={styles.waButton}
-            onPress={() => Linking.openURL(whatsappUrl(s.whatsapp!, `Hola, vi tu servicio de ${s.serviceType} en CundiMarket.`))}>
+            onPress={() => guardContact(() => Linking.openURL(whatsappUrl(s.whatsapp!, `Hola, vi tu servicio de ${s.serviceType} en CundiMarket.`)))}>
             <Ionicons name="logo-whatsapp" size={18} color={Palette.brandInk} />
             <Text style={styles.waButtonText}>WhatsApp</Text>
           </Pressable>

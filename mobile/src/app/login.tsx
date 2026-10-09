@@ -5,6 +5,7 @@ import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput,
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ApiError } from '@/api/client';
+import { PasswordInput } from '@/components/password-input';
 import { Button } from '@/components/ui';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
@@ -52,14 +53,7 @@ export default function LoginScreen() {
             keyboardType="email-address"
             style={styles.input}
           />
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            placeholder="Contraseña"
-            placeholderTextColor={Palette.textSecondary}
-            secureTextEntry
-            style={styles.input}
-          />
+          <PasswordInput value={password} onChangeText={setPassword} placeholder="Contraseña" />
           {error && <Text style={styles.error}>{error}</Text>}
           <Button size="lg" onPress={onSubmit} disabled={loading || !email || !password}>
             {loading ? 'Ingresando…' : 'Ingresar'}

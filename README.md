@@ -8,7 +8,7 @@ Diseño inspirado en el estilo visual de inDrive (lima vibrante + negro, tarjeta
 
 - **Next.js 16** (App Router, Server Actions, Turbopack) + **React 19**
 - **TypeScript** + **Tailwind CSS v4**
-- **Prisma 6** + **SQLite** (migrable a PostgreSQL en producción)
+- **Prisma 6** + **PostgreSQL**
 - Autenticación propia con **JWT** (jose) en cookie httpOnly + **bcrypt**
 - Iconos **lucide-react**, PWA con manifest
 
@@ -22,6 +22,29 @@ npm run dev                 # http://localhost:3000
 ```
 
 > Si agregas rutas con el servidor corriendo y ves 404 inesperados, reinicia `npm run dev` (Turbopack reconstruye el árbol de rutas).
+
+## Despliegue / actualización en el servidor
+
+Un `git push` **no** actualiza el servidor; después de hacer `git pull` ahí:
+
+```bash
+npm install            # ejecuta prisma generate
+npm run build          # prisma generate + prisma migrate deploy + next build
+# reiniciar el proceso (pm2 / Node project de aaPanel)
+npm run news:sync      # opcional: primera carga inmediata de las noticias de la alcaldía
+```
+
+> ⚠️ **No ejecutes `npm run db:seed` en producción**: el seed borra todas las tablas
+> (usuarios, comercios, reportes…) antes de cargar los datos de ejemplo.
+
+## Noticias de la Alcaldía de Mosquera
+
+La sección de noticias se alimenta del portal oficial
+(<https://www.mosquera-cundinamarca.gov.co/tema/noticias>) a través de su API pública
+(`lib/news-sync.ts`). Se sincroniza sola en segundo plano, como máximo cada 30 minutos,
+cuando alguien abre el inicio o las noticias (web o app), y se puede forzar con
+`npm run news:sync`. Cada noticia queda con enlace a la página original (`News.sourceUrl`).
+Las noticias de ejemplo del seed se pueden borrar desde el panel de administración.
 
 ## Usuarios de prueba (contraseña: `123456`)
 

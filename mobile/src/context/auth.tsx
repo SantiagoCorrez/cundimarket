@@ -18,6 +18,9 @@ type AuthContextValue = {
     municipality?: string;
     role?: Role;
   }) => Promise<void>;
+  updateMunicipality: (municipality: string) => Promise<void>;
+  /** Elimina definitivamente la cuenta (pide la contraseña) y cierra la sesión local. */
+  deleteAccount: (password: string) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -67,6 +70,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           input,
         );
         await applySession(token, sessionUser);
+      },
+      updateMunicipality: async (municipality) => {
+        const { token, user: sessionUser } = await api.post<{ token: string; user: SessionUser }>(
+          '/api/mobile/auth/municipality',
+          { municipality },
+        );
+        await applySession(token, sessionUser);
+      },
+      deleteAccount: async (password) => {
+        await api.post('/api/mobile/auth/delete-account', { password });
+        await secureStorage.removeItem(TOKEN_KEY);
+        setAuthToken(null);
+        setUser(null);
       },
       logout: async () => {
         await secureStorage.removeItem(TOKEN_KEY);

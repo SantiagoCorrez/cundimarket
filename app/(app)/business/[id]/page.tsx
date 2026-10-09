@@ -6,6 +6,7 @@ import { BackBar } from "@/components/nav";
 import { Card, Stars, VerifiedBadge, Logo, SectionTitle } from "@/components/ui";
 import { FavoriteButton, RateButton, ReportButton } from "@/components/business-interactions";
 import { whatsappLink, telLink, formatCOP, timeAgo } from "@/lib/utils";
+import { directionsUrl } from "@/lib/maps";
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +38,8 @@ export default async function BusinessPage({ params }: { params: Promise<{ id: s
     : false;
 
   const waMsg = `Hola, te contacto desde CundiMarket por ${business.name}.`;
+  // Llamar o escribir por WhatsApp es solo para usuarios registrados.
+  const gate = `/register?reason=contact&next=${encodeURIComponent(`/business/${id}`)}`;
 
   return (
     <div>
@@ -65,11 +68,20 @@ export default async function BusinessPage({ params }: { params: Promise<{ id: s
 
       {/* Datos de contacto */}
       <div className="px-4 mt-4 space-y-2 text-sm">
-        <p className="flex items-center gap-2 text-ink-soft">
-          <MapPin size={16} className="text-ink shrink-0" />
-          {business.address}
-          {business.neighborhood ? `, ${business.neighborhood}` : ""}, {business.municipality}
-        </p>
+        <a
+          href={directionsUrl(business)}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Cómo llegar en Google Maps"
+          className="flex items-center gap-2 text-brand-strong font-medium underline underline-offset-2"
+        >
+          <MapPin size={16} className="shrink-0" />
+          <span className="flex-1">
+            {business.address}
+            {business.neighborhood ? `, ${business.neighborhood}` : ""}, {business.municipality}
+          </span>
+          <span className="shrink-0 text-xs font-bold no-underline">Cómo llegar</span>
+        </a>
         {business.schedule && (
           <p className="flex items-center gap-2 text-ink-soft">
             <Clock size={16} className="text-ink shrink-0" /> {business.schedule}
@@ -94,7 +106,7 @@ export default async function BusinessPage({ params }: { params: Promise<{ id: s
       {/* Galería */}
       {business.photos.length > 0 && (
         <div className="mt-4 flex gap-2 overflow-x-auto no-scrollbar px-4">
-          {business.photos.map((ph) => (
+          {business.photos.slice(0, 2).map((ph) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               key={ph.id}
@@ -177,13 +189,13 @@ export default async function BusinessPage({ params }: { params: Promise<{ id: s
 
       {/* Barra de contacto fija */}
       <div className="sticky bottom-0 mt-6 bg-surface/95 backdrop-blur border-t border-line p-3 flex gap-2">
-        <a href={telLink(business.phone)} className="flex-1 h-12 rounded-2xl bg-ink text-white font-semibold flex items-center justify-center gap-2">
+        <a href={session ? telLink(business.phone) : gate} className="flex-1 h-12 rounded-2xl bg-ink text-white font-semibold flex items-center justify-center gap-2">
           <Phone size={18} /> Llamar
         </a>
         {business.whatsapp && (
           <a
-            href={whatsappLink(business.whatsapp, waMsg)}
-            target="_blank"
+            href={session ? whatsappLink(business.whatsapp, waMsg) : gate}
+            target={session ? "_blank" : undefined}
             className="flex-1 h-12 rounded-2xl bg-brand text-brand-ink font-semibold flex items-center justify-center gap-2"
           >
             <MessageCircle size={18} /> WhatsApp

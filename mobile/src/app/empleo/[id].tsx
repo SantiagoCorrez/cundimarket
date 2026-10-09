@@ -1,15 +1,17 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { api } from '@/api/client';
 import type { Job } from '@/api/types';
 import { Badge, Button, Card, ScreenHeader } from '@/components/ui';
+import { ReportButton } from '@/components/report-button';
 import { Palette } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
 import { formatCOP } from '@/utils/format';
+import { openDirections } from '@/utils/maps';
 
 export default function JobScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -71,15 +73,30 @@ export default function JobScreen() {
           <Text style={styles.company}>{job.companyName}</Text>
 
           <View style={styles.metaGrid}>
-            {meta.map((m) => (
-              <Card key={m.label} style={styles.metaCard}>
-                <View style={styles.metaLabelRow}>
-                  <Ionicons name={m.icon} size={13} color={Palette.inkFaint} />
-                  <Text style={styles.metaLabel}>{m.label}</Text>
+            {meta.map((m) => {
+              const link = m.label === 'Ubicación' && !!job.address;
+              const card = (
+                <Card>
+                  <View style={styles.metaLabelRow}>
+                    <Ionicons name={m.icon} size={13} color={Palette.inkFaint} />
+                    <Text style={styles.metaLabel}>{m.label}</Text>
+                  </View>
+                  <Text style={[styles.metaValue, link && styles.metaLink]}>{m.value}</Text>
+                  {link && <Text style={styles.metaHint}>Cómo llegar ›</Text>}
+                </Card>
+              );
+              return (
+                <View key={m.label} style={styles.metaCell}>
+                  {link ? (
+                    <Pressable onPress={() => openDirections(job)} accessibilityRole="link" accessibilityLabel="Cómo llegar">
+                      {card}
+                    </Pressable>
+                  ) : (
+                    card
+                  )}
                 </View>
-                <Text style={styles.metaValue}>{m.value}</Text>
-              </Card>
-            ))}
+              );
+            })}
           </View>
 
           {job.functions ? (
@@ -111,6 +128,7 @@ export default function JobScreen() {
             </Button>
           </View>
         </View>
+        <ReportButton targetType="JOB" targetId={job.id} />
       </ScrollView>
     </View>
   );
@@ -122,7 +140,9 @@ const styles = StyleSheet.create({
   title: { fontSize: 22, fontWeight: '800', color: Palette.text, marginTop: 8 },
   company: { fontSize: 14, color: Palette.textSecondary },
   metaGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 16 },
-  metaCard: { width: '47.5%' },
+  metaCell: { width: '47.5%' },
+  metaLink: { color: Palette.brandStrong, textDecorationLine: 'underline' },
+  metaHint: { fontSize: 11.5, fontWeight: '700', color: Palette.brandStrong, marginTop: 3 },
   metaLabelRow: { flexDirection: 'row', alignItems: 'center', gap: 5 },
   metaLabel: { fontSize: 11, color: Palette.inkFaint },
   metaValue: { fontSize: 13.5, fontWeight: '700', color: Palette.text, marginTop: 3 },

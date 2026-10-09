@@ -29,6 +29,16 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
           {n.municipality} · {timeAgo(n.publishedAt)}
         </p>
         <p className="text-[15px] text-ink-soft mt-4 leading-relaxed whitespace-pre-line">{n.body}</p>
+        {n.sourceUrl && (
+          <a
+            href={n.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-5 text-sm font-semibold text-brand-strong"
+          >
+            Ver la noticia completa en la Alcaldía de Mosquera →
+          </a>
+        )}
       </article>
     </div>
   );

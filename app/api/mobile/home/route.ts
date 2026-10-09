@@ -1,8 +1,10 @@
 import { prisma } from "@/lib/prisma";
 import { getSessionFromRequest } from "@/lib/auth";
 import { json } from "@/lib/api";
+import { ensureFreshNews } from "@/lib/news-sync";
 
 export async function GET(req: Request) {
+  ensureFreshNews();
   const session = await getSessionFromRequest(req);
 
   const [categories, featured, promos, news] = await Promise.all([

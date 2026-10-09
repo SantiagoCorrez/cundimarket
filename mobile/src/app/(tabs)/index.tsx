@@ -1,28 +1,34 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { api } from '@/api/client';
 import type { HomeFeed } from '@/api/types';
 import { BusinessFeaturedCard, CategoryChip, NewsCard, PromoCard } from '@/components/cards';
+import { MunicipalityPicker } from '@/components/municipality-picker';
 import { SectionTitle } from '@/components/ui';
+import { PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
 
 const MODULES = [
+  { key: 'comercios', label: 'Comercios', icon: '🏪', href: '/comercios' as const },
   { key: 'espacios', label: 'CundiEspacios', icon: '🏠', href: '/espacios' as const },
   { key: 'servicios', label: 'CundiServicios', icon: '🛠️', href: '/servicios' as const },
   { key: 'empleo', label: 'CundiEmpleo', icon: '💼', href: '/empleo' as const },
+  { key: 'news', label: 'Noticias', icon: '📰', href: '/(tabs)/news' as const },
   { key: 'emergency', label: 'Emergencias', icon: '🚨', href: '/emergency' as const },
 ];
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
-  const { user } = useAuth();
+  const { user, updateMunicipality } = useAuth();
   const [feed, setFeed] = useState<HomeFeed | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const municipality = user?.municipality ?? PILOT_MUNICIPALITY;
 
   const load = useCallback(async () => {
     try {
@@ -52,7 +58,17 @@ export default function HomeScreen() {
     );
   }
 
+  async function saveMunicipality(m: string, notify: boolean) {
+    try {
+      await updateMunicipality(m);
+      if (notify) Alert.alert('¡Listo!', `Te avisaremos cuando CundiMarket esté disponible en ${m}.`);
+    } catch {
+      Alert.alert('No se pudo guardar', 'Inténtalo de nuevo en unos segundos.');
+    }
+  }
+
   return (
+    <>
     <ScrollView
       style={{ flex: 1, backgroundColor: Palette.background }}
       refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Palette.brand} />}
@@ -61,10 +77,12 @@ export default function HomeScreen() {
         <View style={styles.heroTop}>
           <View>
             <Text style={styles.heroGreeting}>{user ? `Hola, ${user.name.split(' ')[0]} 👋` : 'Hola 👋'}</Text>
-            <View style={styles.heroPlace}>
+            <Pressable style={styles.heroPlace} onPress={() => setPickerOpen(true)} hitSlop={8}>
               <Ionicons name="location" size={16} color={Palette.brand} />
-              <Text style={styles.heroPlaceText}>{user?.municipality ?? feed.session?.municipality ?? 'Mosquera'}</Text>
-            </View>
+              <Text style={styles.heroPlaceText}>{municipality}</Text>
+              {municipality !== PILOT_MUNICIPALITY && <Text style={styles.soonTag}>Próximamente</Text>}
+              <Ionicons name="chevron-down" size={14} color="rgba(255,255,255,0.7)" />
+            </Pressable>
           </View>
           <Pressable style={styles.bellButton} onPress={() => router.push(user ? '/(tabs)/profile' : '/login')}>
             <Ionicons name="notifications" size={18} color="#fff" />
@@ -145,6 +163,24 @@ export default function HomeScreen() {
         </View>
       </View>
     </ScrollView>
+
+    <MunicipalityPicker
+      visible={pickerOpen}
+      current={municipality}
+      onClose={() => setPickerOpen(false)}
+      onSelect={(m) => {
+        setPickerOpen(false);
+        if (user && user.municipality !== m) saveMunicipality(m, false);
+      }}
+      onConfirmSoon={(m) => {
+        setPickerOpen(false);
+        if (user) saveMunicipality(m, true);
+        // Se navega después de que el modal termine de cerrarse (si no, queda abierto sobre la pantalla nueva).
+        else setTimeout(() => router.push({ pathname: '/register', params: { municipality: m } }), 300);
+      }}
+      soonConfirmLabel={user ? 'Avisarme cuando esté disponible' : 'Registrarme'}
+    />
+    </>
   );
 }
 
@@ -155,6 +191,7 @@ const styles = StyleSheet.create({
   heroGreeting: { color: 'rgba(255,255,255,0.6)', fontSize: 13 },
   heroPlace: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 2 },
   heroPlaceText: { color: '#fff', fontWeight: '700', fontSize: 15 },
+  soonTag: { fontSize: 10.5, fontWeight: '700', color: '#fff', backgroundColor: 'rgba(255,255,255,0.18)', paddingHorizontal: 8, paddingVertical: 2, borderRadius: Radius.pill, overflow: 'hidden' },
   bellButton: { height: 40, width: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.1)', alignItems: 'center', justifyContent: 'center' },
   searchBar: { marginTop: 18, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#fff', height: 48, borderRadius: Radius.card, paddingHorizontal: 16 },
   searchBarText: { color: Palette.textSecondary, fontSize: 15 },

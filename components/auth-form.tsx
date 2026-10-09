@@ -3,17 +3,23 @@
 import { useActionState, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Lock } from "lucide-react";
 import { Button, Field, Input, Select } from "@/components/ui";
 import { BrandMark } from "@/components/brand";
+import { ComingSoonSheet } from "@/components/coming-soon-sheet";
+import { PasswordInput } from "@/components/password-input";
 import { loginAction, registerAction, type AuthState } from "@/lib/actions/auth";
-import { MUNICIPALITIES, USER_TYPES } from "@/lib/taxonomy";
+import { MUNICIPALITIES, PILOT_MUNICIPALITY, USER_TYPES } from "@/lib/taxonomy";
 import { cn } from "@/lib/utils";
 
 export function AuthForm({ mode }: { mode: "login" | "register" }) {
   const params = useSearchParams();
   const next = params.get("next") || "";
+  const reason = params.get("reason");
   const initialRole = params.get("role") === "merchant" ? "MERCHANT" : "CITIZEN";
   const [role, setRole] = useState<"CITIZEN" | "MERCHANT">(initialRole);
+  const [municipality, setMunicipality] = useState<string>(PILOT_MUNICIPALITY);
+  const [soonFor, setSoonFor] = useState<string | null>(null);
 
   const action = mode === "login" ? loginAction : registerAction;
   const [state, formAction, pending] = useActionState<AuthState, FormData>(action, undefined);
@@ -35,6 +41,16 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
           ? "Bienvenido de vuelta a tu municipio."
           : "Únete a la comunidad de CundiMarket."}
       </p>
+
+      {reason === "contact" && (
+        <div className="mt-4 flex items-start gap-2.5 rounded-2xl bg-brand/10 px-3.5 py-3 text-sm text-ink">
+          <Lock size={18} className="mt-0.5 shrink-0 text-brand-strong" />
+          <p>
+            Para llamar o escribir por WhatsApp necesitas una cuenta. Solo las personas registradas
+            pueden contactar a los comercios y prestadores.
+          </p>
+        </div>
+      )}
 
       <form action={formAction} className="mt-6 space-y-4">
         <input type="hidden" name="next" value={next} />
@@ -68,19 +84,36 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
         </Field>
 
         <Field label="Contraseña" required hint={mode === "register" ? "Mínimo 6 caracteres" : undefined}>
-          <Input name="password" type="password" placeholder="••••••••" required minLength={6} />
+          <PasswordInput
+            name="password"
+            placeholder="••••••••"
+            autoComplete={mode === "login" ? "current-password" : "new-password"}
+            minLength={6}
+          />
         </Field>
 
         {mode === "register" && (
           <>
+            <Field label="Repetir contraseña" required>
+              <PasswordInput name="confirmPassword" placeholder="••••••••" autoComplete="new-password" minLength={6} />
+            </Field>
             <Field label="Teléfono / WhatsApp">
               <Input name="phone" type="tel" placeholder="3XX XXX XXXX" />
             </Field>
             <Field label="Municipio">
-              <Select name="municipality" defaultValue="Mosquera">
+              <Select
+                name="municipality"
+                value={municipality}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value === PILOT_MUNICIPALITY) setMunicipality(value);
+                  else setSoonFor(value);
+                }}
+              >
                 {MUNICIPALITIES.map((m) => (
                   <option key={m} value={m}>
                     {m}
+                    {m === PILOT_MUNICIPALITY ? "" : " (próximamente)"}
                   </option>
                 ))}
               </Select>
@@ -138,6 +171,20 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
           </>
         )}
       </p>
+
+      <ComingSoonSheet municipality={soonFor} onChooseAnother={() => setSoonFor(null)}>
+        <Button
+          type="button"
+          size="lg"
+          className="w-full"
+          onClick={() => {
+            if (soonFor) setMunicipality(soonFor);
+            setSoonFor(null);
+          }}
+        >
+          Registrarme
+        </Button>
+      </ComingSoonSheet>
     </main>
   );
 }

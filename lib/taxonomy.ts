@@ -116,6 +116,15 @@ export const MUNICIPALITIES = [
   "Fusagasugá",
 ];
 
+/** Único municipio habilitado en el piloto; el resto se muestra como "Próximamente". */
+export const PILOT_MUNICIPALITY = "Mosquera";
+
+/** Texto del aviso "Próximamente" cuando se elige un municipio que aún no está habilitado. */
+export const COMING_SOON = {
+  title: "📍 ¡Pronto llegaremos a tu municipio!",
+  body: "CundiMarket aún no está habilitado en este municipio. Actualmente estamos recopilando y validando información para preparar su lanzamiento y ofrecerte una mejor experiencia. Puedes registrarte desde ahora y, cuando CundiMarket esté disponible en tu municipio, serás de los primeros en enterarte y empezar a disfrutar de todo lo que tenemos para ti.",
+} as const;
+
 // Coordenadas aproximadas (centro urbano) por municipio, para la vista de mapa.
 export const MUNICIPALITY_COORDS: Record<string, { lat: number; lng: number }> = {
   Mosquera: { lat: 4.7059, lng: -74.2306 },

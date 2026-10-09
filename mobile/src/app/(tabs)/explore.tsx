@@ -6,6 +6,7 @@ import { Card } from '@/components/ui';
 import { Palette, Radius } from '@/constants/theme';
 
 const MODULES = [
+  { key: 'comercios', title: 'Comercios', subtitle: 'Restaurantes, tiendas, salud, tecnología y más', icon: '🏪', href: '/comercios' as const },
   { key: 'espacios', title: 'CundiEspacios', subtitle: 'Arriendo, venta y permuta de inmuebles', icon: '🏠', href: '/espacios' as const },
   { key: 'servicios', title: 'CundiServicios', subtitle: 'Prestadores de servicios verificados', icon: '🛠️', href: '/servicios' as const },
   { key: 'empleo', title: 'CundiEmpleo', subtitle: 'Vacantes en tu municipio', icon: '💼', href: '/empleo' as const },

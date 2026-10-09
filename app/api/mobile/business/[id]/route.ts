@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { getSessionFromRequest } from "@/lib/auth";
 import { json, apiError } from "@/lib/api";
+import { isOpenNow } from "@/lib/schedule";
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -27,5 +28,5 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
       }))
     : false;
 
-  return json({ business, favorited });
+  return json({ business, favorited, openNow: isOpenNow(business.schedule) });
 }

@@ -21,6 +21,9 @@ export default async function ProviderPage({ params }: { params: Promise<{ id: s
   });
   if (!s) notFound();
 
+  // Llamar o escribir por WhatsApp es solo para usuarios registrados.
+  const gate = `/register?reason=contact&next=${encodeURIComponent(`/servicios/${id}`)}`;
+
   return (
     <div>
       <BackBar title="Prestador de servicio" />
@@ -86,13 +89,13 @@ export default async function ProviderPage({ params }: { params: Promise<{ id: s
       </div>
 
       <div className="sticky bottom-0 mt-6 bg-surface/95 backdrop-blur border-t border-line p-3 flex gap-2">
-        <a href={telLink(s.phone)} className="flex-1 h-12 rounded-2xl bg-ink text-white font-semibold flex items-center justify-center gap-2">
+        <a href={session ? telLink(s.phone) : gate} className="flex-1 h-12 rounded-2xl bg-ink text-white font-semibold flex items-center justify-center gap-2">
           <Phone size={18} /> Llamar
         </a>
         {s.whatsapp && (
           <a
-            href={whatsappLink(s.whatsapp, `Hola ${s.providerName}, te contacto desde CundiServicios.`)}
-            target="_blank"
+            href={session ? whatsappLink(s.whatsapp, `Hola ${s.providerName}, te contacto desde CundiServicios.`) : gate}
+            target={session ? "_blank" : undefined}
             className="flex-1 h-12 rounded-2xl bg-brand text-brand-ink font-semibold flex items-center justify-center gap-2"
           >
             <MessageCircle size={18} /> WhatsApp
