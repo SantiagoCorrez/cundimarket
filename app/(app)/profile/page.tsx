@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, Store, Shield, Bell, Settings, ChevronRight, LogOut, User, Trash2 } from "lucide-react";
+import { Heart, Store, Shield, Bell, Settings, ChevronRight, LogOut, User, Trash2, FileText } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 import { logoutAction } from "@/lib/actions/auth";
@@ -27,6 +27,9 @@ export default async function ProfilePage() {
           <Link href="/login"><Button size="lg" className="w-full">Iniciar sesión</Button></Link>
           <Link href="/register"><Button variant="outline" size="lg" className="w-full">Crear cuenta</Button></Link>
         </div>
+        <Link href="/politicas" className="mt-6 text-xs font-semibold text-ink-soft underline">
+          Términos y políticas
+        </Link>
       </div>
     );
   }
@@ -46,6 +49,7 @@ export default async function ProfilePage() {
     { href: "/empleo/perfil", icon: User, label: "Mi perfil laboral" },
     { href: "#", icon: Bell, label: "Notificaciones" },
     { href: "#", icon: Settings, label: "Configuración" },
+    { href: "/politicas", icon: FileText, label: "Términos y políticas" },
     { href: "/eliminar-cuenta", icon: Trash2, label: "Eliminar mi cuenta" },
   ].filter(Boolean) as { href: string; icon: typeof Store; label: string }[];
 

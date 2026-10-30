@@ -58,6 +58,13 @@ export default async function EliminarCuentaPage({
                 promociones y menú.
               </li>
             </ul>
+            <p>
+              Más detalles en la{" "}
+              <Link href="/privacidad" className="font-semibold text-ink underline">
+                política de privacidad
+              </Link>
+              .
+            </p>
 
             {session ? (
               <>

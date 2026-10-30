@@ -14,6 +14,7 @@ import { Button, Card, Logo } from '@/components/ui';
 import { PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
+import { openLegal } from '@/utils/legal';
 
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
@@ -59,6 +60,9 @@ export default function ProfileScreen() {
               Crear cuenta
             </Button>
           </View>
+          <Pressable onPress={() => openLegal('/politicas')} accessibilityRole="link" style={styles.legalLink}>
+            <Text style={styles.legalLinkText}>Términos y políticas</Text>
+          </Pressable>
         </View>
         {/* Sigue montado tras eliminar la cuenta para poder mostrar la confirmación final. */}
         <DeleteAccountModal visible={deleteOpen} onClose={() => setDeleteOpen(false)} />
@@ -99,6 +103,7 @@ export default function ProfileScreen() {
           onPress={() => setPickerOpen(true)}
         />
         <ProfileLink icon="briefcase" label="Mi perfil laboral" onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/empleo/perfil`)} />
+        <ProfileLink icon="document-text" label="Términos y políticas" onPress={() => openLegal('/politicas')} />
       </View>
 
       <View style={styles.section}>
@@ -175,6 +180,8 @@ const styles = StyleSheet.create({
   email: { color: 'rgba(255,255,255,0.6)', fontSize: 13, marginTop: 2 },
   role: { color: Palette.brand, fontSize: 12, fontWeight: '700', marginTop: 4 },
   links: { padding: 16, gap: 8 },
+  legalLink: { marginTop: 28, paddingVertical: 8 },
+  legalLinkText: { fontSize: 13, fontWeight: '600', color: Palette.textSecondary, textDecorationLine: 'underline' },
   deleteLink: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, paddingVertical: 14, marginTop: 6 },
   deleteLinkText: { color: Palette.danger, fontWeight: '600', fontSize: 14 },
   linkCard: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12 },

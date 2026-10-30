@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BrandMark } from "@/components/brand";
 import { Button } from "@/components/ui";
@@ -47,6 +48,17 @@ export default function WelcomePage() {
         </Button>
         <p className="text-center text-xs text-ink-faint">
           Piloto en Mosquera · Cundinamarca, Colombia
+        </p>
+        <p className="text-center text-xs text-ink-faint">
+          Consulta los{" "}
+          <Link href="/terminos" className="font-semibold text-ink-soft underline">
+            términos
+          </Link>{" "}
+          y la{" "}
+          <Link href="/privacidad" className="font-semibold text-ink-soft underline">
+            política de privacidad
+          </Link>
+          .
         </p>
       </div>
     </main>

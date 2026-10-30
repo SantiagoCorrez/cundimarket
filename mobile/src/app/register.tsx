@@ -1,11 +1,10 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Link, router, useLocalSearchParams } from 'expo-router';
-import * as WebBrowser from 'expo-web-browser';
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { API_BASE_URL, ApiError } from '@/api/client';
+import { ApiError } from '@/api/client';
 import type { Role } from '@/api/types';
 import { MunicipalityPicker } from '@/components/municipality-picker';
 import { PasswordInput } from '@/components/password-input';
@@ -13,6 +12,7 @@ import { Button } from '@/components/ui';
 import { MUNICIPALITIES, PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
+import { openLegal } from '@/utils/legal';
 
 export default function RegisterScreen() {
   const insets = useSafeAreaInsets();
@@ -118,10 +118,18 @@ export default function RegisterScreen() {
             </View>
             <Text style={styles.termsText}>
               Acepto los{' '}
-              <Text style={styles.footerLink} onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/terminos`)}>
-                términos y el tratamiento de datos
+              <Text style={styles.footerLink} onPress={() => openLegal('/terminos')}>
+                términos y condiciones
               </Text>
-              .
+              , las{' '}
+              <Text style={styles.footerLink} onPress={() => openLegal('/contenido')}>
+                normas de la comunidad
+              </Text>{' '}
+              y la{' '}
+              <Text style={styles.footerLink} onPress={() => openLegal('/privacidad')}>
+                política de privacidad
+              </Text>
+              , y autorizo el tratamiento de mis datos personales.
             </Text>
           </Pressable>
 

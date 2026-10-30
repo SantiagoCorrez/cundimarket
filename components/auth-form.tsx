@@ -133,8 +133,16 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
               Acepto los{" "}
               <Link href="/terminos" className="font-semibold text-ink underline">
                 términos y condiciones
+              </Link>
+              , las{" "}
+              <Link href="/contenido" className="font-semibold text-ink underline">
+                normas de la comunidad
               </Link>{" "}
-              y el tratamiento de mis datos personales conforme a la Ley 1581 de 2012.
+              y la{" "}
+              <Link href="/privacidad" className="font-semibold text-ink underline">
+                política de privacidad
+              </Link>
+              , y autorizo el tratamiento de mis datos personales conforme a la Ley 1581 de 2012.
             </span>
           </label>
         )}
