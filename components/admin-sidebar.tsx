@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Store, Newspaper, Flag, Phone, FolderTree } from "lucide-react";
+import { LayoutDashboard, Store, Newspaper, Flag, Phone, FolderTree, Briefcase, Wrench } from "lucide-react";
 import { BrandMark } from "./brand";
 import { cn } from "@/lib/utils";
 
 const links = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/comercios", label: "Comercios", icon: Store },
+  { href: "/admin/empleos", label: "Vacantes", icon: Briefcase },
+  { href: "/admin/servicios", label: "Servicios", icon: Wrench },
   { href: "/admin/noticias", label: "Noticias", icon: Newspaper },
   { href: "/admin/categorias", label: "Categorías", icon: FolderTree },
   { href: "/admin/reportes", label: "Reportes", icon: Flag },

@@ -27,7 +27,8 @@ export default function CookiesPage() {
           <li>
             <b>App móvil:</b> el token de sesión se guarda en el almacenamiento seguro del
             dispositivo (Keychain en iOS, Keystore en Android) y se borra al cerrar sesión o
-            eliminar la cuenta.
+            eliminar la cuenta. Además, la app guarda una copia de lo que consultas para poder usarse
+            sin conexión (ver la política de privacidad); también se borra al cerrar sesión.
           </li>
         </LegalList>
       </LegalSection>

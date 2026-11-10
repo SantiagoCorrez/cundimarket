@@ -2,7 +2,7 @@
   "expo": {
     "name": "CundiMarket",
     "slug": "cundimarket",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "cundimarket",
@@ -43,7 +43,8 @@
         {
           "locationWhenInUsePermission": "CundiMarket usa tu ubicación para mostrarte los comercios más cercanos."
         }
-      ]
+      ],
+      "expo-sqlite"
     ],
     "experiments": {
       "typedRoutes": true,

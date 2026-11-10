@@ -5,6 +5,8 @@ import { getSession } from "@/lib/auth";
 import { BackBar } from "@/components/nav";
 import { Logo, Stars, VerifiedBadge, Card, SectionTitle } from "@/components/ui";
 import { RateButton, ReportButton } from "@/components/business-interactions";
+import { OwnerActions } from "@/components/owner-actions";
+import { canManageListing } from "@/lib/listings";
 import { whatsappLink, telLink, timeAgo } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -47,6 +49,10 @@ export default async function ProviderPage({ params }: { params: Promise<{ id: s
           <p className="flex items-center gap-2"><BadgeCheck size={15} className="text-ink" /> {s.yearsExperience} años de experiencia</p>
         ) : null}
       </div>
+
+      {session && canManageListing(s.userId, session) && (
+        <OwnerActions kind="service" id={id} title={s.providerName} admin={session.role === "ADMIN" && s.userId !== session.id} />
+      )}
 
       {s.description && (
         <section className="px-4 mt-4">

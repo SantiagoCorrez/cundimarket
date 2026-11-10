@@ -1,27 +1,26 @@
 import * as WebBrowser from 'expo-web-browser';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { API_BASE_URL, api } from '@/api/client';
+import { API_BASE_URL } from '@/api/client';
 import type { Job } from '@/api/types';
 import { JobCard } from '@/components/cards';
+import { LoadError } from '@/components/load-error';
 import { FilterChips, ModuleHero } from '@/components/module-hero';
 import { EmptyState, ScreenHeader } from '@/components/ui';
 import { CONTRACT_TYPES } from '@/constants/taxonomy';
 import { Palette } from '@/constants/theme';
+import { useApiQuery } from '@/hooks/use-api-query';
 
 export default function EmpleoScreen() {
   const insets = useSafeAreaInsets();
   const [contract, setContract] = useState<string>();
-  const [jobs, setJobs] = useState<Job[] | null>(null);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch-on-filter-change, not derived state
-    setJobs(null);
-    const search = contract ? `?contract=${encodeURIComponent(contract)}` : '';
-    api.get<{ jobs: Job[] }>(`/api/mobile/empleo${search}`).then((r) => setJobs(r.jobs));
-  }, [contract]);
+  const { data, failed, reload } = useApiQuery<{ jobs: Job[] }>(
+    `/api/mobile/empleo${contract ? `?contract=${encodeURIComponent(contract)}` : ''}`,
+    { refreshOnFocus: true },
+  );
+  const jobs = data?.jobs ?? null;
 
   return (
     <View style={{ flex: 1, backgroundColor: Palette.background, paddingTop: insets.top }}>
@@ -32,7 +31,11 @@ export default function EmpleoScreen() {
       </Pressable>
       <FilterChips options={CONTRACT_TYPES.map((c) => ({ key: c, label: c }))} current={contract} onChange={setContract} />
       {jobs === null ? (
-        <ActivityIndicator style={{ marginTop: 24 }} color={Palette.brand} />
+        failed ? (
+          <LoadError onRetry={reload} what="esta lista" />
+        ) : (
+          <ActivityIndicator style={{ marginTop: 24 }} color={Palette.brand} />
+        )
       ) : (
         <FlatList
           data={jobs}

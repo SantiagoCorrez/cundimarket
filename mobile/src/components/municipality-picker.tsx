@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { COMING_SOON, MUNICIPALITIES, PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette, Radius } from '@/constants/theme';
@@ -18,15 +18,21 @@ type Props = {
   soonConfirmLabel: string;
 };
 
+const normalize = (text: string) => text.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
 /**
  * Selector de municipio. Permite elegir cualquiera del listado; los que aún no están
  * habilitados muestran un aviso informativo de "Próximamente" (no un error) que no bloquea el registro.
  */
 export function MunicipalityPicker({ visible, current, onClose, onSelect, onConfirmSoon, soonConfirmLabel }: Props) {
   const [pending, setPending] = useState<string | null>(null);
+  const [query, setQuery] = useState('');
+  const needle = normalize(query.trim());
+  const options = needle ? MUNICIPALITIES.filter((m) => normalize(m).includes(needle)) : MUNICIPALITIES;
 
   function close() {
     setPending(null);
+    setQuery('');
     onClose();
   }
 
@@ -60,14 +66,32 @@ export function MunicipalityPicker({ visible, current, onClose, onSelect, onConf
               <Text style={styles.subtitle}>
                 Hoy CundiMarket está habilitado en {PILOT_MUNICIPALITY}. Los demás municipios llegarán pronto.
               </Text>
-              <ScrollView style={{ maxHeight: 380 }} showsVerticalScrollIndicator={false}>
-                {MUNICIPALITIES.map((m) => {
+              <View style={styles.searchBar}>
+                <Ionicons name="search" size={16} color={Palette.textSecondary} />
+                <TextInput
+                  value={query}
+                  onChangeText={setQuery}
+                  placeholder="Buscar municipio"
+                  placeholderTextColor={Palette.textSecondary}
+                  autoCorrect={false}
+                  style={styles.searchInput}
+                />
+                {query.length > 0 && (
+                  <Pressable onPress={() => setQuery('')} hitSlop={10}>
+                    <Ionicons name="close-circle" size={16} color={Palette.inkFaint} />
+                  </Pressable>
+                )}
+              </View>
+              <ScrollView style={{ maxHeight: 340 }} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
+                {options.length === 0 && <Text style={styles.noResults}>No encontramos ese municipio.</Text>}
+                {options.map((m) => {
                   const enabled = m === PILOT_MUNICIPALITY;
                   return (
                     <Pressable
                       key={m}
                       style={styles.row}
                       onPress={() => {
+                        setQuery('');
                         if (enabled) {
                           onSelect(m);
                         } else {
@@ -98,6 +122,9 @@ const styles = StyleSheet.create({
   card: { width: '100%', maxWidth: 420, backgroundColor: Palette.surface, borderRadius: Radius.card, padding: 20 },
   title: { fontSize: 18, fontWeight: '800', color: Palette.text },
   subtitle: { fontSize: 13, color: Palette.textSecondary, marginTop: 4, marginBottom: 8 },
+  searchBar: { flexDirection: 'row', alignItems: 'center', gap: 8, height: 42, borderRadius: Radius.card - 6, backgroundColor: Palette.backgroundElement, paddingHorizontal: 12, marginBottom: 6 },
+  searchInput: { flex: 1, fontSize: 14.5, color: Palette.text },
+  noResults: { fontSize: 14, color: Palette.textSecondary, textAlign: 'center', paddingVertical: 24 },
   row: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 13, borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: Palette.line },
   rowText: { flex: 1, fontSize: 15, fontWeight: '600', color: Palette.text },
   tag: { fontSize: 11.5, fontWeight: '700', color: Palette.textSecondary, backgroundColor: Palette.backgroundElement, paddingHorizontal: 9, paddingVertical: 4, borderRadius: Radius.pill, overflow: 'hidden' },

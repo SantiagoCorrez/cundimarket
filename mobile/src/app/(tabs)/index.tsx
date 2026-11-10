@@ -1,17 +1,18 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ActivityIndicator, Alert, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { api } from '@/api/client';
 import type { HomeFeed } from '@/api/types';
 import { BusinessFeaturedCard, CategoryChip, NewsCard, PromoCard } from '@/components/cards';
+import { LoadError } from '@/components/load-error';
 import { MunicipalityPicker } from '@/components/municipality-picker';
 import { SectionTitle } from '@/components/ui';
 import { PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
+import { useApiQuery } from '@/hooks/use-api-query';
 
 const MODULES = [
   { key: 'comercios', label: 'Comercios', icon: '🏪', href: '/comercios' as const },
@@ -25,35 +26,14 @@ const MODULES = [
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const { user, updateMunicipality } = useAuth();
-  const [feed, setFeed] = useState<HomeFeed | null>(null);
-  const [refreshing, setRefreshing] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
   const municipality = user?.municipality ?? PILOT_MUNICIPALITY;
-
-  const load = useCallback(async () => {
-    try {
-      const data = await api.get<HomeFeed>('/api/mobile/home');
-      setFeed(data);
-    } catch {
-      // silencioso: la sección se muestra vacía si la API no responde
-    }
-  }, []);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch-on-mount, not derived state
-    load();
-  }, [load]);
-
-  async function onRefresh() {
-    setRefreshing(true);
-    await load();
-    setRefreshing(false);
-  }
+  const { data: feed, failed, loading, reload } = useApiQuery<HomeFeed>('/api/mobile/home');
 
   if (!feed) {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator color={Palette.brand} />
+        {failed ? <LoadError onRetry={reload} what="el inicio" /> : <ActivityIndicator color={Palette.brand} />}
       </View>
     );
   }
@@ -71,7 +51,7 @@ export default function HomeScreen() {
     <>
     <ScrollView
       style={{ flex: 1, backgroundColor: Palette.background }}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={Palette.brand} />}
+      refreshControl={<RefreshControl refreshing={loading} onRefresh={reload} tintColor={Palette.brand} />}
       showsVerticalScrollIndicator={false}>
       <View style={[styles.hero, { paddingTop: insets.top + 16 }]}>
         <View style={styles.heroTop}>

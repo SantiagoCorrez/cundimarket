@@ -1,15 +1,18 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { api } from '@/api/client';
+import { setJobState } from '@/api/offline-actions';
 import type { Job } from '@/api/types';
+import { LoadError } from '@/components/load-error';
+import { OwnerActions } from '@/components/owner-actions';
 import { Badge, Button, Card, ScreenHeader } from '@/components/ui';
 import { ReportButton } from '@/components/report-button';
 import { Palette } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
+import { useApiQuery } from '@/hooks/use-api-query';
 import { formatCOP } from '@/utils/format';
 import { openDirections } from '@/utils/maps';
 
@@ -17,41 +20,37 @@ export default function JobScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
   const { user } = useAuth();
-  const [job, setJob] = useState<Job | null>(null);
-  const [saved, setSaved] = useState(false);
-  const [applied, setApplied] = useState(false);
+  const { data, failed, reload } = useApiQuery<{ job: Job; saved: boolean; applied: boolean; isOwner?: boolean }>(
+    `/api/mobile/empleo/${id}`,
+    { refreshOnFocus: true },
+  );
+  const job = data?.job ?? null;
 
-  const load = useCallback(() => {
-    api.get<{ job: Job; saved: boolean; applied: boolean }>(`/api/mobile/empleo/${id}`).then((r) => {
-      setJob(r.job);
-      setSaved(r.saved);
-      setApplied(r.applied);
-    });
-  }, [id]);
+  // Guardado/aplicado se reflejan al instante; el valor local vale mientras no lleguen datos nuevos del servidor.
+  const [override, setOverride] = useState<{ source: unknown; saved: boolean; applied: boolean } | null>(null);
+  const local = override && override.source === data ? override : null;
+  const saved = local ? local.saved : (data?.saved ?? false);
+  const applied = local ? local.applied : (data?.applied ?? false);
 
-  useEffect(() => {
-    load();
-  }, [load]);
-
-  async function toggleSave() {
+  async function update(next: { saved: boolean; applied: boolean }) {
     if (!user) return router.push('/login');
-    const next = !saved;
-    setSaved(next);
-    await api.post(`/api/mobile/empleo/${id}/save`, { applied: false });
-    if (!next) return;
+    const previous = { saved, applied };
+    setOverride({ source: data, ...next });
+    try {
+      await setJobState(user.id, id, next);
+    } catch {
+      setOverride({ source: data, ...previous });
+      Alert.alert('No se pudo guardar', 'Inténtalo de nuevo en unos segundos.');
+    }
   }
 
-  async function apply() {
-    if (!user) return router.push('/login');
-    setApplied(true);
-    setSaved(true);
-    await api.post(`/api/mobile/empleo/${id}/save`, { applied: true });
-  }
+  const toggleSave = () => update({ saved: !saved, applied: false });
+  const apply = () => update({ saved: true, applied: true });
 
   if (!job) {
     return (
       <View style={[styles.loading, { paddingTop: insets.top }]}>
-        <ActivityIndicator color={Palette.brand} />
+        {failed ? <LoadError onRetry={reload} what="esta vacante" /> : <ActivityIndicator color={Palette.brand} />}
       </View>
     );
   }
@@ -128,6 +127,7 @@ export default function JobScreen() {
             </Button>
           </View>
         </View>
+        {data?.isOwner && <OwnerActions kind="job" id={job.id} title={job.title} onChanged={reload} admin={user?.role === 'ADMIN'} />}
         <ReportButton targetType="JOB" targetId={job.id} />
       </ScrollView>
     </View>

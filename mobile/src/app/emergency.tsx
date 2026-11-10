@@ -1,27 +1,28 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { api } from '@/api/client';
 import type { EmergencyContact } from '@/api/types';
+import { LoadError } from '@/components/load-error';
 import { Card, ScreenHeader } from '@/components/ui';
 import { Palette, Radius } from '@/constants/theme';
+import { useApiQuery } from '@/hooks/use-api-query';
 import { telUrl } from '@/utils/format';
 
 export default function EmergencyScreen() {
   const insets = useSafeAreaInsets();
-  const [contacts, setContacts] = useState<EmergencyContact[] | null>(null);
-
-  useEffect(() => {
-    api.get<{ contacts: EmergencyContact[] }>('/api/mobile/emergency').then((r) => setContacts(r.contacts));
-  }, []);
+  const { data, failed, reload } = useApiQuery<{ contacts: EmergencyContact[] }>('/api/mobile/emergency');
+  const contacts = data?.contacts ?? null;
 
   return (
     <View style={{ flex: 1, backgroundColor: Palette.background, paddingTop: insets.top }}>
       <ScreenHeader title="Canales de atención" />
       {contacts === null ? (
-        <ActivityIndicator style={{ marginTop: 24 }} color={Palette.brand} />
+        failed ? (
+          <LoadError onRetry={reload} what="la lista de canales de atención" />
+        ) : (
+          <ActivityIndicator style={{ marginTop: 24 }} color={Palette.brand} />
+        )
       ) : (
         <FlatList
           data={contacts}

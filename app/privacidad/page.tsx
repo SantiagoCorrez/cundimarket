@@ -51,6 +51,12 @@ export default function PrivacidadPage() {
             perfil ni en nuestra base de datos.
           </li>
           <li>
+            <b>Copia en tu dispositivo (app móvil):</b> para que la app funcione sin internet,
+            guardamos en tu teléfono una copia de lo que consultas (comercios, noticias, tus favoritos)
+            y de tu usuario, además de los cambios que hagas sin conexión hasta que se envíen. Esta
+            copia no sale del dispositivo y se borra al cerrar sesión o eliminar tu cuenta.
+          </li>
+          <li>
             <b>Datos técnicos:</b> dirección IP, tipo de dispositivo o navegador y fecha y hora de las
             solicitudes, que los servidores registran por seguridad y para detectar abusos.
           </li>

@@ -1,16 +1,19 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ActivityIndicator, Alert, Linking, Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { ApiError, api } from '@/api/client';
+import { ApiError } from '@/api/client';
+import { rateBusiness, setFavorite } from '@/api/offline-actions';
 import type { Business } from '@/api/types';
+import { LoadError } from '@/components/load-error';
 import { Card, ScreenHeader, SectionTitle, Stars, VerifiedBadge } from '@/components/ui';
 import { ReportButton } from '@/components/report-button';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
+import { useApiQuery } from '@/hooks/use-api-query';
 import { useContactGuard } from '@/hooks/use-contact-guard';
 import { formatCOP, telUrl, timeAgo, whatsappUrl } from '@/utils/format';
 import { openDirections } from '@/utils/maps';
@@ -20,38 +23,34 @@ export default function BusinessScreen() {
   const insets = useSafeAreaInsets();
   const { user } = useAuth();
   const guardContact = useContactGuard();
-  const [business, setBusiness] = useState<Business | null>(null);
-  const [favorited, setFavorited] = useState(false);
-  const [openNow, setOpenNow] = useState<boolean | null>(null);
   const [rateOpen, setRateOpen] = useState(false);
+  const { data, failed, reload } = useApiQuery<{ business: Business; favorited: boolean; openNow: boolean | null }>(
+    `/api/mobile/business/${id}`,
+  );
+  const business = data?.business ?? null;
+  const openNow = data?.openNow ?? null;
 
-  const load = useCallback(() => {
-    api.get<{ business: Business; favorited: boolean; openNow: boolean | null }>(`/api/mobile/business/${id}`).then((r) => {
-      setBusiness(r.business);
-      setFavorited(r.favorited);
-      setOpenNow(r.openNow ?? null);
-    });
-  }, [id]);
-
-  useEffect(() => {
-    load();
-  }, [load]);
+  // El favorito se muestra al instante; el valor local vale mientras no lleguen datos nuevos del servidor.
+  const [favoriteOverride, setFavoriteOverride] = useState<{ source: unknown; value: boolean } | null>(null);
+  const favorited = favoriteOverride && favoriteOverride.source === data ? favoriteOverride.value : (data?.favorited ?? false);
 
   async function toggleFavorite() {
     if (!user) return router.push('/login');
-    setFavorited((v) => !v);
+    if (!business) return;
+    const next = !favorited;
+    setFavoriteOverride({ source: data, value: next });
     try {
-      const r = await api.post<{ favorited: boolean }>(`/api/mobile/business/${id}/favorite`);
-      setFavorited(r.favorited);
+      await setFavorite(user.id, business, next);
     } catch {
-      setFavorited((v) => !v);
+      setFavoriteOverride({ source: data, value: !next });
+      Alert.alert('No se pudo guardar', 'Inténtalo de nuevo en unos segundos.');
     }
   }
 
   if (!business) {
     return (
-      <View style={styles.loading}>
-        <ActivityIndicator color={Palette.brand} />
+      <View style={[styles.loading, { paddingTop: insets.top }]}>
+        {failed ? <LoadError onRetry={reload} what="este negocio" /> : <ActivityIndicator color={Palette.brand} />}
       </View>
     );
   }
@@ -204,10 +203,12 @@ export default function BusinessScreen() {
         visible={rateOpen}
         onClose={() => setRateOpen(false)}
         onSubmit={async (stars, comment) => {
+          if (!user) return;
           try {
-            await api.post(`/api/mobile/business/${id}/rate`, { stars, comment });
+            const { queued } = await rateBusiness(user.id, user.name, business.id, stars, comment);
             setRateOpen(false);
-            load();
+            if (queued) Alert.alert('Calificación guardada', 'Se enviará cuando vuelvas a tener conexión a internet.');
+            else reload();
           } catch (e) {
             Alert.alert('Error', e instanceof ApiError ? e.message : 'No se pudo enviar tu calificación.');
           }

@@ -32,6 +32,13 @@ export async function POST(req: Request) {
   if (!TARGET_TYPES.includes(targetType) || !targetId || !reason) return apiError("Reporte inválido.");
   if (!(await targetExists(targetType, targetId))) return apiError("La publicación ya no existe.", 404);
 
+  // La app puede reenviar un reporte guardado sin conexión: se ignora un duplicado exacto reciente.
+  const duplicate = await prisma.report.findFirst({
+    where: { userId: session.id, targetType, targetId, reason, detail, createdAt: { gte: new Date(Date.now() - 10 * 60_000) } },
+    select: { id: true },
+  });
+  if (duplicate) return json({ ok: true });
+
   await prisma.report.create({ data: { userId: session.id, targetType, targetId, reason, detail } });
   return json({ ok: true });
 }

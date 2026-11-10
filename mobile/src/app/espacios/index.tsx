@@ -1,26 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { api } from '@/api/client';
 import type { Property } from '@/api/types';
 import { PropertyCard } from '@/components/cards';
+import { LoadError } from '@/components/load-error';
 import { FilterChips, ModuleHero } from '@/components/module-hero';
 import { EmptyState, ScreenHeader } from '@/components/ui';
 import { OFFER_TYPES } from '@/constants/taxonomy';
 import { Palette } from '@/constants/theme';
+import { useApiQuery } from '@/hooks/use-api-query';
 
 export default function EspaciosScreen() {
   const insets = useSafeAreaInsets();
   const [offer, setOffer] = useState<string>();
-  const [properties, setProperties] = useState<Property[] | null>(null);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- fetch-on-filter-change, not derived state
-    setProperties(null);
-    const search = offer ? `?offer=${offer}` : '';
-    api.get<{ properties: Property[] }>(`/api/mobile/espacios${search}`).then((r) => setProperties(r.properties));
-  }, [offer]);
+  const { data, failed, reload } = useApiQuery<{ properties: Property[] }>(`/api/mobile/espacios${offer ? `?offer=${offer}` : ''}`);
+  const properties = data?.properties ?? null;
 
   return (
     <View style={{ flex: 1, backgroundColor: Palette.background, paddingTop: insets.top }}>
@@ -28,7 +23,11 @@ export default function EspaciosScreen() {
       <ModuleHero title="CundiEspacios" subtitle="Encuentra tu próximo hogar" icon="🏠" publishPath="/espacios/nuevo" />
       <FilterChips options={OFFER_TYPES.map((o) => ({ key: o.key, label: o.label }))} current={offer} onChange={setOffer} />
       {properties === null ? (
-        <ActivityIndicator style={styles.loading} color={Palette.brand} />
+        failed ? (
+          <LoadError onRetry={reload} what="esta lista" />
+        ) : (
+          <ActivityIndicator style={styles.loading} color={Palette.brand} />
+        )
       ) : (
         <FlatList
           data={properties}

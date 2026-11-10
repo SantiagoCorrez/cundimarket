@@ -6,7 +6,8 @@ import { ImageUpload } from "@/components/image-upload";
 import { PublishGate } from "@/components/publish-gate";
 import { PublishInfo } from "@/components/publish-info";
 import { createProperty } from "@/lib/actions/modules";
-import { OFFER_TYPES, PROPERTY_TYPES, MUNICIPALITIES } from "@/lib/taxonomy";
+import { OFFER_TYPES, PROPERTY_TYPES } from "@/lib/taxonomy";
+import { MunicipalityOptions } from "@/components/municipality-options";
 
 export default async function NewPropertyPage() {
   const session = await getSession();
@@ -47,9 +48,7 @@ export default async function NewPropertyPage() {
         <div className="grid grid-cols-2 gap-3">
           <Field label="Municipio">
             <Select name="municipality" defaultValue="Mosquera">
-              {MUNICIPALITIES.map((m) => (
-                <option key={m} value={m}>{m}</option>
-              ))}
+              <MunicipalityOptions />
             </Select>
           </Field>
           <Field label="Barrio / sector">

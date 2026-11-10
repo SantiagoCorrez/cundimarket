@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, Store, Shield, Bell, Settings, ChevronRight, LogOut, User, Trash2, FileText } from "lucide-react";
+import { Heart, Store, Shield, Bell, Settings, ChevronRight, LogOut, User, Trash2, FileText, ClipboardList } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 import { logoutAction } from "@/lib/actions/auth";
@@ -45,6 +45,11 @@ export default async function ProfilePage() {
 
   const links = [
     session.role === "MERCHANT" && { href: "/merchant", icon: Store, label: "Mi negocio" },
+    (session.role === "MERCHANT" || session.role === "ADMIN") && {
+      href: "/mis-publicaciones",
+      icon: ClipboardList,
+      label: "Mis vacantes y servicios",
+    },
     session.role === "ADMIN" && { href: "/admin", icon: Shield, label: "Panel administrativo" },
     { href: "/empleo/perfil", icon: User, label: "Mi perfil laboral" },
     { href: "#", icon: Bell, label: "Notificaciones" },

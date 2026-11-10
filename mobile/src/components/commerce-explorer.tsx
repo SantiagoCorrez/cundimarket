@@ -4,11 +4,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Alert, FlatList, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { api } from '@/api/client';
+import { NetworkError, api } from '@/api/client';
+import { searchSavedBusinesses } from '@/api/offline-search';
 import type { Business, Category } from '@/api/types';
 import { BusinessCard } from '@/components/cards';
 import { EmptyState } from '@/components/ui';
 import { Palette, Radius } from '@/constants/theme';
+import { useReconnectTick } from '@/context/connectivity';
 
 type Position = { lat: number; lng: number };
 
@@ -40,16 +42,21 @@ export function CommerceExplorer({
   const [locating, setLocating] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
   const [results, setResults] = useState<Business[]>([]);
-  const [status, setStatus] = useState<'loading' | 'ok' | 'error'>('loading');
+  // 'saved': sin conexión y sin copia de esta búsqueda; se muestran los comercios guardados en el dispositivo.
+  const [status, setStatus] = useState<'loading' | 'ok' | 'saved' | 'error'>('loading');
   const loading = status === 'loading';
+  const reconnectTick = useReconnectTick();
 
   const category = useMemo(() => categories.find((c) => c.slug === categorySlug), [categories, categorySlug]);
   const hasSelection = !!(query.trim() || categorySlug || openNow || topRated || withPromos || nearest);
   const showCategoryGrid = mode === 'browse' && !hasSelection;
 
   useEffect(() => {
-    api.get<{ categories: Category[] }>('/api/mobile/categories').then((r) => setCategories(r.categories));
-  }, []);
+    api
+      .get<{ categories: Category[] }>('/api/mobile/categories')
+      .then((r) => setCategories(r.categories))
+      .catch(() => undefined);
+  }, [reconnectTick]);
 
   useEffect(() => {
     if (showCategoryGrid) return;
@@ -76,8 +83,15 @@ export function CommerceExplorer({
           setResults(r.results);
           setStatus('ok');
         })
-        .catch(() => {
+        .catch(async (e) => {
           if (cancelled) return;
+          if (e instanceof NetworkError) {
+            const saved = await searchSavedBusinesses({ q: query, categorySlug, subcategorySlug, topRated, withPromos });
+            if (cancelled) return;
+            setResults(saved);
+            setStatus('saved');
+            return;
+          }
           setResults([]);
           setStatus('error');
         });
@@ -86,7 +100,7 @@ export function CommerceExplorer({
       cancelled = true;
       clearTimeout(timeout);
     };
-  }, [showCategoryGrid, query, categorySlug, subcategorySlug, openNow, topRated, withPromos, nearest, position]);
+  }, [showCategoryGrid, query, categorySlug, subcategorySlug, openNow, topRated, withPromos, nearest, position, reconnectTick]);
 
   async function toggleNearest() {
     if (nearest) {
@@ -227,16 +241,23 @@ export function CommerceExplorer({
           keyExtractor={(b) => b.id}
           keyboardShouldPersistTaps="handled"
           ListHeaderComponent={
-            status !== 'ok' ? null : (
+            status === 'ok' || status === 'saved' ? (
               <Text style={styles.resultsCount}>
                 {results.length} {results.length === 1 ? 'resultado' : 'resultados'}
                 {category ? ` en ${category.name}` : ''}
+                {status === 'saved' ? ' · guardados en este dispositivo' : ''}
               </Text>
-            )
+            ) : null
           }
           ListEmptyComponent={
             loading ? (
               <ActivityIndicator style={{ marginTop: 24 }} color={Palette.brand} />
+            ) : status === 'saved' ? (
+              <EmptyState
+                icon="📡"
+                title="Sin resultados guardados"
+                subtitle="No tienes conexión. Conéctate a internet para buscar entre todos los comercios."
+              />
             ) : status === 'error' ? (
               <EmptyState icon="📡" title="No pudimos cargar los comercios" subtitle="Revisa tu conexión e inténtalo de nuevo." />
             ) : (

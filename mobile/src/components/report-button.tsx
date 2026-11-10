@@ -3,7 +3,8 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { ApiError, api } from '@/api/client';
+import { ApiError } from '@/api/client';
+import { reportContent } from '@/api/offline-actions';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
 
@@ -24,19 +25,23 @@ export function ReportButton({ targetType, targetId }: { targetType: TargetType;
   const [detail, setDetail] = useState('');
   const [status, setStatus] = useState<'form' | 'sending' | 'done'>('form');
   const [error, setError] = useState<string | null>(null);
+  const [queued, setQueued] = useState(false);
 
   function close() {
     setOpen(false);
     setStatus('form');
     setDetail('');
     setError(null);
+    setQueued(false);
   }
 
   async function submit() {
+    if (!user) return;
     setError(null);
     setStatus('sending');
     try {
-      await api.post('/api/mobile/report', { targetType, targetId, reason, detail });
+      const { queued: wasQueued } = await reportContent(user.id, { targetType, targetId, reason, detail });
+      setQueued(wasQueued);
       setStatus('done');
     } catch (e) {
       setError(e instanceof ApiError ? e.message : 'No se pudo enviar el reporte.');
@@ -63,8 +68,12 @@ export function ReportButton({ targetType, targetId }: { targetType: TargetType;
               {status === 'done' ? (
                 <View style={{ gap: 12, alignItems: 'center' }}>
                   <Ionicons name="checkmark-circle" size={44} color={Palette.success} />
-                  <Text style={styles.title}>Reporte enviado</Text>
-                  <Text style={styles.text}>Gracias por ayudarnos a mantener CundiMarket confiable. Revisaremos esta publicación.</Text>
+                  <Text style={styles.title}>{queued ? 'Reporte guardado' : 'Reporte enviado'}</Text>
+                  <Text style={styles.text}>
+                    {queued
+                      ? 'No tienes conexión ahora. Lo enviaremos automáticamente cuando vuelvas a conectarte.'
+                      : 'Gracias por ayudarnos a mantener CundiMarket confiable. Revisaremos esta publicación.'}
+                  </Text>
                   <Pressable style={styles.primary} onPress={close}>
                     <Text style={styles.primaryText}>Listo</Text>
                   </Pressable>

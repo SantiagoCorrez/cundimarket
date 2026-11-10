@@ -2,30 +2,27 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
-import { useEffect, useState } from 'react';
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { api } from '@/api/client';
 import type { News } from '@/api/types';
+import { LoadError } from '@/components/load-error';
 import { Badge, ScreenHeader } from '@/components/ui';
 import { NEWS_TYPES } from '@/constants/taxonomy';
 import { Palette } from '@/constants/theme';
+import { useApiQuery } from '@/hooks/use-api-query';
 import { timeAgo } from '@/utils/format';
 
 export default function NewsDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
-  const [item, setItem] = useState<News | null>(null);
-
-  useEffect(() => {
-    api.get<{ news: News }>(`/api/mobile/news/${id}`).then((r) => setItem(r.news));
-  }, [id]);
+  const { data, failed, reload } = useApiQuery<{ news: News }>(`/api/mobile/news/${id}`);
+  const item = data?.news ?? null;
 
   if (!item) {
     return (
       <View style={[styles.loading, { paddingTop: insets.top }]}>
-        <ActivityIndicator color={Palette.brand} />
+        {failed ? <LoadError onRetry={reload} what="esta noticia" /> : <ActivityIndicator color={Palette.brand} />}
       </View>
     );
   }

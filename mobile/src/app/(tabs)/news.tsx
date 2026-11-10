@@ -1,25 +1,22 @@
-import { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { api } from '@/api/client';
 import type { News } from '@/api/types';
 import { NewsCard } from '@/components/cards';
+import { LoadError } from '@/components/load-error';
 import { EmptyState } from '@/components/ui';
 import { Palette } from '@/constants/theme';
+import { useApiQuery } from '@/hooks/use-api-query';
 
 export default function NewsScreen() {
   const insets = useSafeAreaInsets();
-  const [news, setNews] = useState<News[] | null>(null);
-
-  useEffect(() => {
-    api.get<{ news: News[] }>('/api/mobile/news').then((r) => setNews(r.news));
-  }, []);
+  const { data, failed, reload } = useApiQuery<{ news: News[] }>('/api/mobile/news');
+  const news = data?.news ?? null;
 
   if (!news) {
     return (
       <View style={[styles.loading, { paddingTop: insets.top }]}>
-        <ActivityIndicator color={Palette.brand} />
+        {failed ? <LoadError onRetry={reload} what="las noticias" /> : <ActivityIndicator color={Palette.brand} />}
       </View>
     );
   }

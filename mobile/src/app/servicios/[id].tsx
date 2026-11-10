@@ -1,15 +1,17 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
 import { ActivityIndicator, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { api } from '@/api/client';
 import type { ServiceProvider } from '@/api/types';
+import { LoadError } from '@/components/load-error';
+import { OwnerActions } from '@/components/owner-actions';
 import { Card, ScreenHeader, SectionTitle, Stars, VerifiedBadge } from '@/components/ui';
 import { ReportButton } from '@/components/report-button';
 import { Palette, Radius } from '@/constants/theme';
+import { useAuth } from '@/context/auth';
+import { useApiQuery } from '@/hooks/use-api-query';
 import { useContactGuard } from '@/hooks/use-contact-guard';
 import { telUrl, timeAgo, whatsappUrl } from '@/utils/format';
 
@@ -17,16 +19,17 @@ export default function ProviderScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
   const guardContact = useContactGuard();
-  const [s, setS] = useState<ServiceProvider | null>(null);
-
-  useEffect(() => {
-    api.get<{ provider: ServiceProvider }>(`/api/mobile/servicios/${id}`).then((r) => setS(r.provider));
-  }, [id]);
+  const { user } = useAuth();
+  const { data, failed, reload } = useApiQuery<{ provider: ServiceProvider; isOwner?: boolean }>(
+    `/api/mobile/servicios/${id}`,
+    { refreshOnFocus: true },
+  );
+  const s = data?.provider ?? null;
 
   if (!s) {
     return (
       <View style={[styles.loading, { paddingTop: insets.top }]}>
-        <ActivityIndicator color={Palette.brand} />
+        {failed ? <LoadError onRetry={reload} what="esta publicación" /> : <ActivityIndicator color={Palette.brand} />}
       </View>
     );
   }
@@ -100,6 +103,7 @@ export default function ProviderScreen() {
             )}
           </View>
         </View>
+        {data?.isOwner && <OwnerActions kind="service" id={s.id} title={s.providerName} onChanged={reload} admin={user?.role === 'ADMIN'} />}
         <ReportButton targetType="SERVICE" targetId={s.id} />
       </ScrollView>
 

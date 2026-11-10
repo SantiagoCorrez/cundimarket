@@ -103,21 +103,45 @@ export const USER_TYPES = {
   MERCHANT: { label: "Tengo un negocio", emoji: "🏪" },
 } as const;
 
-export const MUNICIPALITIES = [
-  "Mosquera",
-  "Funza",
-  "Madrid",
-  "Soacha",
-  "Facatativá",
-  "Zipaquirá",
-  "Chía",
-  "Cota",
-  "Girardot",
-  "Fusagasugá",
-];
-
 /** Único municipio habilitado en el piloto; el resto se muestra como "Próximamente". */
 export const PILOT_MUNICIPALITY = "Mosquera";
+
+/** Los 116 municipios de Cundinamarca, en orden alfabético. */
+const CUNDINAMARCA_MUNICIPALITIES = [
+  "Agua de Dios", "Albán", "Anapoima", "Anolaima", "Apulo", "Arbeláez",
+  "Beltrán", "Bituima", "Bojacá",
+  "Cabrera", "Cachipay", "Cajicá", "Caparrapí", "Cáqueza", "Carmen de Carupa", "Chaguaní", "Chía", "Chipaque", "Choachí", "Chocontá", "Cogua", "Cota", "Cucunubá",
+  "El Colegio", "El Peñón", "El Rosal",
+  "Facatativá", "Fómeque", "Fosca", "Funza", "Fúquene", "Fusagasugá",
+  "Gachalá", "Gachancipá", "Gachetá", "Gama", "Girardot", "Granada", "Guachetá", "Guaduas", "Guasca", "Guataquí", "Guatavita", "Guayabal de Síquima", "Guayabetal", "Gutiérrez",
+  "Jerusalén", "Junín",
+  "La Calera", "La Mesa", "La Palma", "La Peña", "La Vega", "Lenguazaque",
+  "Machetá", "Madrid", "Manta", "Medina", "Mosquera",
+  "Nariño", "Nemocón", "Nilo", "Nimaima", "Nocaima",
+  "Pacho", "Paime", "Pandi", "Paratebueno", "Pasca", "Puerto Salgar", "Pulí",
+  "Quebradanegra", "Quetame", "Quipile",
+  "Ricaurte",
+  "San Antonio del Tequendama", "San Bernardo", "San Cayetano", "San Francisco", "San Juan de Rioseco", "Sasaima", "Sesquilé", "Sibaté", "Silvania", "Simijaca", "Soacha", "Sopó", "Subachoque", "Suesca", "Supatá", "Susa", "Sutatausa",
+  "Tabio", "Tausa", "Tena", "Tenjo", "Tibacuy", "Tibirita", "Tocaima", "Tocancipá", "Topaipí",
+  "Ubalá", "Ubaque", "Ubaté", "Une", "Útica",
+  "Venecia", "Vergara", "Vianí", "Villagómez", "Villapinzón", "Villeta", "Viotá",
+  "Yacopí",
+  "Zipacón", "Zipaquirá",
+];
+
+/** Municipios para los desplegables: el habilitado primero y luego el resto en orden alfabético. */
+export const MUNICIPALITIES = [
+  PILOT_MUNICIPALITY,
+  ...CUNDINAMARCA_MUNICIPALITIES.filter((m) => m !== PILOT_MUNICIPALITY),
+];
+
+/**
+ * Municipio permitido para publicar (negocios, empleos, servicios, inmuebles): solo los habilitados.
+ * `keep` conserva el valor actual al editar una publicación antigua de otro municipio.
+ */
+export function publishableMunicipality(value: string, keep?: string) {
+  return value === PILOT_MUNICIPALITY || (keep !== undefined && value === keep) ? value : PILOT_MUNICIPALITY;
+}
 
 /** Texto del aviso "Próximamente" cuando se elige un municipio que aún no está habilitado. */
 export const COMING_SOON = {

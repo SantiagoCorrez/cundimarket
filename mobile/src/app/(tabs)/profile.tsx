@@ -1,11 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import * as WebBrowser from 'expo-web-browser';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { API_BASE_URL, api } from '@/api/client';
+import { API_BASE_URL } from '@/api/client';
 import type { Business } from '@/api/types';
 import { BusinessCard } from '@/components/cards';
 import { DeleteAccountModal } from '@/components/delete-account-modal';
@@ -14,12 +14,17 @@ import { Button, Card, Logo } from '@/components/ui';
 import { PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette, Radius } from '@/constants/theme';
 import { useAuth } from '@/context/auth';
+import { useConnectivity } from '@/context/connectivity';
+import { useApiQuery } from '@/hooks/use-api-query';
 import { openLegal } from '@/utils/legal';
 
 export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
   const { user, logout, updateMunicipality } = useAuth();
-  const [favorites, setFavorites] = useState<Business[] | null>(null);
+  const { pending } = useConnectivity();
+  const { data: favoritesData, failed: favoritesFailed } = useApiQuery<{ favorites: Business[] }>(user ? '/api/mobile/favorites' : null);
+  // Si no se pudo cargar y no hay copia guardada, se muestra la lista vacía.
+  const favorites: Business[] | null = favoritesData?.favorites ?? (favoritesFailed ? [] : null);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
 
@@ -32,14 +37,6 @@ export default function ProfileScreen() {
       Alert.alert('No se pudo guardar', 'Inténtalo de nuevo en unos segundos.');
     }
   }
-
-  useEffect(() => {
-    if (!user) return;
-    api
-      .get<{ favorites: Business[] }>('/api/mobile/favorites')
-      .then((r) => setFavorites(r.favorites))
-      .catch(() => setFavorites([]));
-  }, [user]);
 
   if (!user) {
     return (
@@ -94,6 +91,13 @@ export default function ProfileScreen() {
         {user.role === 'MERCHANT' && (
           <ProfileLink icon="storefront" label="Mi negocio" onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/merchant`)} />
         )}
+        {(user.role === 'MERCHANT' || user.role === 'ADMIN') && (
+          <ProfileLink
+            icon="clipboard"
+            label="Mis vacantes y servicios"
+            onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/mis-publicaciones`)}
+          />
+        )}
         {user.role === 'ADMIN' && (
           <ProfileLink icon="shield-checkmark" label="Panel administrativo" onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/admin`)} />
         )}
@@ -128,10 +132,16 @@ export default function ProfileScreen() {
           variant="outline"
           style={{ borderColor: 'rgba(226,59,59,0.3)' }}
           onPress={() =>
-            Alert.alert('Cerrar sesión', '¿Seguro que quieres salir de tu cuenta?', [
-              { text: 'Cancelar', style: 'cancel' },
-              { text: 'Cerrar sesión', style: 'destructive', onPress: logout },
-            ])
+            Alert.alert(
+              'Cerrar sesión',
+              pending > 0
+                ? `Tienes ${pending} ${pending === 1 ? 'cambio sin enviar' : 'cambios sin enviar'} por falta de conexión. Si cierras sesión ahora se perderán. ¿Salir de todos modos?`
+                : '¿Seguro que quieres salir de tu cuenta?',
+              [
+                { text: 'Cancelar', style: 'cancel' },
+                { text: 'Cerrar sesión', style: 'destructive', onPress: logout },
+              ],
+            )
           }>
           <Ionicons name="log-out-outline" size={18} color={Palette.danger} />
           <Text style={{ color: Palette.danger, fontWeight: '700', fontSize: 15 }}>Cerrar sesión</Text>

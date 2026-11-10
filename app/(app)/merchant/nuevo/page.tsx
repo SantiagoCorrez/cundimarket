@@ -8,7 +8,7 @@ import { CategorySelect } from "@/components/category-select";
 import { PublishGate } from "@/components/publish-gate";
 import { PublishInfo } from "@/components/publish-info";
 import { createBusiness } from "@/lib/actions/merchant";
-import { MUNICIPALITIES } from "@/lib/taxonomy";
+import { MunicipalityOptions } from "@/components/municipality-options";
 
 export const dynamic = "force-dynamic";
 
@@ -61,9 +61,7 @@ export default async function NewBusinessPage() {
           <div className="grid grid-cols-2 gap-3">
             <Field label="Municipio">
               <Select name="municipality" defaultValue="Mosquera">
-                {MUNICIPALITIES.map((m) => (
-                  <option key={m} value={m}>{m}</option>
-                ))}
+                <MunicipalityOptions />
               </Select>
             </Field>
             <Field label="Barrio">

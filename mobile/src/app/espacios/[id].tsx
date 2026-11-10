@@ -1,16 +1,16 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
 import { ActivityIndicator, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { api } from '@/api/client';
 import type { Property } from '@/api/types';
+import { LoadError } from '@/components/load-error';
 import { Badge, Card, ScreenHeader, VerifiedBadge } from '@/components/ui';
 import { OFFER_TYPES } from '@/constants/taxonomy';
 import { ReportButton } from '@/components/report-button';
 import { Palette, Radius } from '@/constants/theme';
+import { useApiQuery } from '@/hooks/use-api-query';
 import { useContactGuard } from '@/hooks/use-contact-guard';
 import { formatCOP, telUrl, whatsappUrl } from '@/utils/format';
 import { openDirections } from '@/utils/maps';
@@ -19,16 +19,13 @@ export default function PropertyScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
   const guardContact = useContactGuard();
-  const [p, setP] = useState<Property | null>(null);
-
-  useEffect(() => {
-    api.get<{ property: Property }>(`/api/mobile/espacios/${id}`).then((r) => setP(r.property));
-  }, [id]);
+  const { data, failed, reload } = useApiQuery<{ property: Property }>(`/api/mobile/espacios/${id}`);
+  const p = data?.property ?? null;
 
   if (!p) {
     return (
       <View style={[styles.loading, { paddingTop: insets.top }]}>
-        <ActivityIndicator color={Palette.brand} />
+        {failed ? <LoadError onRetry={reload} what="esta publicación" /> : <ActivityIndicator color={Palette.brand} />}
       </View>
     );
   }

@@ -5,6 +5,8 @@ import { getSession } from "@/lib/auth";
 import { BackBar } from "@/components/nav";
 import { Badge, Card } from "@/components/ui";
 import { JobActions } from "@/components/job-actions";
+import { OwnerActions } from "@/components/owner-actions";
+import { canManageListing } from "@/lib/listings";
 import { formatCOP } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
@@ -14,6 +16,10 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
   const session = await getSession();
   const j = await prisma.job.findUnique({ where: { id } });
   if (!j) notFound();
+
+  // Una vacante pausada solo la ve su dueño (o un administrador).
+  const isOwner = !!session && canManageListing(j.userId, session);
+  if (!j.active && !isOwner) notFound();
 
   const saved = session
     ? await prisma.savedJob.findUnique({ where: { userId_jobId: { userId: session.id, jobId: id } } })
@@ -30,7 +36,10 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
     <div>
       <BackBar title="Vacante" />
       <div className="p-4">
-        <Badge tone="brand">{j.sector}</Badge>
+        <div className="flex items-center gap-2">
+          <Badge tone="brand">{j.sector}</Badge>
+          {!j.active && <Badge tone="warn">Pausada</Badge>}
+        </div>
         <h1 className="text-2xl font-extrabold mt-2">{j.title}</h1>
         <p className="text-ink-soft">{j.companyName}</p>
 
@@ -63,6 +72,8 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
           </p>
         )}
       </div>
+
+      {isOwner && <OwnerActions kind="job" id={id} title={j.title} admin={session!.role === "ADMIN" && j.userId !== session!.id} />}
 
       <JobActions
         jobId={id}

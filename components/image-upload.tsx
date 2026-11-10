@@ -12,12 +12,15 @@ export function ImageUpload({
   name,
   max = 5,
   label = "Subir imágenes",
+  initial = [],
 }: {
   name: string;
   max?: number;
   label?: string;
+  /** Imágenes ya guardadas (al editar una publicación). */
+  initial?: string[];
 }) {
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>(initial);
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleFiles(files: FileList | null) {

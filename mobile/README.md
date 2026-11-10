@@ -32,13 +32,42 @@ municipio con aviso "Próximamente" para los municipios aún no habilitados.
 
 **Flujos que abren el sitio web en el navegador in-app** (no reescritos de
 forma nativa todavía): panel de comerciante, panel administrativo, publicar
-inmueble/servicio/vacante, perfil laboral. Son botones "Publicar" / enlaces
+inmueble/servicio/vacante, **editar** una vacante/servicio propio (el detalle
+muestra "Tu publicación" con Editar → formulario web y Eliminar → nativo, vía
+`DELETE /api/mobile/{empleo,servicios}/:id`), listado "Mis vacantes y servicios"
+(`/mis-publicaciones`), perfil laboral. Son botones "Publicar" / enlaces
 en la app que abren `https://cundimarket.online/...` con `expo-web-browser`.
 Portarlos a pantallas nativas es el siguiente paso lógico cuando se quiera
 pulir la experiencia de comerciantes.
 
-**No incluido todavía**: CundiBot (asistente), reportes ciudadanos, mapa de
-búsqueda.
+**No incluido todavía**: CundiBot (asistente), mapa de búsqueda.
+
+## Modo sin conexión
+
+La app sigue siendo útil sin internet. Piezas (todas en `src/api`, `src/context/connectivity.tsx`):
+
+- **Caché de lecturas** (`offline-cache.ts`, `client.ts`): cada `GET` exitoso se guarda en
+  SQLite (`expo-sqlite/kv-store`; en web `localStorage`) por usuario. Sin red (o con el servidor
+  caído: 502/503/504) `api.get` devuelve la última copia. Tope de 250 entradas / ~40 MB; al
+  excederlo se descartan las más antiguas. Se borra al cerrar sesión o eliminar la cuenta.
+- **Sesión**: el usuario se guarda localmente (`cm:user`); al abrir sin red la sesión se
+  conserva. Solo un 401/404 del servidor cierra la sesión.
+- **Aviso de conexión** (`connectivity-frame.tsx`): franja "Sin conexión · mostrando datos
+  guardados" (con contador de cambios pendientes) y "Conexión restablecida". Detecta la red con
+  `expo-network` y comprueba el servidor con `GET /api/mobile/health` cada 15 s mientras esté caído.
+  Al volver la conexión las pantallas se refrescan solas (`useApiQuery` + `tick`).
+- **Cola de acciones** (`outbox.ts`, `offline-actions.ts`): favoritos, guardar/aplicar a vacantes,
+  calificaciones y reportes hechos sin conexión se guardan y se envían en orden al volver. Los
+  endpoints son idempotentes (`{ favorited }`, `{ saved, applied }`, y se ignoran calificaciones/
+  reportes duplicados de los últimos 10 min). Login, registro, cambio de municipio y eliminar
+  cuenta **requieren conexión**.
+- **Precarga** (`prefetch.ts`): con conexión (máx. cada 3 h) descarga inicio, categorías, noticias,
+  emergencias y los favoritos con su ficha.
+- **Búsqueda sin conexión** (`offline-search.ts`): si no hay copia de esa búsqueda, filtra los
+  comercios ya descargados (no aplica "abierto ahora" ni "más cercanos").
+
+Requiere un build nativo nuevo (`expo-sqlite`, `expo-network`): no funciona en Expo Go de versiones
+anteriores ni con un APK/IPA ya compilado.
 
 ## Desarrollo local
 

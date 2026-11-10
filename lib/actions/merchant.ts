@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
+import { publishableMunicipality } from "@/lib/taxonomy";
 
 function num(v: FormDataEntryValue | null): number | null {
   const n = Number(String(v ?? "").replace(/\D/g, ""));
@@ -54,7 +55,7 @@ export async function createBusiness(formData: FormData) {
       description: String(formData.get("description") || ""),
       address: String(formData.get("address") || ""),
       neighborhood: String(formData.get("neighborhood") || "") || null,
-      municipality: String(formData.get("municipality") || "Mosquera"),
+      municipality: publishableMunicipality(String(formData.get("municipality") || "")),
       phone: String(formData.get("phone") || ""),
       whatsapp: String(formData.get("whatsapp") || "") || null,
       schedule: String(formData.get("schedule") || "") || null,
