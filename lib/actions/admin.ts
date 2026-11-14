@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
+import { contactScope } from "@/lib/emergency";
 
 async function requireAdmin() {
   const session = await getSession();
@@ -78,13 +79,16 @@ export async function resolveReport(formData: FormData) {
 
 export async function createContact(formData: FormData) {
   await requireAdmin();
-  const count = await prisma.emergencyContact.count();
+  const municipality = String(formData.get("municipality") || "Mosquera");
+  const count = await prisma.emergencyContact.count({ where: { municipality } });
   await prisma.emergencyContact.create({
     data: {
       name: String(formData.get("name") || ""),
-      phone: String(formData.get("phone") || ""),
+      detail: String(formData.get("detail") || "").trim() || null,
+      phone: String(formData.get("phone") || "").trim(),
       icon: String(formData.get("icon") || "📞"),
-      municipality: String(formData.get("municipality") || "Mosquera"),
+      municipality,
+      scope: contactScope(municipality),
       order: count,
     },
   });

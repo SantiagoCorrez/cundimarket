@@ -25,10 +25,11 @@ const MODULES = [
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
-  const { user, updateMunicipality } = useAuth();
+  const { user, municipality, selectMunicipality } = useAuth();
   const [pickerOpen, setPickerOpen] = useState(false);
-  const municipality = user?.municipality ?? PILOT_MUNICIPALITY;
-  const { data: feed, failed, loading, reload } = useApiQuery<HomeFeed>('/api/mobile/home');
+  const { data: feed, failed, loading, reload } = useApiQuery<HomeFeed>(
+    `/api/mobile/home?municipality=${encodeURIComponent(municipality)}`,
+  );
 
   if (!feed) {
     return (
@@ -40,7 +41,7 @@ export default function HomeScreen() {
 
   async function saveMunicipality(m: string, notify: boolean) {
     try {
-      await updateMunicipality(m);
+      await selectMunicipality(m);
       if (notify) Alert.alert('¡Listo!', `Te avisaremos cuando CundiMarket esté disponible en ${m}.`);
     } catch {
       Alert.alert('No se pudo guardar', 'Inténtalo de nuevo en unos segundos.');
@@ -134,7 +135,7 @@ export default function HomeScreen() {
               <Text style={styles.link}>Ver todas</Text>
             </Pressable>
           }>
-          📰 Noticias del municipio
+          📰 Noticias de {municipality}
         </SectionTitle>
         <View style={{ gap: 10, marginTop: 10 }}>
           {feed.news.slice(0, 3).map((n) => (
@@ -150,13 +151,14 @@ export default function HomeScreen() {
       onClose={() => setPickerOpen(false)}
       onSelect={(m) => {
         setPickerOpen(false);
-        if (user && user.municipality !== m) saveMunicipality(m, false);
+        if (m !== municipality) saveMunicipality(m, false);
       }}
       onConfirmSoon={(m) => {
         setPickerOpen(false);
-        if (user) saveMunicipality(m, true);
+        saveMunicipality(m, !!user);
+        // Visitante: además de ver la información de su municipio, se le invita a registrarse.
         // Se navega después de que el modal termine de cerrarse (si no, queda abierto sobre la pantalla nueva).
-        else setTimeout(() => router.push({ pathname: '/register', params: { municipality: m } }), 300);
+        if (!user) setTimeout(() => router.push({ pathname: '/register', params: { municipality: m } }), 300);
       }}
       soonConfirmLabel={user ? 'Avisarme cuando esté disponible' : 'Registrarme'}
     />

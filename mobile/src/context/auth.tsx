@@ -6,6 +6,7 @@ import { connectivity } from '@/api/connectivity';
 import { cachePurgeScope, setCacheScope } from '@/api/offline-cache';
 import { purgeOutbox } from '@/api/outbox';
 import type { Role, SessionUser } from '@/api/types';
+import { MUNICIPALITIES, PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette } from '@/constants/theme';
 import { cacheStorage } from '@/utils/cache-storage';
 import { secureStorage } from '@/utils/secure-storage';
@@ -13,6 +14,8 @@ import { secureStorage } from '@/utils/secure-storage';
 const TOKEN_KEY = 'cundi_token';
 /** Copia local del usuario: permite abrir la app con la sesión iniciada aunque no haya conexión. */
 const USER_KEY = 'cm:user';
+/** Municipio elegido por un visitante sin sesión. */
+const GUEST_MUNICIPALITY_KEY = 'cm:municipality';
 
 type AuthContextValue = {
   user: SessionUser | null;
@@ -27,6 +30,10 @@ type AuthContextValue = {
     role?: Role;
   }) => Promise<void>;
   updateMunicipality: (municipality: string) => Promise<void>;
+  /** Municipio elegido: el del perfil o, sin sesión, el que el visitante eligió en este dispositivo. */
+  municipality: string;
+  /** Cambia el municipio (en el perfil si hay sesión; si no, solo en este dispositivo). */
+  selectMunicipality: (municipality: string) => Promise<void>;
   /** Elimina definitivamente la cuenta (pide la contraseña) y cierra la sesión local. */
   deleteAccount: (password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -59,6 +66,7 @@ async function wipeLocalSession(userId: string | null) {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<SessionUser | null>(null);
   const [loading, setLoading] = useState(true);
+  const [guestMunicipality, setGuestMunicipality] = useState(PILOT_MUNICIPALITY);
 
   useEffect(() => {
     let active = true;
@@ -82,6 +90,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     (async () => {
+      const savedMunicipality = await cacheStorage.getItem(GUEST_MUNICIPALITY_KEY).catch(() => null);
+      if (active && savedMunicipality && MUNICIPALITIES.includes(savedMunicipality)) setGuestMunicipality(savedMunicipality);
       const token = await secureStorage.getItem(TOKEN_KEY);
       if (token) {
         setAuthToken(token);
@@ -113,10 +123,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(sessionUser);
   }
 
-  const value = useMemo<AuthContextValue>(
-    () => ({
+  const value = useMemo<AuthContextValue>(() => {
+    async function updateMunicipality(municipality: string) {
+      const { token, user: sessionUser } = await api.post<{ token: string; user: SessionUser }>(
+        '/api/mobile/auth/municipality',
+        { municipality },
+      );
+      await applySession(token, sessionUser);
+    }
+
+    return {
       user,
       loading,
+      municipality: user?.municipality ?? guestMunicipality,
+      selectMunicipality: async (municipality) => {
+        if (user) {
+          if (user.municipality !== municipality) await updateMunicipality(municipality);
+          return;
+        }
+        setGuestMunicipality(municipality);
+        await cacheStorage.setItem(GUEST_MUNICIPALITY_KEY, municipality);
+      },
       login: async (email, password) => {
         const { token, user: sessionUser } = await api.post<{ token: string; user: SessionUser }>(
           '/api/mobile/auth/login',
@@ -131,13 +158,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         );
         await applySession(token, sessionUser);
       },
-      updateMunicipality: async (municipality) => {
-        const { token, user: sessionUser } = await api.post<{ token: string; user: SessionUser }>(
-          '/api/mobile/auth/municipality',
-          { municipality },
-        );
-        await applySession(token, sessionUser);
-      },
+      updateMunicipality,
       deleteAccount: async (password) => {
         await api.post('/api/mobile/auth/delete-account', { password });
         await wipeLocalSession(user?.id ?? null);
@@ -147,9 +168,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         await wipeLocalSession(user?.id ?? null);
         setUser(null);
       },
-    }),
-    [user, loading],
-  );
+    };
+  }, [user, loading, guestMunicipality]);
 
   // Hasta leer la sesión guardada no se muestran pantallas (evita pedir datos como visitante por error).
   if (loading) return <View style={{ flex: 1, backgroundColor: Palette.background }} />;

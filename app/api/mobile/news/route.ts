@@ -1,9 +1,12 @@
-import { prisma } from "@/lib/prisma";
+import { getSessionFromRequest } from "@/lib/auth";
 import { json } from "@/lib/api";
-import { ensureFreshNews } from "@/lib/news-sync";
+import { municipalityNews } from "@/lib/news-sync";
+import { normalizeMunicipality } from "@/lib/taxonomy";
 
-export async function GET() {
-  ensureFreshNews();
-  const news = await prisma.news.findMany({ orderBy: { publishedAt: "desc" }, take: 50 });
-  return json({ news });
+/** Noticias de la alcaldía del municipio pedido (?municipality=), o del de la sesión. */
+export async function GET(req: Request) {
+  const session = await getSessionFromRequest(req);
+  const requested = new URL(req.url).searchParams.get("municipality");
+  const municipality = normalizeMunicipality(requested, session?.municipality);
+  return json(await municipalityNews(municipality));
 }

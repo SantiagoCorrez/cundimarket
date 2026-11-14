@@ -37,14 +37,27 @@ npm run news:sync      # opcional: primera carga inmediata de las noticias de la
 > ⚠️ **No ejecutes `npm run db:seed` en producción**: el seed borra todas las tablas
 > (usuarios, comercios, reportes…) antes de cargar los datos de ejemplo.
 
-## Noticias de la Alcaldía de Mosquera
+## Noticias y líneas de atención por municipio
 
-La sección de noticias se alimenta del portal oficial
-(<https://www.mosquera-cundinamarca.gov.co/tema/noticias>) a través de su API pública
-(`lib/news-sync.ts`). Se sincroniza sola en segundo plano, como máximo cada 30 minutos,
-cuando alguien abre el inicio o las noticias (web o app), y se puede forzar con
-`npm run news:sync`. Cada noticia queda con enlace a la página original (`News.sourceUrl`).
-Las noticias de ejemplo del seed se pueden borrar desde el panel de administración.
+Las noticias y los canales de atención dependen del **municipio elegido** (el del perfil;
+para visitantes, el que eligen en la app o `?municipio=` en la web).
+
+**Noticias** (`lib/news-sync.ts`, sitios en `lib/municipal-sites.ts`): la mayoría de
+alcaldías usan el mismo portal con API pública (`/api/v1/contents?tags=1`). Las noticias de
+un municipio se descargan la primera vez que alguien las pide (espera hasta 8 s) y luego se
+refrescan en segundo plano cada 30 minutos. Las alcaldías con otro sistema (SharePoint, etc.)
+no se sincronizan: la app y la web enlazan a su sección de noticias. Forzar:
+`npm run news:sync` (Mosquera), `npm run news:sync -- Funza Chía` o `npm run news:sync -- --all`.
+Cada noticia guarda el enlace a la página original (`News.sourceUrl`).
+
+**Líneas de atención** (`lib/emergency.ts`): directorio oficial de los 116 municipios más
+las líneas de la Gobernación y las nacionales (`prisma/data/emergency-lines.json`, cargado
+por la migración `20261113000000_emergency_directory`, que reemplaza los contactos
+anteriores). El administrador las edita por municipio en *Admin → Canales de atención*.
+Fuente: "Lineas de emergencia municipios Cundinamarca.xlsx" (consulta 12-nov-2026).
+
+> En Windows con antivirus que inspecciona HTTPS (Avast), Node necesita
+> `NODE_EXTRA_CA_CERTS` con el certificado del antivirus para descargar noticias en local.
 
 ## Usuarios de prueba (contraseña: `123456`)
 

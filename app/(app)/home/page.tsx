@@ -11,12 +11,14 @@ import {
 } from "@/components/cards";
 import { ModuleGrid } from "@/components/module-grid";
 import { ensureFreshNews } from "@/lib/news-sync";
+import { normalizeMunicipality } from "@/lib/taxonomy";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  ensureFreshNews();
   const session = await getSession();
+  const municipality = normalizeMunicipality(session?.municipality);
+  void ensureFreshNews(municipality);
 
   const [categories, featured, promos, news] = await Promise.all([
     prisma.category.findMany({ orderBy: { order: "asc" } }),
@@ -32,7 +34,7 @@ export default async function HomePage() {
       take: 8,
       include: { business: { select: { id: true, name: true, logoUrl: true } } },
     }),
-    prisma.news.findMany({ orderBy: { publishedAt: "desc" }, take: 5 }),
+    prisma.news.findMany({ where: { municipality }, orderBy: { publishedAt: "desc" }, take: 5 }),
   ]);
 
   return (

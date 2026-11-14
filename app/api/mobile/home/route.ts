@@ -2,10 +2,12 @@ import { prisma } from "@/lib/prisma";
 import { getSessionFromRequest } from "@/lib/auth";
 import { json } from "@/lib/api";
 import { ensureFreshNews } from "@/lib/news-sync";
+import { normalizeMunicipality } from "@/lib/taxonomy";
 
 export async function GET(req: Request) {
-  ensureFreshNews();
   const session = await getSessionFromRequest(req);
+  const municipality = normalizeMunicipality(new URL(req.url).searchParams.get("municipality"), session?.municipality);
+  void ensureFreshNews(municipality);
 
   const [categories, featured, promos, news] = await Promise.all([
     prisma.category.findMany({ orderBy: { order: "asc" } }),
@@ -21,7 +23,7 @@ export async function GET(req: Request) {
       take: 8,
       include: { business: { select: { id: true, name: true, logoUrl: true } } },
     }),
-    prisma.news.findMany({ orderBy: { publishedAt: "desc" }, take: 5 }),
+    prisma.news.findMany({ where: { municipality }, orderBy: { publishedAt: "desc" }, take: 5 }),
   ]);
 
   return json({
@@ -32,5 +34,6 @@ export async function GET(req: Request) {
     featured,
     promos,
     news,
+    municipality,
   });
 }

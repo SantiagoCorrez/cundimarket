@@ -92,9 +92,29 @@ export type News = {
 
 export type EmergencyContact = {
   id: string;
+  scope?: 'MUNICIPAL' | 'DEPARTAMENTAL' | 'NACIONAL';
   name: string;
+  /** Entidad o aclaración (p. ej. "CAI Santa Rita"). */
+  detail?: string | null;
+  /** Uno o varios números separados por " / "; vacío = solo informativo. */
   phone: string;
   icon: string;
+};
+
+export type EmergencyDirectory = {
+  municipality: string;
+  local: EmergencyContact[];
+  departmental: EmergencyContact[];
+  national: EmergencyContact[];
+};
+
+export type MunicipalityNews = {
+  municipality: string;
+  news: News[];
+  /** Sitio y sección de noticias oficiales de la alcaldía. */
+  source: { site: string; news: string } | null;
+  /** La primera descarga de noticias de esa alcaldía sigue en curso. */
+  syncing?: boolean;
 };
 
 export type PropertyPhoto = { id: string; url: string };

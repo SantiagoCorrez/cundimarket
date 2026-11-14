@@ -1,6 +1,7 @@
 import { PrismaClient } from "../lib/generated/prisma";
 import bcrypt from "bcryptjs";
 import { CATEGORIES, NEIGHBORHOODS_MOSQUERA } from "../lib/taxonomy";
+import emergencyLines from "./data/emergency-lines.json";
 
 const prisma = new PrismaClient();
 
@@ -151,18 +152,8 @@ async function main() {
     await prisma.news.create({ data: { ...n, authorId: admin.id, imageUrl: img(`news-${n.title.length}`) } });
   }
 
-  console.log("🚨 Canales de atención…");
-  const contacts = [
-    { name: "Policía Nacional", phone: "123", icon: "🚓" },
-    { name: "Bomberos Mosquera", phone: "6018279999", icon: "🚒" },
-    { name: "Ambulancia / Emergencias médicas", phone: "125", icon: "🚑" },
-    { name: "Hospital María Auxiliadora", phone: "6018270000", icon: "🏥" },
-    { name: "Defensa Civil", phone: "144", icon: "🛟" },
-    { name: "Tránsito Municipal", phone: "6018271111", icon: "🚦" },
-  ];
-  for (let i = 0; i < contacts.length; i++) {
-    await prisma.emergencyContact.create({ data: { ...contacts[i], order: i } });
-  }
+  console.log("🚨 Canales de atención (directorio oficial de los 116 municipios)…");
+  await prisma.emergencyContact.createMany({ data: emergencyLines });
 
   console.log("🏠 CundiEspacios…");
   const props = [

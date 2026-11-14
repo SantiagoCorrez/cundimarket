@@ -25,8 +25,19 @@ export function formatDistance(km: number) {
   return `a ${Math.max(10, Math.round((km * 1000) / 10) * 10)} m`;
 }
 
+/** URL tel: para UN número. Soporta extensiones ("601 749 0000 ext. 12" → pausa) y códigos como "#767". */
 export function telUrl(phone: string) {
-  return `tel:${phone.replace(/[^\d+]/g, '')}`;
+  const [main, ext] = phone.split(/\s*ext\.?\s*/i);
+  const number = main.replace(/[^\d+#]/g, '').replace(/#/g, '%23');
+  return `tel:${number}${ext ? `,${ext.replace(/\D/g, '')}` : ''}`;
+}
+
+/** Separa un campo con varios teléfonos ("601 827 8666 / 311 209 1084"). */
+export function splitPhones(phone: string) {
+  return phone
+    .split(/\s*\/\s*/)
+    .map((p) => p.trim())
+    .filter(Boolean);
 }
 
 export function whatsappUrl(phone: string, message?: string) {

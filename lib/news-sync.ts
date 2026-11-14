@@ -1,17 +1,29 @@
 /**
- * Sincroniza las noticias de la Alcaldía de Mosquera
- * (https://www.mosquera-cundinamarca.gov.co/tema/noticias) con la tabla `News`.
+ * Sincroniza las noticias de las alcaldías de Cundinamarca con la tabla `News`.
  *
- * El portal de la alcaldía es una SPA que consume su propia API pública:
+ * La mayoría de alcaldías usan el mismo portal (SPA) con una API pública:
  *  - Lista:   GET /api/v1/contents?tags=1&orderBy=recent&pageSize=N   (tag 1 = "Noticias")
  *  - Detalle: GET /api/v1/contents/{id}                               (cuerpo HTML, fecha, imágenes)
  *  - Página pública de cada noticia: /noticias/{friendlyName}
+ * Las que usan otro sistema (SharePoint, etc.) no se sincronizan: la app enlaza a su sección de noticias.
  */
 import { prisma } from "./prisma";
+import { MUNICIPAL_SITES } from "./municipal-sites";
+import { PILOT_MUNICIPALITY } from "./taxonomy";
 
-const ORIGIN = "https://www.mosquera-cundinamarca.gov.co";
 const NEWS_TAG_ID = 1;
 const SYNC_INTERVAL_MS = 30 * 60 * 1000;
+/** Si el portal no tiene la API, no se vuelve a intentar en un día. */
+const UNSUPPORTED_RETRY_MS = 24 * 60 * 60 * 1000;
+const DETAIL_CONCURRENCY = 6;
+
+class UnsupportedPortal extends Error {}
+
+/** Sitio y sección de noticias oficiales de la alcaldía. */
+export function newsSourceFor(municipality: string) {
+  const site = MUNICIPAL_SITES[municipality];
+  return site ? { site: site.site, news: site.news } : null;
+}
 
 type ListItem = {
   contentID: number;
@@ -97,12 +109,28 @@ function toHttps(url: string | null | undefined) {
   return url ? url.replace(/^http:\/\//i, "https://") : null;
 }
 
-export async function syncMosqueraNews({ limit = 20 }: { limit?: number } = {}) {
-  const list = await getJson<{ results: ListItem[] }>(
-    `${ORIGIN}/api/v1/contents?tags=${NEWS_TAG_ID}&orderBy=recent&pageSize=${limit}`,
-  );
+/** Sincroniza las noticias recientes de la alcaldía de `municipality` (máximo 20 por consulta del portal). */
+export async function syncMunicipalityNews(municipality: string, { limit = 20 }: { limit?: number } = {}) {
+  const source = newsSourceFor(municipality);
+  if (!source) throw new UnsupportedPortal(`Sin sitio registrado para ${municipality}`);
+  const origin = new URL(source.site).origin;
+
+  let list: { results: ListItem[] };
+  try {
+    list = await getJson<{ results: ListItem[] }>(
+      `${origin}/api/v1/contents?tags=${NEWS_TAG_ID}&orderBy=recent&pageSize=${Math.min(limit, 20)}`,
+    );
+  } catch (error) {
+    // 404 o una página HTML: ese portal no expone la API de noticias.
+    if (error instanceof SyntaxError || (error instanceof Error && /HTTP 40[34]/.test(error.message))) {
+      throw new UnsupportedPortal(`${origin} no tiene API de noticias`);
+    }
+    throw error;
+  }
+  if (!Array.isArray(list?.results)) throw new UnsupportedPortal(`${origin} no tiene API de noticias`);
+
   const items = list.results.filter((i) => i.friendlyName && i.name);
-  const urlOf = (item: ListItem) => `${ORIGIN}/noticias/${item.friendlyName}`;
+  const urlOf = (item: ListItem) => `${origin}/noticias/${item.friendlyName}`;
 
   const known = new Set(
     (
@@ -113,49 +141,100 @@ export async function syncMosqueraNews({ limit = 20 }: { limit?: number } = {}) 
     ).map((n) => n.sourceUrl),
   );
 
-  const rows = [];
-  for (const item of items) {
-    const sourceUrl = urlOf(item);
-    if (known.has(sourceUrl)) continue;
+  const pending = items.filter((item) => !known.has(urlOf(item)));
 
-    let detail: Detail | null = null;
-    try {
-      detail = await getJson<Detail>(`${ORIGIN}/api/v1/contents/${item.contentID}`);
-    } catch {
-      // sin detalle publicamos igual con el resumen de la lista
+  // Los detalles se piden de a varios a la vez: la primera carga de un municipio trae ~20 noticias.
+  const details = new Map<number, Detail | null>();
+  const queue = [...pending];
+  const worker = async () => {
+    for (let item = queue.shift(); item; item = queue.shift()) {
+      try {
+        details.set(item.contentID, await getJson<Detail>(`${origin}/api/v1/contents/${item.contentID}`));
+      } catch {
+        details.set(item.contentID, null); // sin detalle publicamos igual con el resumen de la lista
+      }
     }
+  };
+  await Promise.all(Array.from({ length: Math.min(DETAIL_CONCURRENCY, queue.length) }, worker));
+
+  const rows = pending.map((item) => {
+    const detail = details.get(item.contentID) ?? null;
     const title = normalizeTitle(item.name);
     const body = htmlToText(detail?.body ?? "") || htmlToText(item.metaDescription ?? "") || title;
-    rows.push({
+    return {
       title,
       body,
       type: classifyNews(title),
       imageUrl: toHttps(item.defaultImage ?? detail?.defaultImage),
-      municipality: "Mosquera",
+      municipality,
       publishedAt:
         parseBogotaDate(detail?.creationDate) ?? parseBogotaDate(item.modifiedDate) ?? new Date(),
-      sourceUrl,
-    });
-  }
+      sourceUrl: urlOf(item),
+    };
+  });
 
   if (rows.length) await prisma.news.createMany({ data: rows, skipDuplicates: true });
   return { checked: items.length, created: rows.length };
 }
 
-const state = globalThis as unknown as { __newsSync?: { last: number; running: boolean } };
+type SyncState = { last: number; running: Promise<void> | null; supported: boolean };
+const state = globalThis as unknown as { __newsSyncByMunicipality?: Map<string, SyncState> };
 
-/** Dispara una sincronización en segundo plano como máximo cada 30 minutos. */
-export function ensureFreshNews() {
-  const s = (state.__newsSync ??= { last: 0, running: false });
-  if (s.running || Date.now() - s.last < SYNC_INTERVAL_MS) return;
-  s.running = true;
+/** Indica si la alcaldía tiene noticias sincronizables (false tras comprobar que su portal no tiene la API). */
+export function newsSyncSupported(municipality: string) {
+  return state.__newsSyncByMunicipality?.get(municipality)?.supported ?? true;
+}
+
+/**
+ * Sincroniza en segundo plano las noticias del municipio como máximo cada 30 minutos.
+ * Devuelve una promesa que termina cuando acaba la sincronización en curso (útil para esperar
+ * la primera carga de un municipio que aún no tiene noticias).
+ */
+export function ensureFreshNews(municipality: string = PILOT_MUNICIPALITY): Promise<void> {
+  const map = (state.__newsSyncByMunicipality ??= new Map());
+  const s = map.get(municipality) ?? { last: 0, running: null, supported: true };
+  map.set(municipality, s);
+
+  if (s.running) return s.running;
+  const wait = s.supported ? SYNC_INTERVAL_MS : UNSUPPORTED_RETRY_MS;
+  if (Date.now() - s.last < wait) return Promise.resolve();
+
   s.last = Date.now();
-  syncMosqueraNews()
+  s.running = syncMunicipalityNews(municipality)
+    .then(() => {
+      s.supported = true;
+    })
     .catch((error) => {
-      console.error("[news-sync]", error);
+      if (error instanceof UnsupportedPortal) {
+        s.supported = false;
+        return;
+      }
+      console.error(`[news-sync] ${municipality}`, error);
       s.last = Date.now() - SYNC_INTERVAL_MS + 5 * 60 * 1000; // reintenta en 5 minutos
     })
     .finally(() => {
-      s.running = false;
+      s.running = null;
     });
+  return s.running;
+}
+
+/**
+ * Noticias de un municipio. Si aún no hay ninguna guardada, espera (hasta 8 s) la primera
+ * sincronización; si ya hay, responde de inmediato y refresca en segundo plano.
+ * `source` es la sección de noticias oficial de la alcaldía (para enlazarla).
+ */
+export async function municipalityNews(municipality: string, take = 50) {
+  const existing = await prisma.news.count({ where: { municipality } });
+  if (existing === 0) await ensureFreshNewsWithin(municipality, 8000);
+  else void ensureFreshNews(municipality);
+
+  const news = await prisma.news.findMany({ where: { municipality }, orderBy: { publishedAt: "desc" }, take });
+  // `syncing`: la primera descarga sigue en curso; el cliente puede volver a consultar en unos segundos.
+  const syncing = !!state.__newsSyncByMunicipality?.get(municipality)?.running;
+  return { municipality, news, source: newsSourceFor(municipality), syncing };
+}
+
+/** Espera la sincronización como máximo `ms` (para no demorar la respuesta si el portal es lento). */
+export async function ensureFreshNewsWithin(municipality: string, ms: number) {
+  await Promise.race([ensureFreshNews(municipality), new Promise((resolve) => setTimeout(resolve, ms))]);
 }

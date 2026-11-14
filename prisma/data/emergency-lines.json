@@ -1,0 +1,4718 @@
+[
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Agua de Dios",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 887 7349",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Agua de Dios",
+  "name": "Hospital / urgencias",
+  "detail": "Sanatorio de Agua de Dios – urgencias",
+  "phone": "601 834 5000 ext. 1111",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Agua de Dios",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud Johan",
+  "phone": "320 333 4150",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Agua de Dios",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Agua de Dios",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Albán",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Albán",
+  "name": "Hospital / urgencias",
+  "detail": "Puesto de Salud Albán (ESE San Rafael de Facatativá)",
+  "phone": "601 846 9197",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Albán",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Albán",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Anapoima",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0775",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Anapoima",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "313 387 9354",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Anapoima",
+  "name": "Hospital / urgencias",
+  "detail": "Sede ESE Pedro León Álvarez Díaz",
+  "phone": "317 260 1556",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Anapoima",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Anapoima",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Anolaima",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0775",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Anolaima",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "322 348 2379",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Anolaima",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Anolaima",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Apulo",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "313 248 5320",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Apulo",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Apulo",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Arbeláez",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "311 892 3216",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Arbeláez",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Arbeláez",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Beltrán",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "319 213 7543",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Beltrán",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Beltrán",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Bituima",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "312 210 4944",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Bituima",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Bituima",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Bojacá",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Bojacá",
+  "name": "Tránsito",
+  "detail": "Sede operativa El Rosal – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Bojacá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Bojacá",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "316 408 6611",
+  "icon": "👪",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Bojacá",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "315 501 7961",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cabrera",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 390 6439",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cabrera",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "321 965 9133 / 322 348 9881",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cabrera",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cabrera",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cachipay",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0789",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cachipay",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "322 348 4820",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cachipay",
+  "name": "Hospital / urgencias",
+  "detail": "Sede ESE Pedro León Álvarez Díaz",
+  "phone": "317 260 1556",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cachipay",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cachipay",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cajicá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "313 889 0931",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cajicá",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "317 222 9119",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cajicá",
+  "name": "Hospital / urgencias",
+  "detail": "Hospital Profesor Jorge Cavelier",
+  "phone": "601 866 4949 ext. 1011",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cajicá",
+  "name": "Hospital / urgencias",
+  "detail": "ambulancia",
+  "phone": "310 669 7196",
+  "icon": "🏥",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cajicá",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cajicá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cajicá",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "317 369 5628",
+  "icon": "👪",
+  "order": 6
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Caparrapí",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "316 618 7700",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Caparrapí",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "320 260 8679",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Caparrapí",
+  "name": "Tránsito",
+  "detail": "Sede operativa Puerto Salgar – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Caparrapí",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cáqueza",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "313 610 9285",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cáqueza",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "320 302 4992",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cáqueza",
+  "name": "Bomberos",
+  "detail": "Sin dato oficial publicado",
+  "phone": "123",
+  "icon": "🚒",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cáqueza",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Rafael",
+  "phone": "601 794 4394",
+  "icon": "🏥",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cáqueza",
+  "name": "Hospital / urgencias",
+  "detail": "referencia",
+  "phone": "311 811 0122",
+  "icon": "🏥",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cáqueza",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cáqueza",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 6
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Carmen de Carupa",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3595",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Carmen de Carupa",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Carmen de Carupa",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chaguaní",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "314 690 7706",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chaguaní",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chaguaní",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chía",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chía",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chía",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chipaque",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "312 572 2029",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chipaque",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE Cáqueza)",
+  "phone": "312 683 7392",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chipaque",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chipaque",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Choachí",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "310 320 9874",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Choachí",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Choachí",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chocontá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "312 467 7524",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chocontá",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "320 302 8825",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chocontá",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Martín de Porres",
+  "phone": "601 856 2202 / 601 856 1301 / 311 803 2447",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chocontá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chocontá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Chocontá",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "322 457 9469",
+  "icon": "👪",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cogua",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cogua",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cogua",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cota",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "310 875 1525",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cota",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "322 910 0092 / 601 864 0114",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cota",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud",
+  "phone": "601 864 0372",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cota",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Defensa Civil",
+  "phone": "323 335 7817",
+  "icon": "⛑️",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cota",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Gestión del Riesgo",
+  "phone": "313 458 5610",
+  "icon": "⛑️",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cota",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cota",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 6
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cucunubá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3596",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cucunubá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Cucunubá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Colegio",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0781",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Colegio",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "312 354 2750",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Colegio",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Colegio",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Peñón",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3585",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Peñón",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Peñón",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Rosal",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Rosal",
+  "name": "Tránsito",
+  "detail": "Sede operativa El Rosal – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Rosal",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Rosal",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "333 267 5671",
+  "icon": "👪",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "El Rosal",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "321 982 8617",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "318 708 0320",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Cuadrante Facatativá",
+  "phone": "350 819 1680",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "CAI Santa Rita",
+  "phone": "321 815 4212",
+  "icon": "🚔",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "CAI San Benito",
+  "phone": "313 819 7678",
+  "icon": "🚔",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "CAI Tisquesusa",
+  "phone": "321 814 2980",
+  "icon": "🚔",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Subestación Cartagenita",
+  "phone": "312 527 0407",
+  "icon": "🚔",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Cuadrante Cartagenita",
+  "phone": "350 819 1681",
+  "icon": "🚔",
+  "order": 6
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Rafael",
+  "phone": "601 890 1915 / 601 891 0319",
+  "icon": "🏥",
+  "order": 7
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Tránsito",
+  "detail": "Secretaría de Tránsito municipal",
+  "phone": "318 804 4357",
+  "icon": "🚦",
+  "order": 8
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Facatativá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 9
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fómeque",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 216 2329",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fómeque",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Vicente de Paúl",
+  "phone": "601 241 1420",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fómeque",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fómeque",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fosca",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "320 210 9892",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fosca",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fosca",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Funza",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Funza",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Funza",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Funza",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección Primera de Policía",
+  "phone": "601 821 9175 / 350 299 1022",
+  "icon": "👪",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Funza",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría Primera de Familia",
+  "phone": "601 825 8264",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fúquene",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3597",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fúquene",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE El Salvador Ubaté)",
+  "phone": "322 435 5125",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fúquene",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud Capellanía",
+  "phone": "310 246 6627",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fúquene",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fúquene",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fusagasugá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 6110",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fusagasugá",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "320 302 3715",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fusagasugá",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Fusagasugá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachalá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 2341",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachalá",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "321 441 9292",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachalá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachalá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachancipá",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachancipá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachancipá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachetá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "320 296 5132",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachetá",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "320 301 3651",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachetá",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "322 348 7376",
+  "icon": "🚒",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachetá",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Francisco – urgencias 24 h",
+  "phone": "318 312 5767",
+  "icon": "🏥",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachetá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gachetá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gama",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3636",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gama",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "317 317 7999",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gama",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gama",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Girardot",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 390 6771",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Girardot",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "320 304 8040",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Girardot",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Girardot",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Granada",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 425 2996",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Granada",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sibaté – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Granada",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guachetá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3600",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guachetá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guachetá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guachetá",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "312 450 5986",
+  "icon": "👪",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guachetá",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "310 503 8017",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guaduas",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "311 209 6010",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guaduas",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "601 841 6479 / 313 444 2378",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guaduas",
+  "name": "Hospital / urgencias",
+  "detail": "Hospital San José",
+  "phone": "312 305 1242 / 312 305 3729",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guaduas",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guaduas",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guasca",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guasca",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "313 367 3103",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guasca",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guasca",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guataquí",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0768",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guataquí",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guataquí",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guatavita",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "320 343 4789",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guatavita",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guatavita",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guayabal de Síquima",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "312 467 3207",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guayabal de Síquima",
+  "name": "Hospital / urgencias",
+  "detail": "Puesto de Salud Síquima (ESE Facatativá)",
+  "phone": "601 846 3684",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guayabal de Síquima",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guayabal de Síquima",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guayabetal",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "313 399 5002",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guayabetal",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE Cáqueza)",
+  "phone": "312 690 0405",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guayabetal",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Guayabetal",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gutiérrez",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 391 6710",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gutiérrez",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "312 329 3000",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gutiérrez",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE Cáqueza)",
+  "phone": "320 846 3281",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gutiérrez",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Gutiérrez",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Jerusalén",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "316 828 5031",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Jerusalén",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE Tocaima)",
+  "phone": "320 484 3694",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Jerusalén",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Jerusalén",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Junín",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "312 485 0249",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Junín",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "320 903 6482",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Junín",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Junín",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Calera",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Calera",
+  "name": "Hospital / urgencias",
+  "detail": "Sede La Calera (ESE Hospital Divino Salvador)",
+  "phone": "601 875 4030 / 317 385 6995 / 311 733 1356",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Calera",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Calera",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Calera",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "601 875 4077 ext. 1120",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Mesa",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0782",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Mesa",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "320 301 6173",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Mesa",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital Pedro León Álvarez Díaz",
+  "phone": "601 387 8724",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Mesa",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Mesa",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Palma",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3586",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Palma",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Palma",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Peña",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "312 436 1290",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Peña",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Peña",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Peña",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "350 275 7701",
+  "icon": "👪",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Peña",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "310 301 2097",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "310 549 5527",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Policía La Vega (línea adicional)",
+  "phone": "322 348 2367",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Estación de Policía El Vino",
+  "phone": "322 348 2383",
+  "icon": "🚔",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "313 318 9690",
+  "icon": "🚒",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital de La Vega – urgencias",
+  "phone": "316 331 8097",
+  "icon": "🏥",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Defensa Civil",
+  "phone": "313 313 4978",
+  "icon": "⛑️",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Cruz Roja",
+  "phone": "313 494 2748",
+  "icon": "⛑️",
+  "order": 6
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 7
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 8
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "311 441 2592",
+  "icon": "👪",
+  "order": 9
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "La Vega",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "322 305 7892",
+  "icon": "👪",
+  "order": 10
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Lenguazaque",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3601",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Lenguazaque",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE El Salvador Ubaté)",
+  "phone": "310 246 3384",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Lenguazaque",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Lenguazaque",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Lenguazaque",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "314 253 6734",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Machetá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "300 725 2971",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Machetá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Machetá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Madrid",
+  "name": "Policía – Estación",
+  "detail": "Estación zona centro",
+  "phone": "601 828 2000 / 601 825 0005",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Madrid",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "321 380 0353 / 313 322 4811 / 601 747 0306",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Madrid",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital Santa Matilde – urgencias",
+  "phone": "320 301 6063",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Madrid",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Defensa Civil",
+  "phone": "311 505 0742 / 322 348 6083",
+  "icon": "⛑️",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Madrid",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Madrid",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Manta",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "317 737 5704",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Manta",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Manta",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Medina",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 400 8938",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Medina",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "320 303 0658",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Medina",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "313 322 8863",
+  "icon": "🚒",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Medina",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Medina",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Mosquera",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Mosquera",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "601 827 8666 / 311 209 1084",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Mosquera",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Mosquera",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nariño",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 375 7492",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nariño",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nariño",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nemocón",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nemocón",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Vicente de Paúl – urgencias",
+  "phone": "301 252 5349",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nemocón",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nemocón",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nemocón",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "310 301 3363",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nemocón",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "317 371 8401",
+  "icon": "👪",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nilo",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "301 542 7799",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nilo",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "321 325 5344 / 310 589 5640",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nilo",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nilo",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nimaima",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "318 348 1684",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nimaima",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "312 540 4846",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nimaima",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nimaima",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nocaima",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "314 296 4920",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nocaima",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "313 321 0469 / 313 870 2860",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nocaima",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Nocaima",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pacho",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3587",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pacho",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "321 394 9255",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pacho",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Rafael",
+  "phone": "601 854 0055 / 601 854 0185 / 314 334 5223",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pacho",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pacho",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Paime",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3588",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Paime",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Paime",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pandi",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 424 7887",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pandi",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "320 854 8671",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pandi",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pandi",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Paratebueno",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "314 264 4385",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Paratebueno",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "321 426 3601",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Paratebueno",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Paratebueno",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pasca",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 339 0757",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pasca",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sibaté – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pasca",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Puerto Salgar",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 2390",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Puerto Salgar",
+  "name": "Tránsito",
+  "detail": "Sede operativa Puerto Salgar – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Puerto Salgar",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pulí",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 948 5059",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pulí",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Pulí",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quebradanegra",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "314 315 8180",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quebradanegra",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "322 348 9887 / 311 873 6252",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quebradanegra",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quebradanegra",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quetame",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "313 825 9482",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quetame",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE Cáqueza)",
+  "phone": "323 220 9014",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quetame",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quetame",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quipile",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "316 422 0500",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quipile",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Quipile",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ricaurte",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0773",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ricaurte",
+  "name": "Bomberos",
+  "detail": "Atendido por Bomberos de San Antonio del Tequendama – Subestación Ricaurte (sin teléfono publicado)",
+  "phone": "",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ricaurte",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ricaurte",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Antonio del Tequendama",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0786",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Antonio del Tequendama",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "314 461 0541",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Antonio del Tequendama",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Antonio",
+  "phone": "350 581 7252",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Antonio del Tequendama",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Antonio del Tequendama",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Bernardo",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 339 0758",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Bernardo",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Bernardo",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Cayetano",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3589",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Cayetano",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Cayetano",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Francisco",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "320 309 7406",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Francisco",
+  "name": "Tránsito",
+  "detail": "Sede operativa El Rosal – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Francisco",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Juan de Rioseco",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "314 294 0840",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Juan de Rioseco",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "320 302 7509",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Juan de Rioseco",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Vicente de Paúl",
+  "phone": "601 846 5040 / 601 846 5016 / 321 214 2556",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Juan de Rioseco",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "San Juan de Rioseco",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sasaima",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "310 251 6091",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sasaima",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sasaima",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sesquilé",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "314 317 8251",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sesquilé",
+  "name": "Hospital / urgencias",
+  "detail": "Hospital San Antonio – urgencias 24 h",
+  "phone": "311 230 5230",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sesquilé",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sesquilé",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sibaté",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sibaté",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sibaté – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sibaté",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sibaté",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "601 529 7107",
+  "icon": "👪",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sibaté",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "601 529 5158",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Silvania",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 339 0760",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Silvania",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "304 243 4618",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Silvania",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Silvania",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Simijaca",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3602",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Simijaca",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE El Salvador Ubaté)",
+  "phone": "310 245 1703",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Simijaca",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Simijaca",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Soacha",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Soacha",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Soacha",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sopó",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "601 857 0104 / 315 865 1366",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sopó",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Policía de Infancia y Adolescencia",
+  "phone": "322 348 6066 / 322 348 4853",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sopó",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "314 376 5845",
+  "icon": "🚒",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sopó",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital Divino Salvador",
+  "phone": "601 857 1313",
+  "icon": "🏥",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sopó",
+  "name": "Hospital / urgencias",
+  "detail": "ambulancia",
+  "phone": "316 830 8100",
+  "icon": "🏥",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sopó",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sopó",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 6
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sopó",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "601 857 2488 / 318 833 2624 / 318 820 2254",
+  "icon": "👪",
+  "order": 7
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Subachoque",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Subachoque",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE Facatativá)",
+  "phone": "601 843 4855",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Subachoque",
+  "name": "Tránsito",
+  "detail": "Sede operativa El Rosal – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Subachoque",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Suesca",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "350 772 2100",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Suesca",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital – urgencias",
+  "phone": "312 386 5802",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Suesca",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Suesca",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Suesca",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "317 656 6671",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Suesca",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "321 463 0668",
+  "icon": "👪",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Supatá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3591",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Supatá",
+  "name": "Tránsito",
+  "detail": "Sede operativa El Rosal – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Supatá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Susa",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3603",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Susa",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE El Salvador Ubaté)",
+  "phone": "310 245 5945",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Susa",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Susa",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sutatausa",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3604",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sutatausa",
+  "name": "Hospital / urgencias",
+  "detail": "Centro de Salud (ESE El Salvador Ubaté)",
+  "phone": "310 245 3773",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sutatausa",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Sutatausa",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tabio",
+  "name": "Policía – Estación",
+  "detail": "CAI de la Variante",
+  "phone": "350 557 6524",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tabio",
+  "name": "Tránsito",
+  "detail": "Sede operativa Tenjo – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tabio",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tabio",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "601 514 5878 ext. 2311",
+  "icon": "👪",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tabio",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "601 514 5878 ext. 2312",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tausa",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "310 814 8015",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tausa",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tausa",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tena",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0789",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tena",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Policía La Gran Vía",
+  "phone": "313 455 0165",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tena",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "312 524 6405",
+  "icon": "🚒",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tena",
+  "name": "Hospital / urgencias",
+  "detail": "Sede ESE Pedro León Álvarez Díaz",
+  "phone": "317 260 1556",
+  "icon": "🏥",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tena",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Gestión del Riesgo",
+  "phone": "311 514 6367",
+  "icon": "⛑️",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tena",
+  "name": "Tránsito",
+  "detail": "Sede operativa La Mesa – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tena",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 6
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tena",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "311 514 6370",
+  "icon": "👪",
+  "order": 7
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tena",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Inspección de Policía",
+  "phone": "324 559 1067",
+  "icon": "👪",
+  "order": 8
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tenjo",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "317 391 9030 / 315 467 1626",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tenjo",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Estación de Policía La Punta",
+  "phone": "316 779 8267",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tenjo",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "304 344 0847",
+  "icon": "🚒",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tenjo",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital Santa Rosa – urgencias",
+  "phone": "310 854 8104",
+  "icon": "🏥",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tenjo",
+  "name": "Hospital / urgencias",
+  "detail": null,
+  "phone": "601 864 6415",
+  "icon": "🏥",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tenjo",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Defensa Civil",
+  "phone": "313 289 3315",
+  "icon": "⛑️",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tenjo",
+  "name": "Tránsito",
+  "detail": "Sede operativa Tenjo – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 6
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tenjo",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 7
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tenjo",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "315 278 2984 / 315 295 2326",
+  "icon": "👪",
+  "order": 8
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tibacuy",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 390 0761",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tibacuy",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tibacuy",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tibirita",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "320 870 5040",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tibirita",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Policía (línea publicada por la alcaldía)",
+  "phone": "321 903 4425",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tibirita",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tibirita",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocaima",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 374 6205",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocaima",
+  "name": "Policía – CAI y otras unidades",
+  "detail": "Estación de Policía (celular publicado por la alcaldía)",
+  "phone": "321 948 2614",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocaima",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "313 325 4126 / 311 838 8495",
+  "icon": "🚒",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocaima",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital Marco Felipe Afanador – urgencias",
+  "phone": "311 221 7139",
+  "icon": "🏥",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocaima",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocaima",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocancipá",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocancipá",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Línea de emergencia municipal",
+  "phone": "316 909 0901",
+  "icon": "⛑️",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocancipá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Tocancipá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Topaipí",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3592",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Topaipí",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Topaipí",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Topaipí",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "312 578 0587",
+  "icon": "👪",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubalá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3638",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubalá",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "321 441 9292",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubalá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubalá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaque",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "320 491 8868",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaque",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "322 328 0013 / 322 348 7371",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaque",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaque",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaque",
+  "name": "Comisaría de Familia / Inspección",
+  "detail": "Comisaría de Familia",
+  "phone": "317 839 8311",
+  "icon": "👪",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaté",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3607",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaté",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "601 855 1019 / 320 985 2095",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaté",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital El Salvador",
+  "phone": "601 855 2212 / 320 999 0265",
+  "icon": "🏥",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaté",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Ubaté",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Une",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "317 844 6509",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Une",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "321 939 0779 / 321 272 3132",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Une",
+  "name": "Tránsito",
+  "detail": "Sede operativa Cáqueza – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Une",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Útica",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 480 4989",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Útica",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "311 490 6918",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Útica",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Útica",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Venecia",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "311 586 1858",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Venecia",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Venecia",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Vergara",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 246 7306",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Vergara",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Vergara",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Vianí",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 246 8920",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Vianí",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Vianí",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villagómez",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3593",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villagómez",
+  "name": "Tránsito",
+  "detail": "Sede operativa Sesquilé – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villagómez",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villapinzón",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "311 571 2054",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villapinzón",
+  "name": "Tránsito",
+  "detail": "Sede operativa Chocontá – Secretaría de Movilidad de Cundinamarca",
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villapinzón",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villeta",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "313 273 1717",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villeta",
+  "name": "Policía – CAI y otras unidades",
+  "detail": null,
+  "phone": "320 308 3680",
+  "icon": "🚔",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villeta",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "310 219 6747",
+  "icon": "🚒",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villeta",
+  "name": "Tránsito",
+  "detail": "Sede operativa Villeta – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Villeta",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Viotá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "321 939 0791",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Viotá",
+  "name": "Hospital / urgencias",
+  "detail": "ESE Hospital San Francisco – urgencias",
+  "phone": "322 285 7395",
+  "icon": "🏥",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Viotá",
+  "name": "Tránsito",
+  "detail": "Sede operativa Ricaurte – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Viotá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Yacopí",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "322 348 3594",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Yacopí",
+  "name": "Tránsito",
+  "detail": "Sede operativa Puerto Salgar – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Yacopí",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipacón",
+  "name": "Policía – Estación",
+  "detail": "Sin número propio publicado: la línea 123 enruta tu llamada",
+  "phone": "123",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipacón",
+  "name": "Tránsito",
+  "detail": "Sede operativa El Rosal – Secretaría de Movilidad de Cundinamarca (conmutador Gobernación)",
+  "phone": "601 749 0000",
+  "icon": "🚦",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipacón",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipaquirá",
+  "name": "Policía – Estación",
+  "detail": null,
+  "phone": "320 850 2950 / 313 452 6468",
+  "icon": "🚓",
+  "order": 0
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipaquirá",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "311 482 8992 / 601 852 3844 / 601 852 5503",
+  "icon": "🚒",
+  "order": 1
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipaquirá",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Cruz Roja",
+  "phone": "305 800 6282",
+  "icon": "⛑️",
+  "order": 2
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipaquirá",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Defensa Civil",
+  "phone": "321 939 0784",
+  "icon": "⛑️",
+  "order": 3
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipaquirá",
+  "name": "Gestión del riesgo y socorro",
+  "detail": "Ejército Nacional",
+  "phone": "310 666 7092",
+  "icon": "⛑️",
+  "order": 4
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipaquirá",
+  "name": "Tránsito",
+  "detail": "Organismo de tránsito municipal (teléfono no publicado en la fuente consultada)",
+  "phone": "",
+  "icon": "🚦",
+  "order": 5
+ },
+ {
+  "scope": "MUNICIPAL",
+  "municipality": "Zipaquirá",
+  "name": "Tránsito",
+  "detail": "Policía de Tránsito",
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 6
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Línea única de atención de emergencias (Policía, ambulancia, bomberos)",
+  "detail": null,
+  "phone": "123",
+  "icon": "🆘",
+  "order": 0
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Policía Nacional",
+  "detail": null,
+  "phone": "112",
+  "icon": "🚓",
+  "order": 1
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Bomberos",
+  "detail": null,
+  "phone": "119",
+  "icon": "🚒",
+  "order": 2
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Cruz Roja Colombiana",
+  "detail": null,
+  "phone": "132",
+  "icon": "⛑️",
+  "order": 3
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Defensa Civil Colombiana",
+  "detail": null,
+  "phone": "144",
+  "icon": "🦺",
+  "order": 4
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "GAULA Policía – antisecuestro y antiextorsión",
+  "detail": null,
+  "phone": "165",
+  "icon": "🛡️",
+  "order": 5
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "GAULA Ejército Nacional",
+  "detail": null,
+  "phone": "147",
+  "icon": "🪖",
+  "order": 6
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Seguridad vial – Policía de Tránsito y Transporte",
+  "detail": null,
+  "phone": "#767",
+  "icon": "🚦",
+  "order": 7
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Orientación y atención a mujeres víctimas de violencia",
+  "detail": null,
+  "phone": "155",
+  "icon": "💜",
+  "order": 8
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "ICBF – atención a niños, niñas y adolescentes",
+  "detail": null,
+  "phone": "141",
+  "icon": "🧒",
+  "order": 9
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Antinarcóticos",
+  "detail": null,
+  "phone": "167",
+  "icon": "🚫",
+  "order": 10
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Anticontrabando",
+  "detail": null,
+  "phone": "159",
+  "icon": "📦",
+  "order": 11
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Anticorrupción – Policía Nacional",
+  "detail": null,
+  "phone": "157",
+  "icon": "⚖️",
+  "order": 12
+ },
+ {
+  "scope": "NACIONAL",
+  "municipality": "Colombia",
+  "name": "Transparencia institucional",
+  "detail": null,
+  "phone": "166",
+  "icon": "🔎",
+  "order": 13
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Línea de Emergencia de Cundinamarca – UAEGRD",
+  "detail": null,
+  "phone": "601 749 1420",
+  "icon": "🆘",
+  "order": 0
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Centro de Información y Comunicaciones (CIC) – UAEGRD",
+  "detail": null,
+  "phone": "313 323 1888",
+  "icon": "🆘",
+  "order": 1
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Unidad Administrativa Especial para la Gestión del Riesgo de Desastres (UAEGRD)",
+  "detail": null,
+  "phone": "313 323 1213 / 322 348 4880 / 322 348 4870",
+  "icon": "🆘",
+  "order": 2
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Centro Regulador de Urgencias y Emergencias (CRUE) Cundinamarca",
+  "detail": null,
+  "phone": "601 749 1728 / 601 749 1720 / 315 298 7268",
+  "icon": "🚑",
+  "order": 3
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Departamento de Policía Cundinamarca",
+  "detail": null,
+  "phone": "601 596 8686",
+  "icon": "🚓",
+  "order": 4
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Defensa Civil Colombiana – Seccional Cundinamarca",
+  "detail": null,
+  "phone": "601 420 2181",
+  "icon": "🦺",
+  "order": 5
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Cruz Roja Colombiana – Seccional Bogotá-Cundinamarca",
+  "detail": null,
+  "phone": "601 746 0909",
+  "icon": "⛑️",
+  "order": 6
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "CAR Cundinamarca – Gestión del Riesgo",
+  "detail": null,
+  "phone": "601 580 1111 ext. 1012",
+  "icon": "🌳",
+  "order": 7
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Dirección Nacional de Bomberos",
+  "detail": null,
+  "phone": "601 634 6342",
+  "icon": "🚒",
+  "order": 8
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Secretaría de Movilidad de Cundinamarca (tránsito departamental)",
+  "detail": "línea gratuita",
+  "phone": "601 749 0000 / 601 749 1221",
+  "icon": "🚦",
+  "order": 9
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Sede operativa de tránsito Chocontá",
+  "detail": null,
+  "phone": "318 586 3485",
+  "icon": "🚦",
+  "order": 10
+ },
+ {
+  "scope": "DEPARTAMENTAL",
+  "municipality": "Cundinamarca",
+  "name": "Gobernación de Cundinamarca – Secretaría de Salud (conmutador)",
+  "detail": null,
+  "phone": "601 749 0000",
+  "icon": "🏥",
+  "order": 11
+ }
+]

@@ -175,12 +175,19 @@ model News {
 }
 
 model EmergencyContact {
-  id           String @id @default(cuid())
+  id           String  @id @default(cuid())
+  /// MUNICIPAL (de un municipio), DEPARTAMENTAL (Cundinamarca) o NACIONAL (Colombia).
+  scope        String  @default("MUNICIPAL")
   name         String
+  /// Entidad o aclaración (p. ej. "CAI Santa Rita", "Sede operativa Villeta…").
+  detail       String?
+  /// Uno o varios números separados por " / " (puede incluir "ext. 1234" o códigos como "#767"). Vacío = solo informativo.
   phone        String
-  icon         String @default("📞")
-  municipality String @default("Mosquera")
-  order        Int    @default(0)
+  icon         String  @default("📞")
+  municipality String  @default("Mosquera")
+  order        Int     @default(0)
+
+  @@index([municipality])
 }
 
 /// CundiEspacios. offerType: RENT | SALE | SWAP. status: ACTIVE | RESERVED | CLOSED

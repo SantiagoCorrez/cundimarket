@@ -29,7 +29,7 @@ async function pingServer() {
  * está caído, reenvía las acciones pendientes al volver y descarga lo esencial para uso sin conexión.
  */
 export function ConnectivityProvider({ children }: { children: ReactNode }) {
-  const { user } = useAuth();
+  const { user, municipality } = useAuth();
   const userId = user?.id ?? null;
   const snapshot = useConnectivity();
 
@@ -62,19 +62,19 @@ export function ConnectivityProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     return connectivity.onRecover(() => {
       if (userId) void flushOutbox(userId);
-      void prefetchEssentials(userId);
+      void prefetchEssentials(userId, municipality);
     });
-  }, [userId]);
+  }, [userId, municipality]);
 
-  // Al iniciar o cambiar de usuario: contar pendientes, enviarlos y precargar.
+  // Al iniciar, cambiar de usuario o de municipio: contar pendientes, enviarlos y precargar.
   useEffect(() => {
     void (async () => {
       await refreshPending(userId);
       if (!connectivity.getSnapshot().online) return;
       if (userId) await flushOutbox(userId);
-      void prefetchEssentials(userId);
+      void prefetchEssentials(userId, municipality);
     })();
-  }, [userId]);
+  }, [userId, municipality]);
 
   // Reintenta periódicamente si quedaron acciones pendientes que fallaron por un error del servidor.
   useEffect(() => {

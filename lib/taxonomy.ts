@@ -135,6 +135,13 @@ export const MUNICIPALITIES = [
   ...CUNDINAMARCA_MUNICIPALITIES.filter((m) => m !== PILOT_MUNICIPALITY),
 ];
 
+/** Devuelve el municipio si es uno de Cundinamarca; si no, `fallback` (o el habilitado). */
+export function normalizeMunicipality(value: string | null | undefined, fallback?: string | null) {
+  if (value && MUNICIPALITIES.includes(value)) return value;
+  if (fallback && MUNICIPALITIES.includes(fallback)) return fallback;
+  return PILOT_MUNICIPALITY;
+}
+
 /**
  * Municipio permitido para publicar (negocios, empleos, servicios, inmuebles): solo los habilitados.
  * `keep` conserva el valor actual al editar una publicación antigua de otro municipio.

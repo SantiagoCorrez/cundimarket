@@ -32,8 +32,16 @@ export function whatsappLink(phone: string, message?: string) {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
+/** Enlace tel: para UN número. Soporta extensiones ("601 749 0000 ext. 12" → pausa) y códigos como "#767". */
 export function telLink(phone: string) {
-  return `tel:${phone.replace(/[^\d+]/g, "")}`;
+  const [main, ext] = phone.split(/\s*ext\.?\s*/i);
+  const number = main.replace(/[^\d+#]/g, "").replace(/#/g, "%23");
+  return `tel:${number}${ext ? `,${ext.replace(/\D/g, "")}` : ""}`;
+}
+
+/** Separa un campo con varios teléfonos ("601 827 8666 / 311 209 1084"). */
+export function splitPhones(phone: string) {
+  return phone.split(/\s*\/\s*/).map((p) => p.trim()).filter(Boolean);
 }
 
 /** Determina si un horario de texto sugiere "abierto ahora" (heurística simple). */
