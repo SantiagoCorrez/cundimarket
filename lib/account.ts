@@ -26,6 +26,8 @@ export async function deleteUserAccount(userId: string) {
   if (account?.appleRefreshToken) await revokeAppleAccess(account.appleRefreshToken);
 
   await prisma.user.delete({ where: { id: userId } });
+  // Los avisos que otros recibieron por sus postulaciones llevan su nombre: también se borran.
+  await prisma.notification.deleteMany({ where: { dedupeKey: { startsWith: "application:", endsWith: `:${userId}` } } });
 
   const businessIds = new Set(ratings.map((r) => r.businessId).filter((id): id is string => !!id));
   const providerIds = new Set(ratings.map((r) => r.providerId).filter((id): id is string => !!id));

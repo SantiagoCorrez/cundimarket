@@ -190,3 +190,30 @@ export type HomeFeed = {
   promos: Promotion[];
   news: News[];
 };
+
+export type AppNotification = {
+  id: string;
+  type: string;
+  title: string;
+  body: string;
+  /** Ruta interna de la web (ver utils/notification-route.ts). */
+  href: string;
+  readAt: string | null;
+  createdAt: string;
+};
+
+export type Applicant = {
+  id: string;
+  appliedAt: string | null;
+  viewedAt: string | null;
+  user: {
+    name: string;
+    email: string;
+    phone: string | null;
+    municipality: string;
+    avatarUrl: string | null;
+    candidate: { experience: string | null; skills: string | null; education: string | null; cvUrl?: string | null } | null;
+  };
+};
+
+export type ApplicantsJob = { id: string; title: string; companyName: string };

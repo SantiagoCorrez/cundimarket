@@ -130,6 +130,12 @@ export default function PrivacidadPage() {
             cuenta e iniciar sesión.
           </li>
           <li>
+            <b>Empleadores:</b> si te postulas a una vacante, quien la publicó (y nadie más) puede ver tu
+            nombre, foto, municipio, teléfono, correo y perfil laboral, incluida la hoja de vida si la
+            adjuntaste, solo para ese proceso de selección. Deja de verlos si retiras la postulación o
+            eliminas tu cuenta.
+          </li>
+          <li>
             <b>Administradores de {LEGAL.brand}:</b> acceden a la información necesaria para
             verificar negocios, atender reportes y brindar soporte.
           </li>
@@ -162,6 +168,11 @@ export default function PrivacidadPage() {
           <li>
             <b>Inicio de sesión con Google y Apple:</b> si eliges esta opción, Google o Apple verifican
             tu identidad y se rigen por sus propias políticas de privacidad.
+          </li>
+          <li>
+            <b>Notificaciones push (opcionales):</b> si las permites, guardamos un identificador de tu
+            dispositivo y los avisos se envían por medio de Expo, Apple y Google. No incluyen datos
+            personales de otras personas.
           </li>
           <li>
             <b>Tiendas de aplicaciones:</b> Apple App Store y Google Play distribuyen la app y

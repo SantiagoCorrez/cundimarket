@@ -37,6 +37,21 @@ npm run news:sync      # opcional: primera carga inmediata de las noticias de la
 > ⚠️ **No ejecutes `npm run db:seed` en producción**: el seed borra todas las tablas
 > (usuarios, comercios, reportes…) antes de cargar los datos de ejemplo.
 
+## Postulaciones y notificaciones
+
+Al postularse a una vacante (`lib/applications.ts`), el empleador recibe un aviso en la web
+(`/notificaciones`), en la app y por push, y puede revisar el perfil en
+`/empleo/[id]/postulaciones`. Solo quien publicó la vacante ve a los postulantes (un administrador
+no); la app no guarda esos datos en el dispositivo. Retirar la postulación oculta el perfil.
+
+**Push** (`lib/notifications.ts`, vía el servicio de Expo; sin esto los avisos igual se ven dentro de
+la app). Requiere un build nativo nuevo y:
+- **Android**: proyecto de Firebase con la app `co.cundimarket.app`; guarda `google-services.json` en
+  `mobile/` (`app.config.js` lo usa si existe) y sube la llave de cuenta de servicio (FCM V1) con
+  `npx eas-cli credentials`.
+- **iOS**: en el primer `eas build` acepta generar la llave de notificaciones push (APNs).
+- Opcional: `EXPO_ACCESS_TOKEN` en el `.env` del servidor, si activas tokens de acceso en Expo.
+
 ## Inicio de sesión con Google
 
 Web (Google Identity Services) y app (`@react-native-google-signin/google-signin`). El cliente

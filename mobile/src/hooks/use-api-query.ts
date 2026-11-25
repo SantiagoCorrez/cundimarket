@@ -11,25 +11,27 @@ type Result<T> = { path: string; data: T | null; failed: boolean; version: strin
  * - `data` solo contiene datos de la ruta actual (nunca los de una ruta anterior).
  * - `failed` es true si no se pudo cargar y tampoco hay copia guardada.
  * - Pasa `null` para no pedir nada todavía.
+ * - `cache: false` no guarda ni usa la copia sin conexión (para datos personales de otras personas).
  * - `refreshOnFocus` vuelve a pedir los datos al regresar a la pantalla (p. ej. tras editar o eliminar).
  */
-export function useApiQuery<T>(path: string | null, options?: { refreshOnFocus?: boolean }) {
+export function useApiQuery<T>(path: string | null, options?: { refreshOnFocus?: boolean; cache?: boolean }) {
   const tick = useReconnectTick();
   const [attempt, setAttempt] = useState(0);
   const [result, setResult] = useState<Result<T> | null>(null);
   const version = `${tick}:${attempt}`;
+  const cache = options?.cache !== false;
 
   useEffect(() => {
     if (!path) return;
     let cancelled = false;
     api
-      .get<T>(path)
+      .get<T>(path, { cache })
       .then((data) => !cancelled && setResult({ path, data, failed: false, version }))
       .catch(() => !cancelled && setResult((prev) => ({ path, data: prev?.path === path ? prev.data : null, failed: true, version })));
     return () => {
       cancelled = true;
     };
-  }, [path, version]);
+  }, [path, version, cache]);
 
   const reload = useCallback(() => setAttempt((n) => n + 1), []);
 

@@ -7,6 +7,8 @@ import { Badge, VerifiedBadge, Card } from "@/components/ui";
 import { ReportButton } from "@/components/business-interactions";
 import { whatsappLink, telLink, formatCOP } from "@/lib/utils";
 import { directionsUrl } from "@/lib/maps";
+import { OwnerActions } from "@/components/owner-actions";
+import { canManageListing } from "@/lib/listings";
 import { OFFER_TYPES } from "@/lib/taxonomy";
 
 export const dynamic = "force-dynamic";
@@ -16,6 +18,10 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
   const session = await getSession();
   const p = await prisma.property.findUnique({ where: { id }, include: { photos: true } });
   if (!p) notFound();
+
+  // Un inmueble cerrado solo lo ve su dueño (o un administrador).
+  const canManage = !!session && canManageListing(p.userId, session);
+  if (p.status === "CLOSED" && !canManage) notFound();
 
   // Llamar o escribir por WhatsApp es solo para usuarios registrados.
   const gate = `/register?reason=contact&next=${encodeURIComponent(`/espacios/${id}`)}`;
@@ -87,6 +93,17 @@ export default async function PropertyPage({ params }: { params: Promise<{ id: s
           </>
         )}
         {p.stratum && <p className="text-sm text-ink-soft mt-3">Estrato {p.stratum}</p>}
+
+        {canManage && (
+          <div className="-mx-4">
+            <OwnerActions
+              kind="property"
+              id={id}
+              title={`${p.propertyType} · ${formatCOP(p.price)}`}
+              admin={session!.role === "ADMIN" && p.userId !== session!.id}
+            />
+          </div>
+        )}
 
         <div className="mt-5 flex justify-center">
           <ReportButton targetId={id} targetType="PROPERTY" isAuthed={!!session} />

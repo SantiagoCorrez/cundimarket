@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ActivityIndicator, Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { ApiError } from '@/api/client';
 import { setJobState } from '@/api/offline-actions';
 import type { Job } from '@/api/types';
 import { LoadError } from '@/components/load-error';
@@ -20,7 +21,7 @@ export default function JobScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
   const { user } = useAuth();
-  const { data, failed, reload } = useApiQuery<{ job: Job; saved: boolean; applied: boolean; isOwner?: boolean }>(
+  const { data, failed, reload } = useApiQuery<{ job: Job; saved: boolean; applied: boolean; isOwner?: boolean; applicants?: number }>(
     `/api/mobile/empleo/${id}`,
     { refreshOnFocus: true },
   );
@@ -36,16 +37,44 @@ export default function JobScreen() {
     if (!user) return router.push('/login');
     const previous = { saved, applied };
     setOverride({ source: data, ...next });
+    let queued: boolean;
     try {
-      await setJobState(user.id, id, next);
-    } catch {
+      ({ queued } = await setJobState(user.id, id, next));
+    } catch (e) {
       setOverride({ source: data, ...previous });
-      Alert.alert('No se pudo guardar', 'Inténtalo de nuevo en unos segundos.');
+      Alert.alert('No se pudo guardar', e instanceof ApiError ? e.message : 'Inténtalo de nuevo en unos segundos.');
+      return;
+    }
+    if (next.applied && !previous.applied) {
+      Alert.alert(
+        queued ? 'Postulación guardada' : 'Postulación enviada',
+        queued
+          ? 'No tienes conexión: la enviaremos cuando vuelvas a conectarte.'
+          : 'El empleador podrá ver tu perfil laboral y contactarte. Tenlo al día para destacar.',
+        [
+          { text: 'Ahora no', style: 'cancel' },
+          { text: 'Ver mi perfil', onPress: () => router.push('/perfil-laboral') },
+        ],
+      );
     }
   }
 
-  const toggleSave = () => update({ saved: !saved, applied: false });
-  const apply = () => update({ saved: true, applied: true });
+  function toggleSave() {
+    // Quitarla de guardados retira la postulación: se confirma para no hacerlo por accidente.
+    if (!applied) return update({ saved: !saved, applied: false });
+    Alert.alert('Retirar postulación', 'El empleador dejará de ver tu perfil. ¿Quieres retirarla?', [
+      { text: 'Cancelar', style: 'cancel' },
+      { text: 'Retirar', style: 'destructive', onPress: () => update({ saved: false, applied: false }) },
+    ]);
+  }
+
+  function apply() {
+    if (!user) return router.push('/login');
+    Alert.alert('Postularme', 'El empleador verá tu nombre, tus datos de contacto y tu perfil laboral.', [
+      { text: 'Cancelar', style: 'cancel' },
+      { text: 'Postularme', onPress: () => update({ saved: true, applied: true }) },
+    ]);
+  }
 
   if (!job) {
     return (
@@ -54,6 +83,9 @@ export default function JobScreen() {
       </View>
     );
   }
+
+  // El servidor solo envía el número de postulantes a quien publicó la vacante.
+  const isEmployer = data?.applicants !== undefined;
 
   const meta = [
     { icon: 'briefcase', label: 'Empresa', value: job.companyName },
@@ -117,15 +149,24 @@ export default function JobScreen() {
             </Text>
           ) : null}
 
+          {isEmployer ? (
+            <Button
+              size="lg"
+              style={{ marginTop: 24 }}
+              onPress={() => router.push({ pathname: '/postulaciones/[jobId]', params: { jobId: job.id } })}>
+              {`Ver postulantes (${data?.applicants ?? 0})`}
+            </Button>
+          ) : (
           <View style={styles.actions}>
             <Button variant="outline" onPress={toggleSave} style={{ flex: 1 }}>
               <Ionicons name={saved ? 'bookmark' : 'bookmark-outline'} size={18} color={Palette.text} />
               <Text style={{ fontWeight: '700', color: Palette.text }}>{saved ? 'Guardada' : 'Guardar'}</Text>
             </Button>
             <Button onPress={apply} disabled={applied} style={{ flex: 1 }}>
-              {applied ? 'Ya aplicaste' : 'Aplicar'}
+              {applied ? 'Ya te postulaste' : 'Postularme'}
             </Button>
           </View>
+          )}
         </View>
         {data?.isOwner && <OwnerActions kind="job" id={job.id} title={job.title} onChanged={reload} admin={user?.role === 'ADMIN'} />}
         <ReportButton targetType="JOB" targetId={job.id} />

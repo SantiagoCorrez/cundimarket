@@ -25,9 +25,12 @@ export default async function AdminReportsPage() {
   const bizs = await prisma.business.findMany({ where: { id: { in: bizIds } }, select: { id: true, name: true } });
   const bizName = (id: string) => bizs.find((b) => b.id === id)?.name;
 
-  // Vacantes y servicios reportados que todavía existen (para ofrecer "Eliminar publicación")
+  // Vacantes, servicios e inmuebles reportados que todavía existen (para ofrecer "Eliminar publicación")
   const jobIds = new Set(
     (await prisma.job.findMany({ where: { id: { in: reports.filter((r) => r.targetType === "JOB").map((r) => r.targetId) } }, select: { id: true } })).map((j) => j.id),
+  );
+  const propertyIds = new Set(
+    (await prisma.property.findMany({ where: { id: { in: reports.filter((r) => r.targetType === "PROPERTY").map((r) => r.targetId) } }, select: { id: true } })).map((p) => p.id),
   );
   const serviceIds = new Set(
     (await prisma.serviceProvider.findMany({ where: { id: { in: reports.filter((r) => r.targetType === "SERVICE").map((r) => r.targetId) } }, select: { id: true } })).map((s) => s.id),
@@ -71,6 +74,9 @@ export default async function AdminReportsPage() {
                 )}
                 {r.targetType === "JOB" && jobIds.has(r.targetId) && (
                   <DeleteListingButton kind="job" id={r.targetId} title="esta vacante" from="reports" />
+                )}
+                {r.targetType === "PROPERTY" && propertyIds.has(r.targetId) && (
+                  <DeleteListingButton kind="property" id={r.targetId} title="este inmueble" from="reports" />
                 )}
                 {r.targetType === "SERVICE" && serviceIds.has(r.targetId) && (
                   <DeleteListingButton kind="service" id={r.targetId} title="este servicio" from="reports" />

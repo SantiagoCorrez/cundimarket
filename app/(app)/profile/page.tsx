@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Heart, Store, Shield, Bell, Settings, ChevronRight, LogOut, User, Trash2, FileText, ClipboardList } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
+import { unreadNotifications } from "@/lib/notifications";
 import { logoutAction } from "@/lib/actions/auth";
 import { Card, Button, Logo } from "@/components/ui";
 import { BusinessCard } from "@/components/cards";
@@ -43,16 +44,18 @@ export default async function ProfilePage() {
     take: 10,
   });
 
+  const unread = await unreadNotifications(session.id);
+
   const links = [
     session.role === "MERCHANT" && { href: "/merchant", icon: Store, label: "Mi negocio" },
     (session.role === "MERCHANT" || session.role === "ADMIN") && {
       href: "/mis-publicaciones",
       icon: ClipboardList,
-      label: "Mis vacantes y servicios",
+      label: "Mis publicaciones",
     },
     session.role === "ADMIN" && { href: "/admin", icon: Shield, label: "Panel administrativo" },
     { href: "/empleo/perfil", icon: User, label: "Mi perfil laboral" },
-    { href: "#", icon: Bell, label: "Notificaciones" },
+    { href: "/notificaciones", icon: Bell, label: unread ? `Notificaciones (${unread})` : "Notificaciones" },
     { href: "#", icon: Settings, label: "Configuración" },
     { href: "/politicas", icon: FileText, label: "Términos y políticas" },
     { href: "/eliminar-cuenta", icon: Trash2, label: "Eliminar mi cuenta" },

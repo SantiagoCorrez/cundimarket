@@ -1,9 +1,8 @@
-import * as WebBrowser from 'expo-web-browser';
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { API_BASE_URL } from '@/api/client';
 import type { Job } from '@/api/types';
 import { JobCard } from '@/components/cards';
 import { LoadError } from '@/components/load-error';
@@ -26,7 +25,7 @@ export default function EmpleoScreen() {
     <View style={{ flex: 1, backgroundColor: Palette.background, paddingTop: insets.top }}>
       <ScreenHeader title="CundiEmpleo" />
       <ModuleHero title="CundiEmpleo" subtitle="Oportunidades en tu municipio" icon="💼" publishPath="/empleo/nuevo" />
-      <Pressable style={styles.profileLink} onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/empleo/perfil`)}>
+      <Pressable style={styles.profileLink} onPress={() => router.push('/perfil-laboral')}>
         <Text style={styles.profileLinkText}>👤 Mi perfil laboral</Text>
       </Pressable>
       <FilterChips options={CONTRACT_TYPES.map((c) => ({ key: c, label: c }))} current={contract} onChange={setContract} />

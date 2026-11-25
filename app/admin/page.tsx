@@ -41,9 +41,9 @@ export default async function AdminDashboard() {
     { label: "Comercios", value: totalBiz, icon: Store, sub: `${verifiedBiz} verificados` },
     { label: "Por verificar", value: pendingBiz, icon: TrendingUp, sub: "pendientes", href: "/admin/comercios?status=IN_REVIEW" },
     { label: "Usuarios", value: users, icon: Users, sub: "registrados" },
-    { label: "Inmuebles", value: properties, icon: Home, sub: "CundiEspacios" },
-    { label: "Servicios", value: services, icon: Wrench, sub: "CundiServicios" },
-    { label: "Vacantes", value: jobs, icon: Briefcase, sub: "CundiEmpleo" },
+    { label: "Inmuebles", value: properties, icon: Home, sub: "CundiEspacios", href: "/admin/espacios" },
+    { label: "Servicios", value: services, icon: Wrench, sub: "CundiServicios", href: "/admin/servicios" },
+    { label: "Vacantes", value: jobs, icon: Briefcase, sub: "CundiEmpleo", href: "/admin/empleos" },
     { label: "Promociones", value: promos, icon: TrendingUp, sub: "activas" },
     { label: "Reportes", value: openReports, icon: Flag, sub: "abiertos", href: "/admin/reportes" },
   ];

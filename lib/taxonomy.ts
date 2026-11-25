@@ -215,6 +215,13 @@ export const SERVICE_CATEGORIES = [
 ];
 
 // CundiEspacios
+/** Estados de un inmueble. Los cerrados no aparecen en los listados públicos. */
+export const PROPERTY_STATUSES = [
+  { key: "ACTIVE", label: "Disponible", tone: "success" },
+  { key: "RESERVED", label: "Reservado", tone: "warn" },
+  { key: "CLOSED", label: "Cerrado", tone: "neutral" },
+] as const;
+
 export const OFFER_TYPES = [
   { key: "RENT", label: "Arriendo" },
   { key: "SALE", label: "Venta" },

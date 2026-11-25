@@ -4,8 +4,9 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
-import { canManageListing, deleteJobListing, deleteServiceListing } from "@/lib/listings";
-import { publishableMunicipality } from "@/lib/taxonomy";
+import { ApplicationError, saveCandidate, setJobState } from "@/lib/applications";
+import { canManageListing, deleteJobListing, deletePropertyListing, deleteServiceListing } from "@/lib/listings";
+import { PROPERTY_STATUSES, publishableMunicipality } from "@/lib/taxonomy";
 
 function num(v: FormDataEntryValue | null): number | null {
   const n = Number(String(v ?? "").replace(/\D/g, ""));
@@ -18,6 +19,44 @@ function canPublish(role: string) {
 }
 
 /* ---------------- CundiEspacios ---------------- */
+function propertyData(formData: FormData, fallbackName: string, keepMunicipality?: string) {
+  return {
+    offerType: String(formData.get("offerType") || "RENT"),
+    propertyType: String(formData.get("propertyType") || "Apartamento"),
+    municipality: publishableMunicipality(String(formData.get("municipality") || ""), keepMunicipality),
+    neighborhood: String(formData.get("neighborhood") || "") || null,
+    address: String(formData.get("address") || "") || null,
+    area: num(formData.get("area")),
+    rooms: num(formData.get("rooms")),
+    bathrooms: num(formData.get("bathrooms")),
+    parking: formData.get("parking") === "on",
+    stratum: num(formData.get("stratum")),
+    price: num(formData.get("price")),
+    description: String(formData.get("description") || ""),
+    services: String(formData.get("services") || "") || null,
+    ownerName: String(formData.get("ownerName") || fallbackName),
+    phone: String(formData.get("phone") || ""),
+    whatsapp: String(formData.get("whatsapp") || "") || null,
+  };
+}
+
+async function requirePropertyManager(id: string) {
+  const session = await getSession();
+  if (!session) redirect(`/login?next=/espacios/${id}/editar`);
+  const property = await prisma.property.findUnique({ where: { id } });
+  if (!property) redirect("/mis-publicaciones");
+  if (!canManageListing(property!.userId, session!)) redirect(`/espacios/${id}`);
+  return { session: session!, property: property! };
+}
+
+function revalidateProperty(id: string) {
+  revalidatePath("/espacios");
+  revalidatePath(`/espacios/${id}`);
+  revalidatePath("/mis-publicaciones");
+  revalidatePath("/admin/espacios");
+  revalidatePath("/admin/reportes");
+}
+
 export async function createProperty(formData: FormData) {
   const session = await getSession();
   if (!session) redirect("/login?next=/espacios/nuevo");
@@ -27,27 +66,65 @@ export async function createProperty(formData: FormData) {
   const prop = await prisma.property.create({
     data: {
       userId: session!.id,
-      offerType: String(formData.get("offerType") || "RENT"),
-      propertyType: String(formData.get("propertyType") || "Apartamento"),
-      municipality: publishableMunicipality(String(formData.get("municipality") || "")),
-      neighborhood: String(formData.get("neighborhood") || "") || null,
-      address: String(formData.get("address") || "") || null,
-      area: num(formData.get("area")),
-      rooms: num(formData.get("rooms")),
-      bathrooms: num(formData.get("bathrooms")),
-      parking: formData.get("parking") === "on",
-      stratum: num(formData.get("stratum")),
-      price: num(formData.get("price")),
-      description: String(formData.get("description") || ""),
-      services: String(formData.get("services") || "") || null,
-      ownerName: String(formData.get("ownerName") || session!.name),
-      phone: String(formData.get("phone") || ""),
-      whatsapp: String(formData.get("whatsapp") || "") || null,
+      ...propertyData(formData, session!.name),
       photos: { create: photos.map((url) => ({ url })) },
     },
   });
   revalidatePath("/espacios");
   redirect(`/espacios/${prop.id}`);
+}
+
+export async function updateProperty(formData: FormData) {
+  const id = String(formData.get("id") || "");
+  const { session, property } = await requirePropertyManager(id);
+
+  const data = propertyData(formData, property.ownerName, property.municipality);
+  const status = String(formData.get("status") || "");
+  // Las fotos que llegan en el formulario son el conjunto final.
+  const photos = formData.getAll("photos").map(String).filter(Boolean);
+  // Si el anunciante cambia la ubicación de un inmueble verificado, debe volver a verificarse.
+  const moved =
+    data.address !== property.address ||
+    data.neighborhood !== property.neighborhood ||
+    data.municipality !== property.municipality;
+
+  await prisma.$transaction([
+    prisma.propertyPhoto.deleteMany({ where: { propertyId: id } }),
+    prisma.property.update({
+      where: { id },
+      data: {
+        ...data,
+        status: PROPERTY_STATUSES.some((s) => s.key === status) ? status : property.status,
+        ...(moved && session.role !== "ADMIN" ? { verified: false } : {}),
+        photos: { create: photos.map((url) => ({ url })) },
+      },
+    }),
+  ]);
+  revalidateProperty(id);
+  redirect(`/espacios/${id}`);
+}
+
+/** Cambia el estado del anuncio (disponible, reservado, cerrado) sin abrir el formulario. */
+export async function setPropertyStatus(id: string, status: string) {
+  await requirePropertyManager(id);
+  if (!PROPERTY_STATUSES.some((s) => s.key === status)) return;
+  await prisma.property.update({ where: { id }, data: { status } });
+  revalidateProperty(id);
+}
+
+/** Marca o desmarca un inmueble como verificado (solo administradores). */
+export async function setPropertyVerified(id: string, verified: boolean) {
+  const session = await getSession();
+  if (!session || session.role !== "ADMIN") redirect("/login?next=/admin/espacios");
+  await prisma.property.update({ where: { id }, data: { verified } });
+  revalidateProperty(id);
+}
+
+export async function deleteProperty(id: string, from?: DeleteReturn) {
+  const { session } = await requirePropertyManager(id);
+  await deletePropertyListing(id);
+  revalidateProperty(id);
+  redirect(afterDelete(from, session.role, "/admin/espacios"));
 }
 
 /* ---------------- CundiServicios ---------------- */
@@ -198,18 +275,15 @@ export async function deleteJob(id: string, from?: DeleteReturn) {
   redirect(afterDelete(from, session.role, "/admin/empleos"));
 }
 
-export async function toggleSaveJob(jobId: string, applied = false) {
+/** Guarda la vacante, se postula o retira la postulación (ver lib/applications.ts). */
+export async function setJobStateAction(jobId: string, state: { saved: boolean; applied: boolean }) {
   const session = await getSession();
   if (!session) return { error: "Inicia sesión." };
-  const existing = await prisma.savedJob.findUnique({
-    where: { userId_jobId: { userId: session.id, jobId } },
-  });
-  if (existing && !applied) {
-    await prisma.savedJob.delete({ where: { id: existing.id } });
-  } else if (existing && applied) {
-    await prisma.savedJob.update({ where: { id: existing.id }, data: { applied: true } });
-  } else {
-    await prisma.savedJob.create({ data: { userId: session.id, jobId, applied } });
+  try {
+    await setJobState(session, jobId, state);
+  } catch (error) {
+    if (error instanceof ApplicationError) return { error: error.message };
+    throw error;
   }
   revalidatePath(`/empleo/${jobId}`);
   return { ok: true };
@@ -218,17 +292,11 @@ export async function toggleSaveJob(jobId: string, applied = false) {
 export async function saveCandidateProfile(formData: FormData) {
   const session = await getSession();
   if (!session) redirect("/login?next=/empleo/perfil");
-  const cv = formData.getAll("cv").map(String).filter(Boolean)[0] || undefined;
-  const data = {
-    experience: String(formData.get("experience") || "") || null,
-    skills: String(formData.get("skills") || "") || null,
-    education: String(formData.get("education") || "") || null,
-    ...(cv ? { cvUrl: cv } : {}),
-  };
-  await prisma.candidateProfile.upsert({
-    where: { userId: session!.id },
-    create: { userId: session!.id, ...data },
-    update: data,
+  await saveCandidate(session!.id, {
+    experience: String(formData.get("experience") || ""),
+    skills: String(formData.get("skills") || ""),
+    education: String(formData.get("education") || ""),
+    cvUrl: formData.getAll("cv").map(String).filter(Boolean)[0],
   });
   revalidatePath("/empleo/perfil");
   redirect("/empleo");

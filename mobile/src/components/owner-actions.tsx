@@ -9,7 +9,7 @@ import { cacheRemove } from '@/api/offline-cache';
 import { Palette, Radius } from '@/constants/theme';
 
 /**
- * Panel "Tu publicación" para el dueño de una vacante o servicio.
+ * Panel "Tu publicación" para el dueño de una vacante, un servicio o un inmueble.
  * - Editar abre el formulario del sitio web (donde ya se publica) y al cerrarlo recarga los datos.
  * - Eliminar se hace en la app (con confirmación) y requiere conexión.
  */
@@ -20,7 +20,7 @@ export function OwnerActions({
   onChanged,
   admin = false,
 }: {
-  kind: 'job' | 'service';
+  kind: 'job' | 'service' | 'property';
   id: string;
   title: string;
   /** Se llama al volver del editor web para recargar la publicación. */
@@ -29,7 +29,7 @@ export function OwnerActions({
   admin?: boolean;
 }) {
   const [busy, setBusy] = useState(false);
-  const section = kind === 'job' ? 'empleo' : 'servicios';
+  const section = { job: 'empleo', service: 'servicios', property: 'espacios' }[kind];
 
   async function edit() {
     await WebBrowser.openBrowserAsync(`${API_BASE_URL}/${section}/${id}/editar`);

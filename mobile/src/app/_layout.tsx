@@ -2,6 +2,7 @@ import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 
 import { ConnectivityFrame } from '@/components/connectivity-frame';
+import { PushManager } from '@/components/push-manager';
 import { Palette } from '@/constants/theme';
 import { AuthProvider } from '@/context/auth';
 import { ConnectivityProvider } from '@/context/connectivity';
@@ -18,6 +19,7 @@ export default function RootLayout() {
       <ConnectivityProvider>
         <ThemeProvider value={AppTheme}>
           <StatusBar style="dark" />
+          <PushManager />
           <ConnectivityFrame>
             <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: Palette.background } }}>
               <Stack.Screen name="(tabs)" />

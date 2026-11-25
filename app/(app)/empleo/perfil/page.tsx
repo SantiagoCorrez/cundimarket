@@ -5,6 +5,7 @@ import { BackBar } from "@/components/nav";
 import { Button, Field, Input, Textarea, Card } from "@/components/ui";
 import { ImageUpload } from "@/components/image-upload";
 import { saveCandidateProfile } from "@/lib/actions/modules";
+import { isCvImage } from "@/lib/applications";
 
 export const dynamic = "force-dynamic";
 
@@ -23,6 +24,9 @@ export default async function CandidateProfilePage() {
     <div>
       <BackBar title="Mi perfil laboral" />
       <form action={saveCandidateProfile} className="p-4 space-y-4">
+        <p className="text-sm text-ink-soft rounded-2xl bg-brand/10 px-3.5 py-3">
+          Solo lo ven los empleadores de las vacantes a las que te postulas.
+        </p>
         <Field label="Nombre">
           <Input defaultValue={session.name} disabled />
         </Field>
@@ -36,7 +40,7 @@ export default async function CandidateProfilePage() {
           <Input name="education" defaultValue={profile?.education || ""} placeholder="Ej: Bachiller, Técnico…" />
         </Field>
         <Field label="Hoja de vida (imagen/PDF como imagen)">
-          <ImageUpload name="cv" max={1} label="Adjuntar hoja de vida" />
+          <ImageUpload name="cv" max={1} label="Adjuntar hoja de vida" initial={isCvImage(profile?.cvUrl) ? [profile.cvUrl] : []} />
         </Field>
         <Button size="lg" className="w-full">Guardar perfil</Button>
       </form>

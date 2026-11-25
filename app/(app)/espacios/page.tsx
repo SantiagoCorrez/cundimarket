@@ -16,7 +16,7 @@ export default async function EspaciosPage({
   const session = await getSession();
   const canPublish = session?.role === "MERCHANT" || session?.role === "ADMIN";
   const properties = await prisma.property.findMany({
-    where: { ...(offer ? { offerType: offer } : {}) },
+    where: { status: { not: "CLOSED" }, ...(offer ? { offerType: offer } : {}) },
     orderBy: { createdAt: "desc" },
     include: { photos: true },
     take: 50,

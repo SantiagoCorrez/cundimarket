@@ -11,6 +11,7 @@ import {
 } from "@/components/cards";
 import { ModuleGrid } from "@/components/module-grid";
 import { ensureFreshNews } from "@/lib/news-sync";
+import { unreadNotifications } from "@/lib/notifications";
 import { normalizeMunicipality } from "@/lib/taxonomy";
 
 export const dynamic = "force-dynamic";
@@ -19,6 +20,7 @@ export default async function HomePage() {
   const session = await getSession();
   const municipality = normalizeMunicipality(session?.municipality);
   void ensureFreshNews(municipality);
+  const unread = session ? await unreadNotifications(session.id) : 0;
 
   const [categories, featured, promos, news] = await Promise.all([
     prisma.category.findMany({ orderBy: { order: "asc" } }),
@@ -52,10 +54,16 @@ export default async function HomePage() {
             </button>
           </div>
           <Link
-            href={session ? "/profile" : "/login"}
-            className="h-10 w-10 rounded-full bg-white/10 grid place-items-center"
+            href={session ? "/notificaciones" : "/login"}
+            aria-label={unread ? `Notificaciones: ${unread} sin leer` : "Notificaciones"}
+            className="relative h-10 w-10 rounded-full bg-white/10 grid place-items-center"
           >
             <Bell size={18} />
+            {unread > 0 && (
+              <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-danger text-white text-[11px] font-bold grid place-items-center">
+                {unread > 9 ? "9+" : unread}
+              </span>
+            )}
           </Link>
         </div>
 

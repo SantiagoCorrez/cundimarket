@@ -10,6 +10,7 @@ import { MUNICIPALITIES, PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette } from '@/constants/theme';
 import { cacheStorage } from '@/utils/cache-storage';
 import { googleSignOut } from '@/utils/google-signin';
+import { unregisterPush } from '@/utils/push';
 import { secureStorage } from '@/utils/secure-storage';
 
 const TOKEN_KEY = 'cundi_token';
@@ -184,6 +185,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(null);
       },
       logout: async () => {
+        await unregisterPush();
         await wipeLocalSession(user?.id ?? null);
         setUser(null);
       },

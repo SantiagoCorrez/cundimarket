@@ -14,7 +14,9 @@ import { useApiQuery } from '@/hooks/use-api-query';
 export default function EspaciosScreen() {
   const insets = useSafeAreaInsets();
   const [offer, setOffer] = useState<string>();
-  const { data, failed, reload } = useApiQuery<{ properties: Property[] }>(`/api/mobile/espacios${offer ? `?offer=${offer}` : ''}`);
+  const { data, failed, reload } = useApiQuery<{ properties: Property[] }>(`/api/mobile/espacios${offer ? `?offer=${offer}` : ''}`, {
+    refreshOnFocus: true,
+  });
   const properties = data?.properties ?? null;
 
   return (

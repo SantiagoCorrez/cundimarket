@@ -42,7 +42,7 @@ export default async function AdminServicesPage() {
                 <Link href={`/servicios/${s.id}/editar`} className={buttonClass("outline", "sm")}>
                   <Pencil size={14} /> Editar
                 </Link>
-                <DeleteListingButton kind="service" id={s.id} title={s.providerName} from="admin" />
+                <DeleteListingButton kind="service" id={s.id} title={s.providerName} from="admin" size="sm" />
               </div>
             </Card>
           ))

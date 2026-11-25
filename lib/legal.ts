@@ -4,7 +4,7 @@ export const LEGAL = {
   url: "https://cundimarket.online",
   contactEmail: "danifersilrod@gmail.com",
   /** Fecha de la última revisión de todas las políticas. */
-  updated: "30 de octubre de 2026",
+  updated: "25 de noviembre de 2026",
 } as const;
 
 export const LEGAL_LINKS = [

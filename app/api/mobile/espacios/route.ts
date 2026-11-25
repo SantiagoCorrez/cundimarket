@@ -6,7 +6,7 @@ export async function GET(req: Request) {
   const offer = searchParams.get("offer") || undefined;
 
   const properties = await prisma.property.findMany({
-    where: { ...(offer ? { offerType: offer } : {}) },
+    where: { status: { not: "CLOSED" }, ...(offer ? { offerType: offer } : {}) },
     orderBy: { createdAt: "desc" },
     include: { photos: true },
     take: 50,

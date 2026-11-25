@@ -13,12 +13,12 @@ export function OwnerActions({
   title,
   admin = false,
 }: {
-  kind: "job" | "service";
+  kind: "job" | "service" | "property";
   id: string;
   title: string;
   admin?: boolean;
 }) {
-  const base = kind === "job" ? "/empleo" : "/servicios";
+  const base = { job: "/empleo", service: "/servicios", property: "/espacios" }[kind];
   return (
     <Card className="mx-4 mt-5 p-3.5 space-y-2.5">
       <p className="text-sm font-semibold">{admin ? "Administrar publicación" : "Tu publicación"}</p>

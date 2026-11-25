@@ -30,16 +30,18 @@ model User {
   avatarUrl         String?
   createdAt         DateTime @default(now())
 
-  businesses Business[]
-  properties Property[]
-  services   ServiceProvider[]
-  jobs       Job[]
-  ratings    Rating[]
-  reports    Report[]
-  favorites  Favorite[]
-  news       News[]
-  candidate  CandidateProfile?
-  savedJobs  SavedJob[]
+  businesses    Business[]
+  properties    Property[]
+  services      ServiceProvider[]
+  jobs          Job[]
+  ratings       Rating[]
+  reports       Report[]
+  favorites     Favorite[]
+  news          News[]
+  candidate     CandidateProfile?
+  savedJobs     SavedJob[]
+  notifications Notification[]
+  pushTokens    PushToken[]
 }
 
 model Category {
@@ -287,13 +289,17 @@ model Job {
 }
 
 model SavedJob {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   jobId     String
-  job       Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
-  applied   Boolean  @default(false)
-  createdAt DateTime @default(now())
+  job       Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  applied   Boolean   @default(false)
+  /// Cuándo se postuló (solo si applied).
+  appliedAt DateTime?
+  /// Cuándo el empleador revisó el perfil del postulante.
+  viewedAt  DateTime?
+  createdAt DateTime  @default(now())
 
   @@unique([userId, jobId])
 }
@@ -317,4 +323,32 @@ model Favorite {
   createdAt  DateTime @default(now())
 
   @@unique([userId, businessId])
+}
+
+/// Aviso dentro de la app y la web (y por push si el usuario lo permitió).
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  title     String
+  body      String
+  /// Ruta interna de la web; la app la traduce a su propia pantalla.
+  href      String
+  /// Evita repetir el mismo aviso (p. ej. postularse, retirarse y volver a postularse).
+  dedupeKey String?   @unique
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, createdAt])
+}
+
+/// Dispositivo que recibe notificaciones push de un usuario.
+model PushToken {
+  token     String   @id
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
 }

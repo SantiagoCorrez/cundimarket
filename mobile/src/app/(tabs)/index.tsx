@@ -31,6 +31,12 @@ export default function HomeScreen() {
     `/api/mobile/home?municipality=${encodeURIComponent(municipality)}`,
   );
 
+  const { data: notifications } = useApiQuery<{ unread: number }>(user ? '/api/mobile/notifications' : null, {
+    refreshOnFocus: true,
+    cache: false,
+  });
+  const unread = notifications?.unread ?? 0;
+
   if (!feed) {
     return (
       <View style={styles.loading}>
@@ -65,8 +71,13 @@ export default function HomeScreen() {
               <Ionicons name="chevron-down" size={14} color="rgba(255,255,255,0.7)" />
             </Pressable>
           </View>
-          <Pressable style={styles.bellButton} onPress={() => router.push(user ? '/(tabs)/profile' : '/login')}>
+          <Pressable style={styles.bellButton} onPress={() => router.push(user ? '/notificaciones' : '/login')} accessibilityRole="button" accessibilityLabel={unread ? `Notificaciones: ${unread} sin leer` : 'Notificaciones'}>
             <Ionicons name="notifications" size={18} color="#fff" />
+            {unread > 0 && (
+              <View style={styles.bellBadge}>
+                <Text style={styles.bellBadgeText}>{unread > 9 ? '9+' : unread}</Text>
+              </View>
+            )}
           </Pressable>
         </View>
 
@@ -174,6 +185,8 @@ const styles = StyleSheet.create({
   heroPlace: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 2 },
   heroPlaceText: { color: '#fff', fontWeight: '700', fontSize: 15 },
   soonTag: { fontSize: 10.5, fontWeight: '700', color: '#fff', backgroundColor: 'rgba(255,255,255,0.18)', paddingHorizontal: 8, paddingVertical: 2, borderRadius: Radius.pill, overflow: 'hidden' },
+  bellBadge: { position: 'absolute', top: -4, right: -4, minWidth: 19, height: 19, borderRadius: 10, paddingHorizontal: 4, backgroundColor: Palette.danger, alignItems: 'center', justifyContent: 'center' },
+  bellBadgeText: { color: '#fff', fontSize: 11, fontWeight: '800' },
   bellButton: { height: 40, width: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.1)', alignItems: 'center', justifyContent: 'center' },
   searchBar: { marginTop: 18, flexDirection: 'row', alignItems: 'center', gap: 8, backgroundColor: '#fff', height: 48, borderRadius: Radius.card, paddingHorizontal: 16 },
   searchBarText: { color: Palette.textSecondary, fontSize: 15 },

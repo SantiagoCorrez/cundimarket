@@ -9,7 +9,9 @@ import { LoadError } from '@/components/load-error';
 import { Badge, Card, ScreenHeader, VerifiedBadge } from '@/components/ui';
 import { OFFER_TYPES } from '@/constants/taxonomy';
 import { ReportButton } from '@/components/report-button';
+import { OwnerActions } from '@/components/owner-actions';
 import { Palette, Radius } from '@/constants/theme';
+import { useAuth } from '@/context/auth';
 import { useApiQuery } from '@/hooks/use-api-query';
 import { useContactGuard } from '@/hooks/use-contact-guard';
 import { formatCOP, telUrl, whatsappUrl } from '@/utils/format';
@@ -19,7 +21,10 @@ export default function PropertyScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
   const guardContact = useContactGuard();
-  const { data, failed, reload } = useApiQuery<{ property: Property }>(`/api/mobile/espacios/${id}`);
+  const { user } = useAuth();
+  const { data, failed, reload } = useApiQuery<{ property: Property; isOwner?: boolean }>(`/api/mobile/espacios/${id}`, {
+    refreshOnFocus: true,
+  });
   const p = data?.property ?? null;
 
   if (!p) {
@@ -95,6 +100,15 @@ export default function PropertyScreen() {
           ) : null}
           {p.stratum ? <Text style={styles.paragraph}>Estrato {p.stratum}</Text> : null}
         </View>
+        {data?.isOwner && (
+          <OwnerActions
+            kind="property"
+            id={p.id}
+            title={`${p.propertyType} · ${formatCOP(p.price)}`}
+            onChanged={reload}
+            admin={user?.role === 'ADMIN'}
+          />
+        )}
         <ReportButton targetType="PROPERTY" targetId={p.id} />
       </ScrollView>
 

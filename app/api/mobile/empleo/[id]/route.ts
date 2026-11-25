@@ -10,15 +10,18 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   const job = await prisma.job.findUnique({ where: { id } });
   if (!job) return apiError("Vacante no encontrada.", 404);
 
-  // Una vacante pausada solo la ve su dueño (o un administrador).
   const isOwner = !!session && canManageListing(job.userId, session);
-  if (!job.active && !isOwner) return apiError("Vacante no encontrada.", 404);
-
   const saved = session
     ? await prisma.savedJob.findUnique({ where: { userId_jobId: { userId: session.id, jobId: id } } })
     : null;
+  // Una vacante pausada solo la ven su dueño, un administrador o quien la guardó o se postuló.
+  if (!job.active && !isOwner && !saved) return apiError("Vacante no encontrada.", 404);
 
-  return json({ job, saved: !!saved, applied: !!saved?.applied, isOwner });
+  // Solo quien publicó la vacante ve a sus postulantes (un administrador no).
+  const applicants =
+    session?.id === job.userId ? await prisma.savedJob.count({ where: { jobId: id, applied: true } }) : undefined;
+
+  return json({ job, saved: !!saved, applied: !!saved?.applied, isOwner, applicants });
 }
 
 /** Elimina la vacante: solo su dueño o un administrador. */

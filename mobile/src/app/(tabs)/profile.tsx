@@ -94,19 +94,20 @@ export default function ProfileScreen() {
         {(user.role === 'MERCHANT' || user.role === 'ADMIN') && (
           <ProfileLink
             icon="clipboard"
-            label="Mis vacantes y servicios"
+            label="Mis publicaciones"
             onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/mis-publicaciones`)}
           />
         )}
         {user.role === 'ADMIN' && (
           <ProfileLink icon="shield-checkmark" label="Panel administrativo" onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/admin`)} />
         )}
+        <ProfileLink icon="notifications" label="Notificaciones" onPress={() => router.push('/notificaciones')} />
         <ProfileLink
           icon="location"
           label={user.municipality === PILOT_MUNICIPALITY ? `Municipio: ${user.municipality}` : `Municipio: ${user.municipality} (próximamente)`}
           onPress={() => setPickerOpen(true)}
         />
-        <ProfileLink icon="briefcase" label="Mi perfil laboral" onPress={() => WebBrowser.openBrowserAsync(`${API_BASE_URL}/empleo/perfil`)} />
+        <ProfileLink icon="briefcase" label="Mi perfil laboral" onPress={() => router.push('/perfil-laboral')} />
         <ProfileLink icon="document-text" label="Términos y políticas" onPress={() => openLegal('/politicas')} />
       </View>
 

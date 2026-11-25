@@ -1,9 +1,10 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Briefcase, Clock, DollarSign } from "lucide-react";
+import { MapPin, Briefcase, Clock, DollarSign, Users } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 import { BackBar } from "@/components/nav";
-import { Badge, Card } from "@/components/ui";
+import { Badge, Card, buttonClass } from "@/components/ui";
 import { JobActions } from "@/components/job-actions";
 import { OwnerActions } from "@/components/owner-actions";
 import { canManageListing } from "@/lib/listings";
@@ -17,13 +18,21 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
   const j = await prisma.job.findUnique({ where: { id } });
   if (!j) notFound();
 
-  // Una vacante pausada solo la ve su dueño (o un administrador).
   const isOwner = !!session && canManageListing(j.userId, session);
-  if (!j.active && !isOwner) notFound();
-
   const saved = session
     ? await prisma.savedJob.findUnique({ where: { userId_jobId: { userId: session.id, jobId: id } } })
     : null;
+  // Una vacante pausada solo la ven su dueño, un administrador o quien la guardó o se postuló.
+  if (!j.active && !isOwner && !saved) notFound();
+
+  // Solo quien publicó la vacante ve a sus postulantes; y no puede postularse a ella.
+  const isEmployer = session?.id === j.userId;
+  const [applicants, candidate] = await Promise.all([
+    isEmployer ? prisma.savedJob.count({ where: { jobId: id, applied: true } }) : 0,
+    session
+      ? prisma.candidateProfile.findUnique({ where: { userId: session.id }, select: { experience: true, skills: true, education: true } })
+      : null,
+  ]);
 
   const meta = [
     { icon: Briefcase, label: "Empresa", value: j.companyName },
@@ -73,14 +82,26 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
         )}
       </div>
 
+      {isEmployer && (
+        <Link
+          href={`/empleo/${id}/postulaciones`}
+          className={buttonClass("primary", "lg", "mx-4 mt-2 flex")}
+        >
+          <Users size={18} /> Ver postulantes ({applicants})
+        </Link>
+      )}
+
       {isOwner && <OwnerActions kind="job" id={id} title={j.title} admin={session!.role === "ADMIN" && j.userId !== session!.id} />}
 
-      <JobActions
-        jobId={id}
-        initialSaved={!!saved}
-        initialApplied={!!saved?.applied}
-        isAuthed={!!session}
-      />
+      {!isEmployer && (
+        <JobActions
+          jobId={id}
+          initialSaved={!!saved}
+          initialApplied={!!saved?.applied}
+          isAuthed={!!session}
+          hasProfile={!!(candidate?.experience || candidate?.skills || candidate?.education)}
+        />
+      )}
     </div>
   );
 }

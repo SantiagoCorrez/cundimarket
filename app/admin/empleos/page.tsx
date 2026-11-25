@@ -64,7 +64,7 @@ export default async function AdminJobsPage({ searchParams }: { searchParams: Pr
                 <Link href={`/empleo/${j.id}/editar`} className={buttonClass("outline", "sm")}>
                   <Pencil size={14} /> Editar
                 </Link>
-                <DeleteListingButton kind="job" id={j.id} title={j.title} from="admin" />
+                <DeleteListingButton kind="job" id={j.id} title={j.title} from="admin" size="sm" />
               </div>
             </Card>
           ))

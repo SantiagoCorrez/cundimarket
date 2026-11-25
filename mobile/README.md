@@ -34,8 +34,9 @@ municipio con aviso "Próximamente" para los municipios aún no habilitados.
 forma nativa todavía): panel de comerciante, panel administrativo, publicar
 inmueble/servicio/vacante, **editar** una vacante/servicio propio (el detalle
 muestra "Tu publicación" con Editar → formulario web y Eliminar → nativo, vía
-`DELETE /api/mobile/{empleo,servicios}/:id`), listado "Mis vacantes y servicios"
-(`/mis-publicaciones`), perfil laboral. Son botones "Publicar" / enlaces
+`DELETE /api/mobile/{empleo,servicios,espacios}/:id`), listado "Mis publicaciones"
+(`/mis-publicaciones`). El **perfil laboral**, las **notificaciones** y los **postulantes** de una
+vacante son pantallas nativas (la hoja de vida se adjunta desde la web). Son botones "Publicar" / enlaces
 en la app que abren `https://cundimarket.online/...` con `expo-web-browser`.
 Portarlos a pantallas nativas es el siguiente paso lógico cuando se quiera
 pulir la experiencia de comerciantes.
