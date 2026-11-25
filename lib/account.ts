@@ -1,5 +1,6 @@
 import { prisma } from "./prisma";
 import { recomputeBusinessRating, recomputeProviderRating } from "./ratings";
+import { revokeAppleAccess } from "./apple-auth";
 
 /** Motivo por el que una cuenta no se puede eliminar (null si se puede). */
 export async function accountDeletionBlocker(user: { role: string }): Promise<string | null> {
@@ -19,6 +20,10 @@ export async function deleteUserAccount(userId: string) {
     where: { userId },
     select: { businessId: true, providerId: true },
   });
+
+  // Si entró con Apple, se revoca el acceso de la app en su cuenta de Apple (lo exige Apple).
+  const account = await prisma.user.findUnique({ where: { id: userId }, select: { appleRefreshToken: true } });
+  if (account?.appleRefreshToken) await revokeAppleAccess(account.appleRefreshToken);
 
   await prisma.user.delete({ where: { id: userId } });
 

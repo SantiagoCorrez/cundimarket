@@ -8,6 +8,7 @@ import { Button, Field, Input, Select } from "@/components/ui";
 import { BrandMark } from "@/components/brand";
 import { ComingSoonSheet } from "@/components/coming-soon-sheet";
 import { PasswordInput } from "@/components/password-input";
+import { GoogleSignIn } from "@/components/google-sign-in";
 import { loginAction, registerAction, type AuthState } from "@/lib/actions/auth";
 import { MUNICIPALITIES, PILOT_MUNICIPALITY, USER_TYPES } from "@/lib/taxonomy";
 import { cn } from "@/lib/utils";
@@ -162,7 +163,9 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
         <span className="h-px flex-1 bg-line" />
       </div>
 
-      <p className="text-center text-sm text-ink-soft">
+      <GoogleSignIn next={next} />
+
+      <p className="text-center text-sm text-ink-soft mt-6">
         {mode === "login" ? (
           <>
             ¿No tienes cuenta?{" "}

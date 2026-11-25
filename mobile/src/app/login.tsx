@@ -5,6 +5,7 @@ import { KeyboardAvoidingView, Platform, Pressable, StyleSheet, Text, TextInput,
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ApiError } from '@/api/client';
+import { SocialSignIn } from '@/components/social-sign-in';
 import { PasswordInput } from '@/components/password-input';
 import { Button } from '@/components/ui';
 import { Palette, Radius } from '@/constants/theme';
@@ -58,6 +59,7 @@ export default function LoginScreen() {
           <Button size="lg" onPress={onSubmit} disabled={loading || !email || !password}>
             {loading ? 'Ingresando…' : 'Ingresar'}
           </Button>
+          <SocialSignIn onSuccess={() => router.back()} />
         </View>
 
         <View style={styles.footer}>

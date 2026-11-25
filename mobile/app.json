@@ -11,8 +11,10 @@
       "bundleIdentifier": "co.cundimarket.app",
       "supportsTablet": false,
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      }
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleAllowMixedLocalizations": true
+      },
+      "usesAppleSignIn": true
     },
     "android": {
       "package": "co.cundimarket.app",
@@ -44,7 +46,8 @@
           "locationWhenInUsePermission": "CundiMarket usa tu ubicación para mostrarte los comercios más cercanos."
         }
       ],
-      "expo-sqlite"
+      "expo-sqlite",
+      "expo-apple-authentication"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -13,15 +13,22 @@ datasource db {
 
 /// Roles: CITIZEN | MERCHANT | ADMIN
 model User {
-  id           String   @id @default(cuid())
-  name         String
-  email        String   @unique
-  phone        String?
-  passwordHash String
-  role         String   @default("CITIZEN")
-  municipality String   @default("Mosquera")
-  avatarUrl    String?
-  createdAt    DateTime @default(now())
+  id                String   @id @default(cuid())
+  name              String
+  email             String   @unique
+  phone             String?
+  /// Vacío ("") en cuentas creadas con Google o Apple: no tienen contraseña.
+  passwordHash      String
+  /// Identificador de la cuenta de Google (claim "sub"), si inició sesión con Google.
+  googleId          String?  @unique
+  /// Identificador de Apple (claim "sub"), si inició sesión con Apple.
+  appleId           String?  @unique
+  /// Refresh token de Apple: se usa para revocar el acceso al eliminar la cuenta (exigido por Apple).
+  appleRefreshToken String?
+  role              String   @default("CITIZEN")
+  municipality      String   @default("Mosquera")
+  avatarUrl         String?
+  createdAt         DateTime @default(now())
 
   businesses Business[]
   properties Property[]

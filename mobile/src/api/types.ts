@@ -8,6 +8,8 @@ export type SessionUser = {
   role: Role;
   municipality: string;
   avatarUrl?: string | null;
+  /** false en cuentas creadas con Google (no tienen contraseña). */
+  hasPassword?: boolean;
 };
 
 export type Category = {

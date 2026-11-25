@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronLeft, CheckCircle2 } from "lucide-react";
 import { getSession } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 import { buttonClass } from "@/components/ui";
 import { DeleteAccountForm } from "@/components/delete-account-form";
 
@@ -14,6 +15,9 @@ export default async function EliminarCuentaPage({
 }) {
   const { listo } = await searchParams;
   const session = await getSession();
+  const account = session
+    ? await prisma.user.findUnique({ where: { id: session.id }, select: { passwordHash: true } })
+    : null;
 
   return (
     <main className="min-h-dvh mx-auto max-w-md bg-surface">
@@ -71,7 +75,7 @@ export default async function EliminarCuentaPage({
                 <p className="text-ink">
                   Sesión iniciada como <b>{session.email}</b>.
                 </p>
-                <DeleteAccountForm />
+                <DeleteAccountForm hasPassword={!!account?.passwordHash} />
               </>
             ) : (
               <>

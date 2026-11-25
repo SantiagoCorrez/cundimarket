@@ -37,6 +37,55 @@ npm run news:sync      # opcional: primera carga inmediata de las noticias de la
 > ⚠️ **No ejecutes `npm run db:seed` en producción**: el seed borra todas las tablas
 > (usuarios, comercios, reportes…) antes de cargar los datos de ejemplo.
 
+## Inicio de sesión con Google
+
+Web (Google Identity Services) y app (`@react-native-google-signin/google-signin`). El cliente
+obtiene un *ID token* de Google y el servidor lo verifica con las llaves públicas de Google
+(`lib/google-auth.ts`). Si el correo ya tiene cuenta, se vincula; si es nuevo, se pide tipo de
+perfil, municipio y aceptar los términos antes de crearla. Las cuentas de Google no tienen
+contraseña: para eliminarlas se escribe **ELIMINAR**. Mientras no esté configurado, el botón no aparece.
+
+1. **Google Cloud Console** → *APIs y servicios* → *Pantalla de consentimiento de OAuth*: tipo
+   externo, nombre CundiMarket, correo de soporte, dominio `cundimarket.online` y política de
+   privacidad `https://cundimarket.online/privacidad`. Publícala (modo producción).
+2. **Credenciales → Crear ID de cliente de OAuth**:
+   - **Web**: orígenes autorizados `https://cundimarket.online` y `http://localhost:3000`.
+   - **iOS**: bundle ID `co.cundimarket.app`.
+   - **Android**: paquete `co.cundimarket.app` y la huella **SHA-1** del certificado. Crea uno por
+     cada certificado: el de *firma de apps* y el de *carga* (Play Console → Integridad de la app),
+     o el del keystore de EAS (`npx eas-cli credentials`) para builds fuera de la tienda.
+3. **Servidor** (`.env` del VPS) y volver a compilar (`npm run build`):
+   ```
+   GOOGLE_CLIENT_IDS=<web>,<ios>,<android>
+   NEXT_PUBLIC_GOOGLE_CLIENT_ID=<web>
+   ```
+4. **App** (`mobile/.env`) y nuevo build nativo:
+   ```
+   EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID=<web>
+   EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID=<ios>
+   ```
+   `mobile/app.config.js` agrega el plugin de Google con el *URL scheme* de iOS a partir de ese ID.
+
+## Iniciar sesión con Apple (app de iOS)
+
+Obligatorio en la App Store porque la app ofrece Google (guía 4.8). Usa `expo-apple-authentication`
+(`mobile/app.json`: `ios.usesAppleSignIn` y el plugin). El servidor verifica el *identity token*
+con las llaves de Apple (`lib/apple-auth.ts`); el resto (vincular por correo, completar registro,
+eliminar con ELIMINAR) es igual que con Google (`lib/social-auth.ts`).
+
+1. **Apple Developer** → *Identifiers* → `co.cundimarket.app`: activa **Sign In with Apple**
+   (EAS lo sincroniza al compilar). Nuevo build de iOS.
+2. **Revocación al eliminar la cuenta** (Apple la exige): *Keys* → crea una llave con
+   *Sign in with Apple* asociada a la app, descarga el `.p8` (solo se puede una vez) y en el
+   `.env` del VPS:
+   ```
+   APPLE_TEAM_ID=<Team ID>
+   APPLE_KEY_ID=<Key ID>
+   APPLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+   # APPLE_CLIENT_IDS=co.cundimarket.app   (valor por defecto)
+   ```
+   Sin la llave el inicio de sesión funciona, pero al eliminar una cuenta no se revoca en Apple.
+
 ## Noticias y líneas de atención por municipio
 
 Las noticias y los canales de atención dependen del **municipio elegido** (el del perfil;

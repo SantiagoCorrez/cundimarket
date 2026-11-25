@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { signAuthToken, verifyPassword, type Role } from "@/lib/auth";
 import { json, apiError } from "@/lib/api";
+import { noPasswordMessage } from "@/lib/social-auth";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
@@ -9,6 +10,7 @@ export async function POST(req: Request) {
   if (!email || !password) return apiError("Correo y contraseña son requeridos.");
 
   const user = await prisma.user.findUnique({ where: { email } });
+  if (user && !user.passwordHash) return apiError(noPasswordMessage(user), 401);
   if (!user || !(await verifyPassword(password, user.passwordHash))) {
     return apiError("Correo o contraseña incorrectos.", 401);
   }
@@ -21,5 +23,5 @@ export async function POST(req: Request) {
     municipality: user.municipality,
   };
   const token = await signAuthToken(sessionUser);
-  return json({ token, user: sessionUser });
+  return json({ token, user: { ...sessionUser, hasPassword: true } });
 }

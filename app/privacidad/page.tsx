@@ -32,6 +32,13 @@ export default function PrivacidadPage() {
             (opcional) y tu contraseña, que guardamos <b>cifrada</b>, nunca en texto plano.
           </li>
           <li>
+            <b>Si entras con Google o Apple:</b> recibimos de ese servicio tu nombre, tu correo y un
+            identificador de tu cuenta (y tu foto de perfil, en el caso de Google). Con Apple puedes
+            ocultar tu correo real; en ese caso recibimos una dirección de reenvío de Apple. No
+            recibimos tu contraseña de Google ni de Apple. Al eliminar tu cuenta revocamos el acceso
+            de CundiMarket a tu cuenta de Apple.
+          </li>
+          <li>
             <b>Contenido que publicas:</b> información de tus negocios, inmuebles, servicios o
             vacantes (nombre, descripción, precios, horarios, dirección, datos de contacto, redes
             sociales y fotos).
@@ -151,6 +158,10 @@ export default function PrivacidadPage() {
           <li>
             <b>Noticias:</b> leemos contenido público del portal de la Alcaldía de Mosquera; no le
             enviamos datos personales.
+          </li>
+          <li>
+            <b>Inicio de sesión con Google y Apple:</b> si eliges esta opción, Google o Apple verifican
+            tu identidad y se rigen por sus propias políticas de privacidad.
           </li>
           <li>
             <b>Tiendas de aplicaciones:</b> Apple App Store y Google Play distribuyen la app y

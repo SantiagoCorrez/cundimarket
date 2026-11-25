@@ -24,6 +24,8 @@ export async function hashPassword(password: string) {
 }
 
 export async function verifyPassword(password: string, hash: string) {
+  // Las cuentas creadas con Google no tienen contraseña.
+  if (!hash) return false;
   return bcrypt.compare(password, hash);
 }
 

@@ -7,6 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ApiError } from '@/api/client';
 import type { Role } from '@/api/types';
 import { MunicipalityPicker } from '@/components/municipality-picker';
+import { SocialSignIn } from '@/components/social-sign-in';
 import { PasswordInput } from '@/components/password-input';
 import { Button } from '@/components/ui';
 import { MUNICIPALITIES, PILOT_MUNICIPALITY } from '@/constants/taxonomy';
@@ -137,6 +138,7 @@ export default function RegisterScreen() {
           <Button size="lg" onPress={onSubmit} disabled={loading}>
             {loading ? 'Creando cuenta…' : 'Crear cuenta'}
           </Button>
+          <SocialSignIn onSuccess={() => router.back()} />
         </View>
 
         <View style={styles.footer}>

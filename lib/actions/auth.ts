@@ -13,6 +13,8 @@ import {
 } from "@/lib/auth";
 import { MUNICIPALITIES, PILOT_MUNICIPALITY } from "@/lib/taxonomy";
 import { accountDeletionBlocker, deleteUserAccount } from "@/lib/account";
+import { GoogleAuthError, signInWithGoogle, type GoogleSignupInput } from "@/lib/google-auth";
+import { noPasswordMessage } from "@/lib/social-auth";
 
 export type AuthState = { error?: string } | undefined;
 
@@ -73,6 +75,7 @@ export async function loginAction(_prev: AuthState, formData: FormData): Promise
   const next = safeNext(String(formData.get("next") || ""));
 
   const user = await prisma.user.findUnique({ where: { email } });
+  if (user && !user.passwordHash) return { error: noPasswordMessage(user) };
   if (!user || !(await verifyPassword(password, user.passwordHash))) {
     return { error: "Correo o contraseña incorrectos." };
   }
@@ -91,6 +94,31 @@ export async function loginAction(_prev: AuthState, formData: FormData): Promise
   );
 }
 
+export type GoogleWebResult = { error?: string; needsSignup?: { email: string; name: string } };
+
+/**
+ * Inicia sesión o crea la cuenta con Google desde la web (`credential` es el ID token de Google).
+ * Si la cuenta es nueva y aún no aceptó los términos, devuelve `needsSignup` para completar el registro.
+ */
+export async function googleSignInAction(
+  credential: string,
+  signup: GoogleSignupInput | null,
+  next: string,
+): Promise<GoogleWebResult> {
+  let result;
+  try {
+    result = await signInWithGoogle(credential, signup ?? undefined);
+  } catch (error) {
+    if (error instanceof GoogleAuthError) return { error: error.message };
+    throw error;
+  }
+  if (result.status === "needsSignup") return { needsSignup: { email: result.email, name: result.name } };
+
+  await createSession(result.user);
+  const role = result.user.role;
+  redirect(safeNext(next) || (role === "ADMIN" ? "/admin" : role === "MERCHANT" ? "/merchant" : "/home"));
+}
+
 /** Elimina definitivamente la cuenta del usuario con sesión; pide la contraseña como confirmación. */
 export async function deleteAccountAction(_prev: AuthState, formData: FormData): Promise<AuthState> {
   const session = await getSession();
@@ -98,13 +126,19 @@ export async function deleteAccountAction(_prev: AuthState, formData: FormData):
 
   const password = String(formData.get("password") || "");
   const user = await prisma.user.findUnique({ where: { id: session!.id } });
-  if (!user || !(await verifyPassword(password, user.passwordHash))) {
+  if (!user) redirect("/login?next=/eliminar-cuenta");
+  // Las cuentas de Google o Apple no tienen contraseña: confirman escribiendo ELIMINAR.
+  if (!user!.passwordHash) {
+    if (String(formData.get("confirm") || "").trim().toUpperCase() !== "ELIMINAR") {
+      return { error: 'Escribe ELIMINAR para confirmar.' };
+    }
+  } else if (!(await verifyPassword(password, user!.passwordHash))) {
     return { error: "La contraseña no es correcta." };
   }
-  const blocker = await accountDeletionBlocker(user);
+  const blocker = await accountDeletionBlocker(user!);
   if (blocker) return { error: blocker };
 
-  await deleteUserAccount(user.id);
+  await deleteUserAccount(user!.id);
   await destroySession();
   redirect("/eliminar-cuenta?listo=1");
 }

@@ -18,6 +18,7 @@ export async function GET(req: Request) {
       role: user.role,
       municipality: user.municipality,
       avatarUrl: user.avatarUrl,
+      hasPassword: !!user.passwordHash,
     },
   });
 }

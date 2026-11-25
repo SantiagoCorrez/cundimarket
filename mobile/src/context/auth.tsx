@@ -9,6 +9,7 @@ import type { Role, SessionUser } from '@/api/types';
 import { MUNICIPALITIES, PILOT_MUNICIPALITY } from '@/constants/taxonomy';
 import { Palette } from '@/constants/theme';
 import { cacheStorage } from '@/utils/cache-storage';
+import { googleSignOut } from '@/utils/google-signin';
 import { secureStorage } from '@/utils/secure-storage';
 
 const TOKEN_KEY = 'cundi_token';
@@ -34,8 +35,17 @@ type AuthContextValue = {
   municipality: string;
   /** Cambia el municipio (en el perfil si hay sesión; si no, solo en este dispositivo). */
   selectMunicipality: (municipality: string) => Promise<void>;
-  /** Elimina definitivamente la cuenta (pide la contraseña) y cierra la sesión local. */
-  deleteAccount: (password: string) => Promise<void>;
+  /**
+   * Inicia sesión con Google ({ idToken }) o Apple ({ identityToken, authorizationCode, fullName }).
+   * Si la cuenta es nueva y no se envían los datos de registro (con acceptTerms), devuelve needsSignup.
+   */
+  loginWithSocial: (
+    provider: 'google' | 'apple',
+    credentials: Record<string, unknown>,
+    signup?: { role: Role; municipality: string; acceptTerms: true },
+  ) => Promise<{ needsSignup: true; email: string; name: string } | null>;
+  /** Elimina definitivamente la cuenta (con la contraseña, o escribiendo ELIMINAR si es de Google) y cierra la sesión local. */
+  deleteAccount: (confirmation: { password?: string; confirm?: string }) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -54,6 +64,7 @@ async function readStoredUser(): Promise<SessionUser | null> {
 async function wipeLocalSession(userId: string | null) {
   await secureStorage.removeItem(TOKEN_KEY);
   await cacheStorage.removeItem(USER_KEY);
+  await googleSignOut();
   setAuthToken(null);
   setCacheScope(null);
   if (userId) {
@@ -159,8 +170,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         await applySession(token, sessionUser);
       },
       updateMunicipality,
-      deleteAccount: async (password) => {
-        await api.post('/api/mobile/auth/delete-account', { password });
+      loginWithSocial: async (provider, credentials, signup) => {
+        const r = await api.post<
+          { token: string; user: SessionUser } | { needsSignup: true; email: string; name: string }
+        >(`/api/mobile/auth/${provider}`, { ...credentials, ...signup });
+        if ('needsSignup' in r) return r;
+        await applySession(r.token, r.user);
+        return null;
+      },
+      deleteAccount: async (confirmation) => {
+        await api.post('/api/mobile/auth/delete-account', confirmation);
         await wipeLocalSession(user?.id ?? null);
         setUser(null);
       },

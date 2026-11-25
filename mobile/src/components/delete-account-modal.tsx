@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
-import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { ApiError } from '@/api/client';
 import { PasswordInput } from '@/components/password-input';
@@ -17,6 +17,9 @@ export function DeleteAccountModal({ visible, onClose }: { visible: boolean; onC
   const { user, deleteAccount } = useAuth();
   const [step, setStep] = useState<Step>('confirm');
   const [password, setPassword] = useState('');
+  // Las cuentas creadas con Google no tienen contraseña: se confirma escribiendo ELIMINAR.
+  const usesPassword = user?.hasPassword !== false;
+  const ready = usesPassword ? !!password : password.trim().toUpperCase() === 'ELIMINAR';
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -36,7 +39,7 @@ export function DeleteAccountModal({ visible, onClose }: { visible: boolean; onC
     setError(null);
     setLoading(true);
     try {
-      await deleteAccount(password);
+      await deleteAccount(usesPassword ? { password } : { confirm: password.trim() });
       // La sesión ya se cerró; el aviso final se muestra aunque desaparezca el perfil de fondo.
       setStep('done');
     } catch (e) {
@@ -74,12 +77,31 @@ export function DeleteAccountModal({ visible, onClose }: { visible: boolean; onC
                     </View>
                   ))}
                 </View>
-                <Text style={styles.text}>Esta acción no se puede deshacer. Escribe tu contraseña para confirmar:</Text>
-                <PasswordInput value={password} onChangeText={setPassword} placeholder="Tu contraseña" autoComplete="current-password" />
+                {usesPassword ? (
+                  <>
+                    <Text style={styles.text}>Esta acción no se puede deshacer. Escribe tu contraseña para confirmar:</Text>
+                    <PasswordInput value={password} onChangeText={setPassword} placeholder="Tu contraseña" autoComplete="current-password" />
+                  </>
+                ) : (
+                  <>
+                    <Text style={styles.text}>
+                      Esta acción no se puede deshacer. Tu cuenta se creó con Google, así que escribe <Text style={styles.bold}>ELIMINAR</Text> para confirmar:
+                    </Text>
+                    <TextInput
+                      value={password}
+                      onChangeText={setPassword}
+                      placeholder="ELIMINAR"
+                      placeholderTextColor={Palette.textSecondary}
+                      autoCapitalize="characters"
+                      autoCorrect={false}
+                      style={styles.confirmInput}
+                    />
+                  </>
+                )}
                 {error && <Text style={styles.error}>{error}</Text>}
                 <Pressable
-                  style={[styles.danger, (!password || loading) && { opacity: 0.5 }]}
-                  disabled={!password || loading}
+                  style={[styles.danger, (!ready || loading) && { opacity: 0.5 }]}
+                  disabled={!ready || loading}
                   onPress={onDelete}>
                   <Text style={styles.dangerText}>{loading ? 'Eliminando…' : 'Eliminar mi cuenta definitivamente'}</Text>
                 </Pressable>
@@ -110,6 +132,7 @@ export function DeleteAccountModal({ visible, onClose }: { visible: boolean; onC
 }
 
 const styles = StyleSheet.create({
+  confirmInput: { height: 50, borderRadius: Radius.card, borderWidth: 1, borderColor: Palette.line, backgroundColor: Palette.surface, paddingHorizontal: 16, fontSize: 15, color: Palette.text, letterSpacing: 1 },
   backdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.55)', alignItems: 'center', justifyContent: 'center', padding: 20 },
   card: { width: '100%', maxWidth: 420, maxHeight: '92%', backgroundColor: Palette.surface, borderRadius: Radius.card, padding: 20 },
   iconWrap: { alignSelf: 'center', height: 52, width: 52, borderRadius: 26, backgroundColor: 'rgba(226,59,59,0.12)', alignItems: 'center', justifyContent: 'center' },

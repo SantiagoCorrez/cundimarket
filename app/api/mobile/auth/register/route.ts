@@ -39,5 +39,5 @@ export async function POST(req: Request) {
     municipality: user.municipality,
   };
   const token = await signAuthToken(sessionUser);
-  return json({ token, user: sessionUser });
+  return json({ token, user: { ...sessionUser, hasPassword: true } });
 }
